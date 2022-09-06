@@ -121,8 +121,22 @@
             <img :src="HouseStatu ? 'sel2.png' : 'sel1.png'" alt="" />
             新房
           </div>
+          <div>*新房=毛坯房, 不含拆除。</div>
         </div>
-        <div><input type="text" /></div>
+        <div><input type="text" placeholder="请输入手机号:" /></div>
+      </div>
+      <div class="design-7">
+        <button>领取方案</button>
+      </div>
+      <div class="design-footer">
+        <div>
+          <span>首页</span>
+          <span>app下载</span>
+          <span>关于我们</span>
+        </div>
+        <div>
+          — 美墅科技（成都）有限公司 京ICP备15007819号-1 —
+        </div>
       </div>
     </div>
   </div>
@@ -323,6 +337,66 @@ export default {
         color: #ffaa6e;
       }
     }
+  }
+}
+.design-6 {
+  padding-top: 10px;
+  background-color: white;
+  > div:nth-child(2) {
+    margin-top: 15px;
+    display: flex;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    > div:nth-child(3) {
+      margin-left: auto;
+    }
+    > div:nth-child(3) {
+      color: #999999;
+      font-size: 0.7rem;
+    }
+    > div {
+      margin-left: 15px;
+      > img {
+        width: 14px;
+      }
+    }
+  }
+  > div:nth-child(3) {
+    margin-top: 15px;
+    padding-bottom: 15px;
+    text-align: center;
+    > input {
+      background-color: #f5f5f5;
+      border: none;
+      padding: 10px;
+      width: 80%;
+      border-radius: 10px;
+    }
+  }
+}
+.design-7{
+  width: 100%;
+  text-align: center;
+  margin: 30px 0;
+  >button{
+    width: 100%;
+    background-color: #ff6400;
+    color: white;
+    border: none;
+    padding: 10px 0;
+    border-radius: 10px;
+  }
+}
+.design-footer{
+  width: 100%;
+  font-size: 12px;
+  padding-bottom: 50px;
+  >div{
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+    justify-content: space-evenly;
   }
 }
 </style>
