@@ -88,7 +88,7 @@ export default {
       defaultValue:'',
       cascaderValue:'',
       show:false,
-     
+     citydata:[],
            value1: '',
       value2: '',
     
