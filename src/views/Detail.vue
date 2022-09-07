@@ -5,7 +5,6 @@
       <mt-button @click="gomain()" icon="back" slot="left"></mt-button>
       <mt-button icon="more" slot="right"></mt-button>
     </mt-header>
-
     <!-- 背景图 -->
     <img
       src="/img/Ml8yMDIyLTA3LTA1VDE2OjA4OjAzLjU4Mg==.jpg"
@@ -16,13 +15,21 @@
       <img class="tou" src="/img/Snipaste_2022-09-05_22-40-42.png" alt="" />
       <!-- 设计师 -->
       <div class="jianjie">
-        <div>
-          <div class="left">
+        <div class="left">
+          <div class="left-a">
             <span>王兴旺</span>
-            <span>首席设计师</span>
+            <span>V-首席设计师</span>
           </div>
-          <span>2934互动</span>
-          <span>700案例</span>
+          <div class="left-b">
+            <div class="a">
+              <span>2934</span>
+              <span>互动</span>
+            </div>
+            <div class="a">
+              <span>700</span>
+              <span>案例</span>
+            </div>
+          </div>
         </div>
         <button>咨询设计</button>
       </div>
@@ -68,8 +75,31 @@
           <!-- 查看更多 -->
           <div class="gd">查看更多案例>></div>
         </van-tab>
-        <van-tab title="服务信息" name="b">内容 2</van-tab>
-        <van-tab title="图集" name="c">内容 3</van-tab>
+        <van-tab title="服务信息" name="b">
+          <div class="item">
+            <span>服务区域</span>
+            <span>北京</span>
+          </div>
+          <div class="item">
+            <span>经手案例</span>
+            <span>700套案例</span>
+          </div>
+          <div class="item">
+            <span>服务的小区</span>
+            <span>紫玉山庄、香江别墅、龙湖天琅、福熙大道</span>
+          </div>
+        </van-tab>
+        <van-tab title="图集" name="c">
+          <img src="/img/Ml8yMDIyLTA3LTA1VDE2OjA4OjAzLjU4Mg==.jpg" alt="" />
+          <img src="/img/Ml8yMDIyLTA3LTA1VDE2OjA4OjAzLjU4Mg==.jpg" alt="" />
+          <img src="/img/Ml8yMDIyLTA3LTA1VDE2OjA4OjAzLjU4Mg==.jpg" alt="" />
+          <img src="/img/Ml8yMDIyLTA3LTA1VDE2OjA4OjAzLjU4Mg==.jpg" alt="" />
+          <img src="/img/Ml8yMDIyLTA3LTA1VDE2OjA4OjAzLjU4Mg==.jpg" alt="" />
+          <img src="/img/Ml8yMDIyLTA3LTA1VDE2OjA4OjAzLjU4Mg==.jpg" alt="" />
+          <img src="/img/Ml8yMDIyLTA3LTA1VDE2OjA4OjAzLjU4Mg==.jpg" alt="" />
+          <img src="/img/Ml8yMDIyLTA3LTA1VDE2OjA4OjAzLjU4Mg==.jpg" alt="" />
+          <img src="/img/Ml8yMDIyLTA3LTA1VDE2OjA4OjAzLjU4Mg==.jpg" alt="" />
+        </van-tab>
       </van-tabs>
       <!-- 底部导航栏 -->
       <div id="footer">
@@ -126,42 +156,83 @@ export default {
   font-size: 20px;
 }
 #main {
-  // border: 1px red solid;
   border-radius: 16px;
   position: relative;
   top: -20px;
   background-color: #fff;
   padding: 10px;
 }
-.tou {
-  width: 20%;
-  border-radius: 50px;
+#main .tou {
+  width: 22%;
+  border-radius: 50%;
   position: relative;
   top: -40px;
-  left: 20px;
+  left: 10px;
 }
 .jianjie {
   display: flex;
   justify-content: space-between;
-  margin-top: -30px;
+  margin-top: -36px;
+  align-items: center;
 }
-#main .left>span:first-child{
+.jianjie button {
+  font-size: 10px;
+  height: 28px;
+  width: 70px;
+  border-radius: 4px;
+  background-color: rgb(255, 105, 0);
+  color: #fff;
+  border: none;
+  margin-right: 10px;
+}
+#main .left-a {
+  padding: 4px 0;
+}
+#main .left-a > span:first-child {
   font-size: 24px;
-  margin: 0 10px;
+  margin: 0 8px 0 0;
 }
-#main .left>span:last-child{
+#main .left-a > span:last-child {
   border: 1px solid black;
-  border-radius: 10px;
-  padding: 6px;
+  border-radius: 20px;
+  font-size: 10px;
+  padding: 4px;
+  background-color: #000;
+  color: rgb(140, 127, 106);
+  position: relative;
+  bottom: 4px;
 }
-
+#main .left-b {
+  display: flex;
+  align-items: center;
+}
+.left-b .a > span:first-child {
+  font-weight: 300;
+  margin: 0 4px;
+}
+.left-b .a > span:last-child {
+  font-size: 14px;
+  color: #aaa;
+  margin-right: 10px;
+}
+.fg {
+  display: flex;
+}
 .fg > span {
-  background-color: rgb(252, 247, 242);
+  background-color: rgb(240, 234, 229);
   margin: 10px;
   border-radius: 30px;
-  color: rgb(220, 170, 118);
-  padding: 3px;
+  color: rgb(209, 162, 111);
+  padding: 5px;
   font-size: 12px;
+}
+::v-deep .van-tab {
+  flex: none;
+  margin: 10px 8px;
+}
+::v-deep .van-tab--active {
+  font-size: 18px;
+  font-weight: 900;
 }
 #tu {
   box-sizing: border-box;
@@ -204,8 +275,9 @@ export default {
   justify-content: space-evenly;
   align-items: center;
   position: fixed;
-  bottom:0;
+  bottom: 0;
   left: 10px;
+  background-color: #fff;
 }
 #footer img {
   width: 30px;
@@ -225,7 +297,26 @@ export default {
 }
 #footer span:last-child {
   background-color: rgb(51, 51, 51);
-color: #fff;
+  color: #fff;
 }
-
+.van-tabs__wrap{
+  margin-bottom: 10px;
+}
+::v-deep .van-tabs__content .van-tab__pane:nth-child(2) .item {
+  padding-left: 10px;
+  display: flex;
+  flex-direction: column;
+}
+::v-deep .van-tabs__content .van-tab__pane:nth-child(2) .item span:last-child {
+    color: #aaa;
+    margin: 10px 0;
+}
+::v-deep .van-tabs__content .van-tab__pane:last-child {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+::v-deep .van-tab__pane img {
+  width: 30%;
+}
 </style>
