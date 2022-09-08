@@ -190,7 +190,18 @@
   z-index: 9999;
   color: #000;
   top:2px;
-
+  padding: 6px;
+}
+::v-deep .mint-header i{
+    font-size: 20px;
+}
+::v-deep .mint-header mint-button-text{
+    position: relative;
+    top: 2px;
+}
+::v-deep .mint-header h1{
+  font-size: 17px;
+  font-weight: 600;
 }
 .mint-swipe {
   position: fixed;

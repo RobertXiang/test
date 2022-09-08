@@ -251,9 +251,16 @@ export default {
   background-color: rgb(193, 193, 193);
   margin-right: 10px;
   color: #fff;
+  padding: 5px;
+  border-radius: 3px;
 }
 .dax > div > span:last-child {
   background-color: rgb(217, 164, 109);
+  padding: 5px;
+  border-radius: 3px;
+}
+#tu .dax >span:last-child{
+  color: #aaa;
 }
 #tu > span:last-child {
   font-size: 18px;
