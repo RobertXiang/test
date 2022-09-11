@@ -6,14 +6,14 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/detail',
-    name: 'detail',
-    component: () => import('../views/Detail.vue'),
+    path: '/desdetails',
+    name: 'Desdetail',
+    component: () => import('../views/Desdetails.vue'),
   },
   {
-    path: '/banner',
-    name: 'banner',
-    component: () => import('../views/Banner.vue'),
+    path: '/designer',
+    name: 'designer',
+    component: () => import('../views/Designer.vue'),
   },
   {
     path: '/',
