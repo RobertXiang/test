@@ -16,17 +16,16 @@ const routes = [
     component: () => import('../views/NavDetail.vue'),
   },
   {
-    path: '/',
+    path: '/index',
     name: 'Index',
-    component: Index
+    component: () => import('../views/index.vue'),
   },
-
 ]
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
+  routes,
 })
 
 export default router
