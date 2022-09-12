@@ -5,27 +5,27 @@
     <!-- 一楼轮播 -->
     <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white" duration="1500">
       <!-- 跳转报价 -->
-      <van-swipe-item @click="">
+      <van-swipe-item @click="1">
         <img src="https://ikj-public.oss-cn-beijing.aliyuncs.com/market/249c8d5a/ce22c637/5187fcc4/ec445b2e/ZWU3MGJjMWIyNjMwMmJjNDY3ODY0ODMxODM4MDJhNjBfMjAyMi0wNi0yNFQxODo1NzoyNy44MzQ=.jpg" alt="" width="100%" />
       </van-swipe-item>
       <!-- 跳转设计师 -->
-      <van-swipe-item @click="">
+      <van-swipe-item @click="1">
         <img src="https://ikj-public.oss-cn-beijing.aliyuncs.com/market/249c8d5a/ce22c637/5187fcc4/ec445b2e/Teerr2Jhbm5lcu-8mjY5MF8yNDVfMjAyMi0wOC0xOFQxNjoyNjozOC4zODA=.png" alt="" width="100%" />
       </van-swipe-item>
       <!-- 跳转商场 -->
-      <van-swipe-item @click="">
+      <van-swipe-item @click="1">
         <img src="https://ikj-public.oss-cn-beijing.aliyuncs.com/market/249c8d5a/ce22c637/5187fcc4/ec445b2e/NjAzOWZhZjAtNzhjOC00NDUwLWFmN2ItZjhjMDVjNTVjYWI0XzIwMjItMDYtMjdUMTY6MDI6MjIuMjg0.png" alt="" width="100%" />
       </van-swipe-item>
     </van-swipe>
     <!-- 二楼功能列表 -->
     <van-grid>
       <!-- 跳转十秒报价 -->
-      <van-grid-item @click="" icon="https://ikj-storage-front-prod.oss-cn-beijing.aliyuncs.com/app/html-m/sy/site.png" text="10秒报价" />
+      <van-grid-item @click="1" icon="https://ikj-storage-front-prod.oss-cn-beijing.aliyuncs.com/app/html-m/sy/site.png" text="10秒报价" />
       <!-- 跳转0元设计 -->
-      <van-grid-item @click="" icon="https://ikj-storage-front-prod.oss-cn-beijing.aliyuncs.com/app/html-m/sy/devise.png" text="0元设计" />
+      <van-grid-item to="navdesign" icon="https://ikj-storage-front-prod.oss-cn-beijing.aliyuncs.com/app/html-m/sy/devise.png" text="0元设计" />
       <!-- 跳转装修案列 -->
-      <van-grid-item @click="" icon="https://ikj-storage-front-prod.oss-cn-beijing.aliyuncs.com/app/html-m/sy/site.png" text="装修案列" />
-      <van-grid-item @click="" icon="https://ikj-storage-front-prod.oss-cn-beijing.aliyuncs.com/app/html-m/sy/stores.png" text="空间商场" />
+      <van-grid-item @click="1" icon="https://ikj-storage-front-prod.oss-cn-beijing.aliyuncs.com/app/html-m/sy/site.png" text="装修案列" />
+      <van-grid-item @click="1" icon="https://ikj-storage-front-prod.oss-cn-beijing.aliyuncs.com/app/html-m/sy/stores.png" text="空间商场" />
     </van-grid>
     <!-- 整装案列 -->
     <div class="three">
@@ -45,7 +45,7 @@
         <div class="floor">
           <div class="text">
             <h4>家装新体验</h4>
-            </h4>
+            
             <p>一站式省心家装</p>
           </div>
         </div>

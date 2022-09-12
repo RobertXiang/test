@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Index from '../views/Index.vue'
+import Index from '../views/index.vue'
 
 Vue.use(VueRouter)
 
@@ -16,8 +16,8 @@ const routes = [
     component: () => import('../views/NavDetail.vue'),
   },
   {
-    path: '/index',
-    name: 'Index',
+    path: '/',
+    name: 'index',
     component: () => import('../views/index.vue'),
   },
 ]
