@@ -9,7 +9,7 @@
             <span class="xing">*</span><span>您的房子是?</span>
           </div>
           <div v-for="(house, index) in houses" :key="index">
-            <img @click="now = index" :src="house.img" alt="" />
+            <img @click="ckHouse(index)" :src="house.img" alt="" />
             <img :src="now == index ? 'duigou.png' : 'noneIcon.png'" />
           </div>
         </div>
@@ -20,18 +20,18 @@
         </div>
         <div>
           <div class="design-2-1" v-for="(live, index) in lives" :key="index">
-            <img @click="now1 = index" :src="live.img" alt="" />
+            <img @click="ckLive(index)" :src="live.img" alt="" />
             <img :src="now1 == index ? '/duigou.png' : ''" alt="" />
             <div>{{ live.liveType }}</div>
           </div>
         </div>
         <div class="design-2-2">
-          <div @click="choices[0].elderly = !choices[0].elderly">
-            <img :src="choices[0].elderly ? '/sel2.png' : '/sel1.png'" alt="" />
+          <div @click="ckElderly(choices)">
+            <img :src="choices[0].elderly ? '/sel1.png' : '/sel2.png'" alt="" />
             <span>{{ choices[0].choice }}</span>
           </div>
-          <div @click="choices[1].pets = !choices[1].pets">
-            <img :src="choices[1].pets ? '/sel2.png' : '/sel1.png'" alt="" />
+          <div @click="ckPets(choices)">
+            <img :src="choices[1].pets ? '/sel1.png' : '/sel2.png'" alt="" />
             <span>{{ choices[1].choice }}</span>
           </div>
         </div>
@@ -42,7 +42,7 @@
         </div>
         <div class="design-3-1">
           <div v-for="(item, index) in styles" :key="index">
-            <img @click="now3 = index" :src="item.img" alt="" />
+            <img @click="ckStyle(index)" :src="item.img" alt="" />
             <img :src="now3 == index ? 'duigou.png' : 'noneIcon.png'" alt="" />
           </div>
         </div>
@@ -53,11 +53,7 @@
         </div>
         <div class="design-3-1">
           <div v-for="(space, index) in spaces" :key="index">
-            <img
-              @click="spaces[index].space = !spaces[index].space"
-              :src="space.img"
-              alt=""
-            />
+            <img @click="ckSpace(index)" :src="space.img" alt="" />
             <img :src="spaces[index].space ? 'duigou.png' : 'sel2.png'" />
           </div>
         </div>
@@ -66,7 +62,7 @@
         <div class="bt"><span class="xing">*</span><span>卫生间偏好</span></div>
         <div>
           <span
-            @click="preferenceNow = index"
+            @click="ckPreference(index)"
             :class="{ active: preferenceNow == index }"
             v-for="(i, index) in preference"
             :key="index"
@@ -80,7 +76,7 @@
         </div>
         <div>
           <span
-            @click="item.xz = !item.xz"
+            @click="ckOther(index)"
             :class="{ active: item.xz }"
             v-for="(item, index) in other"
             :key="index"
@@ -91,20 +87,28 @@
       <div class="design-6">
         <div class="bt"><span class="xing">*</span><span>房屋状态</span></div>
         <div>
-          <div @click="HouseStatu = !HouseStatu">
-            <img :src="HouseStatu ? 'sel1.png' : 'sel2.png'" alt="" />
+          <div @click="ckhs($event)">
+            <img :src="HouseStatus ? 'sel1.png' : 'sel2.png'" alt="" />
             老房
           </div>
-          <div @click="HouseStatu = !HouseStatu">
-            <img :src="HouseStatu ? 'sel2.png' : 'sel1.png'" alt="" />
+          <div @click="ckhs($event)">
+            <img :src="HouseStatus ? 'sel2.png' : 'sel1.png'" alt="" />
             新房
           </div>
           <div>*新房=毛坯房, 不含拆除。</div>
         </div>
-        <div><input type="text" placeholder="请输入手机号:" /></div>
+        <div>
+          <input
+            @blur="checkPhone"
+            type="number"
+            v-model="scheme.phone"
+            oninput="if(value.length>11)value=value.slice(0,11)"
+            placeholder="请输入手机号:"
+          />
+        </div>
       </div>
       <div class="design-7">
-        <button>领取方案</button>
+        <button @click="schemes">领取方案</button>
       </div>
       <div class="design-footer">
         <div>
@@ -122,47 +126,71 @@
 export default {
   data() {
     return {
-      HouseStatu: false,
+      scheme: [
+        { house: "" },
+        { live: "" },
+        { choice: [{ elderly: "" }, { pets: "" }] },
+        { style: "" },
+        { spaces: [] },
+        { preference: "" },
+        { other: [] },
+        { HouseStatu: "" },
+        { phone: "" },
+      ],
+      HouseStatus: true,
+      HS: "新房",
       now: null,
       now1: null,
       now3: null,
       lr: true,
       cw: true,
       preferenceNow: null,
+
       houses: [
         { img: "house1.png", houseType: "LOFT" },
         { img: "house2.png", houseType: "平层住宅" },
         { img: "house3.png", houseType: "复式住宅" },
         { img: "house4.png", houseType: "LOFT" },
       ],
+      h: null,
+
       lives: [
         { img: "live1.png", liveType: "就我自己" },
         { img: "live2.png", liveType: "和另一半" },
         { img: "live3.png", liveType: "亲子共住" },
       ],
+      l: null,
+
       choices: [
-        { choice: "有老人", elderly: true },
-        { choice: "有宠物", pets: true },
+        { choice: "有老人", elderly: false },
+        { choice: "有宠物", pets: false },
       ],
+      ce: null,
+      cp: null,
 
       styles: [
-        {img:"style1.png",style:'轻奢风'},
-        {img:"style2.png",style:'北欧风'},
-        {img:"style3.png",style:'日式'},
-        {img:"style4.png",style:'美式'},
-        {img:"style5.png",style:'现代简约'},
-        {img:"style6.png",style:'新中式'},
-        {img:"style7.png",style:'新古典'},
+        { img: "style1.png", style: "轻奢风" },
+        { img: "style2.png", style: "北欧风" },
+        { img: "style3.png", style: "日式" },
+        { img: "style4.png", style: "美式" },
+        { img: "style5.png", style: "现代简约" },
+        { img: "style6.png", style: "新中式" },
+        { img: "style7.png", style: "新古典" },
       ],
+      cs: null,
+
       spaces: [
-        { img: "space1.png", space: false },
-        { img: "space2.png", space: false },
-        { img: "space3.png", space: false },
-        { img: "space4.png", space: false },
-        { img: "space5.png", space: false },
-        { img: "space6.png", space: false },
+        { img: "space1.png", space: false, name: "书房" },
+        { img: "space2.png", space: false, name: "儿童房" },
+        { img: "space3.png", space: false, name: "衣帽间" },
+        { img: "space4.png", space: false, name: "娱乐区" },
+        { img: "space5.png", space: false, name: "玄关" },
+        { img: "space6.png", space: false, name: "其他" },
       ],
+
       preference: ["干湿分离", "浴缸", "淋浴房"],
+      pf: null,
+
       other: [
         { item: "定制家具", xz: false },
         { item: "暖气", xz: false },
@@ -172,6 +200,124 @@ export default {
         { item: "热水器", xz: false },
       ],
     };
+  },
+  methods: {
+    // 获取房屋信息
+    ckHouse(index) {
+      this.h = this.now = index;
+    },
+    // 获取和谁一起居住
+    ckLive(index) {
+      this.i = this.now1 = index;
+    },
+    // 获取是否有老人 宠物
+    ckElderly(ce) {
+      ce[0].elderly = !ce[0].elderly;
+      this.ce = ce[0].choice;
+    },
+    ckPets(cp) {
+      cp[1].pets = !cp[1].pets;
+      this.cp = cp[1].choice;
+    },
+    // 获取装修风格
+    ckStyle(index) {
+      this.cs = this.now3 = index;
+    },
+    // 个性空间点击
+    ckSpace(index) {
+      this.spaces[index].space = !this.spaces[index].space;
+    },
+    // 获取卫生间偏好
+    ckPreference(index) {
+      this.pf = this.preferenceNow = index;
+    },
+    // 其他装修需求点击
+    ckOther(index) {
+      this.other[index].xz = !this.other[index].xz;
+    },
+    // 获取房屋状态
+    ckhs(e) {
+      this.HouseStatus = !this.HouseStatus;
+      this.HS = e.target.innerText;
+      console.log(this.HS);
+    },
+
+    // 用于验证手机输入框的值是否符合要求
+    checkPhone() {
+      let exp = /^1[3-9][0-9]{9}$/;
+      if (exp.test(this.scheme.phone)) {
+      } else {
+        this.$toast("手机号错误,请确认");
+        return;
+      }
+    },
+
+    schemes() {
+      // 判断房屋 是否选择
+      if (this.h != null) {
+        this.scheme.house = this.houses[this.h].houseType;
+        console.log(this.scheme.house);
+      } else {
+        this.$toast("请选择房屋类型");
+        return;
+      }
+      // 判断和谁居住 是否选择
+      if (this.i != null) {
+        this.scheme.live = this.lives[this.i].liveType;
+        console.log(this.scheme.live);
+      } else {
+        this.$toast("请选择和谁一起居住");
+        return;
+      }
+      // 判断老人宠物 是否选择
+      if (this.choices[0].elderly == true) {
+        this.scheme[2].choice.elderly = this.ce;
+        console.log(this.scheme[2].choice.elderly);
+      }
+      if (this.choices[1].pets == true) {
+        this.scheme[2].choice.pets = this.cp;
+        console.log(this.scheme[2].choice.pets);
+      }
+      // 判断风格 是否选择
+      if (this.cs != null) {
+        this.scheme.style = this.styles[this.cs].style;
+        console.log(this.scheme.style);
+      } else {
+        this.$toast("请选择喜欢的风格");
+        return;
+      }
+      // 判断多选个性装修
+      this.scheme[4].spaces = [];
+      for (let i = 0; i < this.spaces.length; i++) {
+        if (this.spaces[i].space == true) {
+          this.scheme[4].spaces.push(this.spaces[i].name);
+        }
+      }
+      console.log(this.scheme[4].spaces);
+      // 判断卫生间风格
+      if (this.pf != null) {
+        this.scheme.preference = this.preference[this.pf];
+        console.log(this.scheme.preference);
+      } else {
+        this.$toast("请选择卫生间偏好");
+        return;
+      }
+      // 判断多选其他需求
+      this.scheme[6].other = [];
+      for (let i = 0; i < this.other.length; i++) {
+        if (this.other[i].xz == true) {
+          this.scheme[6].other.push(this.other[i].item);
+        }
+      }
+      console.log(this.scheme[6].other);
+      // 获取房屋状态
+      this.scheme.HouseStatu = this.HS;
+      console.log(this.scheme.HouseStatu);
+      // 获取手机号
+
+      console.log(this.scheme.phone);
+      console.log(this.scheme);
+    },
   },
 };
 </script>
