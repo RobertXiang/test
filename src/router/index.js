@@ -44,6 +44,23 @@ const routes = [
     name: 'index',
     component: Index,
   },
+  // 设计师模块
+  {
+    path: '/desdetails',
+    name: 'Desdetail',
+    component: () => import('../views/Desdetails.vue'),
+  },
+  {
+    path: '/designer',
+    name: 'designer',
+    component: () => import('../views/Designer.vue'),
+  },
+  // 关于我们
+  {
+    path: '/about',
+    name: 'about',
+    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+  }
 ]
 
 const router = new VueRouter({
