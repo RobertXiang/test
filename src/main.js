@@ -2,18 +2,22 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+
 // axios
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 Vue.use(VueAxios, axios)
+
 // ElementUI
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
+
 // VantUI
 import Vant from 'vant';
 import 'vant/lib/index.css';
 Vue.use(Vant);
+
 // MintUI
 import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'

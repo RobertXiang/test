@@ -5,6 +5,30 @@ import Index from '../views/Index.vue'
 Vue.use(VueRouter)
 
 const routes = [
+  // 我的
+  {
+    path: '/mine',
+    name: 'mine',
+    component: () => import('../views/Mine.vue'),
+  },
+  // Home
+  {
+    path: '/home',
+    name: 'home',
+    component: () => import('../views/Home.vue'),
+  },
+  // 空间商城
+  {
+    path: '/spacemall',
+    name: '/spacemall',
+    component: () => import('../views/SpaceMall.vue'),
+  },
+  // 我的订单
+  {
+    path: '/orderform',
+    name: 'orderform',
+    component: () => import('../views/OrderForm.vue'),
+  },
   {
     path: '/navdesign',
     name: 'navdesign',
