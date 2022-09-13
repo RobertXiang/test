@@ -101,7 +101,7 @@
           <input
             @blur="checkPhone"
             type="number"
-            v-model="scheme.phone"
+            v-model="scheme[8].phone"
             oninput="if(value.length>11)value=value.slice(0,11)"
             placeholder="请输入手机号:"
           />
@@ -205,6 +205,7 @@ export default {
     // 获取房屋信息
     ckHouse(index) {
       this.h = this.now = index;
+      console.log(this.scheme);
     },
     // 获取和谁一起居住
     ckLive(index) {
@@ -245,7 +246,7 @@ export default {
     // 用于验证手机输入框的值是否符合要求
     checkPhone() {
       let exp = /^1[3-9][0-9]{9}$/;
-      if (exp.test(this.scheme.phone)) {
+      if (exp.test(this.scheme[8].phone)) {
       } else {
         this.$toast("手机号错误,请确认");
         return;
@@ -255,7 +256,7 @@ export default {
     schemes() {
       // 判断房屋 是否选择
       if (this.h != null) {
-        this.scheme.house = this.houses[this.h].houseType;
+        this.scheme[0].house = this.houses[this.h].houseType;
         console.log(this.scheme.house);
       } else {
         this.$toast("请选择房屋类型");
@@ -263,7 +264,7 @@ export default {
       }
       // 判断和谁居住 是否选择
       if (this.i != null) {
-        this.scheme.live = this.lives[this.i].liveType;
+        this.scheme[1].live = this.lives[this.i].liveType;
         console.log(this.scheme.live);
       } else {
         this.$toast("请选择和谁一起居住");
@@ -280,7 +281,7 @@ export default {
       }
       // 判断风格 是否选择
       if (this.cs != null) {
-        this.scheme.style = this.styles[this.cs].style;
+        this.scheme[3].style = this.styles[this.cs].style;
         console.log(this.scheme.style);
       } else {
         this.$toast("请选择喜欢的风格");
@@ -296,7 +297,7 @@ export default {
       console.log(this.scheme[4].spaces);
       // 判断卫生间风格
       if (this.pf != null) {
-        this.scheme.preference = this.preference[this.pf];
+        this.scheme[5].preference = this.preference[this.pf];
         console.log(this.scheme.preference);
       } else {
         this.$toast("请选择卫生间偏好");
@@ -311,11 +312,11 @@ export default {
       }
       console.log(this.scheme[6].other);
       // 获取房屋状态
-      this.scheme.HouseStatu = this.HS;
+      this.scheme[7].HouseStatu = this.HS;
       console.log(this.scheme.HouseStatu);
       // 获取手机号
 
-      console.log(this.scheme.phone);
+      // console.log(this.scheme.phone);
       console.log(this.scheme);
     },
   },
