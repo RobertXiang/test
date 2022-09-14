@@ -1,6 +1,6 @@
 <template>
   <div class="nav-design">
-    <van-nav-bar title="免费设计" left-arrow />
+    <van-nav-bar @click-left="onClickLeft" title="免费设计" left-arrow />
     <img src="/head.png" alt="" />
     <div>
       <div class="white">
@@ -202,10 +202,12 @@ export default {
     };
   },
   methods: {
+    onClickLeft(){
+      this.$router.push('/')
+    },
     // 获取房屋信息
     ckHouse(index) {
       this.h = this.now = index;
-      console.log(this.scheme);
     },
     // 获取和谁一起居住
     ckLive(index) {
