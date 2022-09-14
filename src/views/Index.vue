@@ -20,7 +20,7 @@
     <!-- 二楼功能列表 -->
     <van-grid>
       <!-- 跳转十秒报价 -->
-      <van-grid-item @click="" icon="https://ikj-storage-front-prod.oss-cn-beijing.aliyuncs.com/app/html-m/sy/site.png" text="10秒报价" />
+      <van-grid-item @click="goPrice" icon="https://ikj-storage-front-prod.oss-cn-beijing.aliyuncs.com/app/html-m/sy/site.png" text="10秒报价" />
       <!-- 跳转0元设计 -->
       <van-grid-item @click="" to="navdesign" icon="https://ikj-storage-front-prod.oss-cn-beijing.aliyuncs.com/app/html-m/sy/devise.png" text="0元设计" />
       <!-- 跳转装修案列 -->
@@ -122,6 +122,10 @@ export default {
     // 调至商城
     goStore () {
       this.$router.push('')
+    },
+    //十秒报价跳转
+    goPrice(){
+      this.$router.push('/price')
     },
     // 调至设计报价
     goDesign () {
