@@ -5,6 +5,18 @@ import Index from '../views/Index.vue'
 Vue.use(VueRouter)
 
 const routes = [
+    // 注册页面
+    {
+        path: '/register',
+        name: 'Register',
+        component: () => import('../views/Register.vue'),
+      },
+    //登录页面
+    {
+        path: '/login',
+        name: 'Login',
+        component: () => import('../views/Login.vue'),
+      },
     // 我的
     {
         path: '/mine',
