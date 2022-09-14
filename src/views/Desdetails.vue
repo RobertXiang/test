@@ -2,7 +2,7 @@
   <div>
     <!-- 头部 -->
     <mt-header fixed title="设计师" v-show="navTab">
-      <mt-button @click="gomain()" icon="back" slot="left"></mt-button>
+      <mt-button @click="goDesigner()" icon="back" slot="left"></mt-button>
       <mt-button icon="more" slot="right"></mt-button>
     </mt-header>
     <!-- 背景图 -->
@@ -118,7 +118,7 @@ export default {
       });
     },
 
-    gomain() {
+    goDesigner() {
       this.$router.push("/designer");
     },
 
