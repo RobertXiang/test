@@ -4,25 +4,30 @@
     <van-nav-bar title="美墅装修" left-text="北京" />
     <!-- 一楼轮播 -->
     <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white" duration="1500">
-      <!-- 跳转报价 -->
-      <van-swipe-item @click="">
-        <img src="https://ikj-public.oss-cn-beijing.aliyuncs.com/market/249c8d5a/ce22c637/5187fcc4/ec445b2e/ZWU3MGJjMWIyNjMwMmJjNDY3ODY0ODMxODM4MDJhNjBfMjAyMi0wNi0yNFQxODo1NzoyNy44MzQ=.jpg" alt="" width="100%" />
-      </van-swipe-item>
-      <!-- 跳转设计师 -->
+       <!-- 跳转设计师 -->
       <van-swipe-item @click="">
         <img src="https://ikj-public.oss-cn-beijing.aliyuncs.com/market/249c8d5a/ce22c637/5187fcc4/ec445b2e/Teerr2Jhbm5lcu-8mjY5MF8yNDVfMjAyMi0wOC0xOFQxNjoyNjozOC4zODA=.png" alt="" width="100%" />
       </van-swipe-item>
+      <!-- 跳转0元设计 -->
+      <van-swipe-item @click="">
+        <img src="https://imgs.bzw315.com/upload/2017/4/13/636277026032137584.jpg?x-oss-process=image/resize,w_800/sharpen,100" alt="" width="100%" />
+      </van-swipe-item>
+     
       <!-- 跳转商场 -->
       <van-swipe-item @click="">
         <img src="https://ikj-public.oss-cn-beijing.aliyuncs.com/market/249c8d5a/ce22c637/5187fcc4/ec445b2e/NjAzOWZhZjAtNzhjOC00NDUwLWFmN2ItZjhjMDVjNTVjYWI0XzIwMjItMDYtMjdUMTY6MDI6MjIuMjg0.png" alt="" width="100%" />
+      </van-swipe-item>
+      <!-- 跳转十秒报价 -->
+      <van-swipe-item @click="">
+        <img src="https://imgs.bzw315.com/upload/2017/9/20/636414999875940870.jpg?x-oss-process=image/resize,w_800/sharpen,100" alt="" width="100%" />
       </van-swipe-item>
     </van-swipe>
     <!-- 二楼功能列表 -->
     <van-grid>
       <!-- 跳转十秒报价 -->
-      <van-grid-item @click="goPrice" icon="https://ikj-storage-front-prod.oss-cn-beijing.aliyuncs.com/app/html-m/sy/site.png" text="10秒报价" />
+      <van-grid-item @click="" icon="https://ikj-storage-front-prod.oss-cn-beijing.aliyuncs.com/app/html-m/sy/site.png" text="10秒报价" />
       <!-- 跳转0元设计 -->
-      <van-grid-item @click="" to="navdesign" icon="https://ikj-storage-front-prod.oss-cn-beijing.aliyuncs.com/app/html-m/sy/devise.png" text="0元设计" />
+      <van-grid-item @click="" icon="https://ikj-storage-front-prod.oss-cn-beijing.aliyuncs.com/app/html-m/sy/devise.png" text="0元设计" />
       <!-- 跳转装修案列 -->
       <van-grid-item @click="" icon="https://ikj-storage-front-prod.oss-cn-beijing.aliyuncs.com/app/html-m/sy/site.png" text="装修案列" />
       <van-grid-item @click="" icon="https://ikj-storage-front-prod.oss-cn-beijing.aliyuncs.com/app/html-m/sy/stores.png" text="空间商场" />
@@ -53,7 +58,6 @@
         </div>
       </div>
     </div>
-
     <!-- 装修报价 -->
     <div class="price">
       <van-row class="quote">
@@ -62,13 +66,14 @@
           <van-col span="16" style="font-size:14px;margin-top:6px;">根据房屋信息&nbsp;3秒给出精准报价信息</van-col>
         </van-row>
         <div class="select">
-          <div ref="select" :data-s="classify" v-for="(classify,index) in classifys" :class="{active:now==index}" @click="classQ(index,$event)">{{classify}}</div>
+          <div ref="select" :data-s="classify" v-for="(classify,index) in classifys" :class="{active:now==index}" @click="classCut(index,$event)">{{classify}}</div>
         </div>
+        <!-- 计算价格 -->
         <div class="select2">
           <div>
             <!-- 弹出层 -->
             <van-cell @click="showPopup" style="width: 95px;height:40px;
-            font-size:15px;padding: 0;text-align:center;line-height:40px;margin-left:4px;background-color:#eeeeee;">
+            font-size:15px;padding: 0;text-align:center;line-height:40px;margin-left:4px;background-color:#eeeeee;margin-top:3px;">
               <span>{{value}}</span>
               <van-icon name="arrow-down" @click="showPicker = true" />
             </van-cell>
@@ -85,9 +90,35 @@
       </van-row>
     </div>
     <!-- 推荐案列 -->
+    <div class="anlie">
+      <van-col span="7" style="font-size:22px;font-weight:550;margin-top:20px;margin-left:5px;">优秀案列</van-col>
+      <van-col span="10" style="font-size:14px;margin-top:27px;">业主装修精选案列推荐&nbsp;</van-col>
+      <!-- 案列 -->
+      <div class="recommend" v-if="data">
+        <!-- 案列内容 -->
+        <div class="content" v-for="item in data.data">
+          <img :src="item.an_pic" alt="" width="165vm">
+          <p>{{item.an_title}}</p>
+          <div class="lanbel">
+            <span>{{item.jushi}}</span>
+            <span>{{item.biaojian11}}</span>
+            <span>
+              <van-icon name="eye-o" /><span>{{item.rensu}}</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 尾部导航栏 -->
+     <van-tabbar v-model="active" active-color="#ee0a24" inactive-color="#000">
+      <van-tabbar-item icon="home-o">首页</van-tabbar-item>
+      <van-tabbar-item icon="friends-o">设计师</van-tabbar-item>
+      <van-tabbar-item icon="orders-o">案列</van-tabbar-item>
+      <van-tabbar-item icon="contact">我的</van-tabbar-item>
+    </van-tabbar> 
+    <!-- 完 -->
   </div>
 </template>
-
 <script>
 export default {
   data () {
@@ -97,15 +128,22 @@ export default {
       //弹出层
       show: false,
       //类别：新房，老房
-      classifys: ['新房', '老房'],
+      classifys: ['新房', '旧房'],
       now: 0,
       //地区的值
       value: '北京体验店',
-      //装修单价
-      price: 5000,
       //输入框输入的平方
       square: null,
+      //新房、老房、元素选择
+      select: '新房',
+      // 尾部导航切换
+      active: 0,
+      //  案列的数据
+      data: null,
     }
+  },
+  mounted () {
+    this.getData()
   },
   methods: {
 
@@ -122,10 +160,6 @@ export default {
     // 调至商城
     goStore () {
       this.$router.push('')
-    },
-    //十秒报价跳转
-    goPrice(){
-      this.$router.push('/price')
     },
     // 调至设计报价
     goDesign () {
@@ -149,44 +183,66 @@ export default {
     showPopup () {
       this.show = true;
     },
+    //样式切换和获取元素
+    classCut (index, e) {
+      this.now = index
+      let select = e.target.dataset.s
+      this.select = select
+      console.log(this.select);
+    },
     // 报价
     inputPrice () {
-      console.log(this.square);
+      console.log('选中的元素', this.select);
+      // console.log(this.square);
       // 如果平方为空就结束调用
+
       if (this.square == null) {
         console.log('面积不能为空');
         //弹窗
         this.$dialog.alert({
-          message: `输入的价格不能为空`,
+          message: `输入的面积不能为空`,
           confirmButtonText: '我知道了',
           confirmButtonColor: '#000',
         })
         return this.square;
       }
-      //如果平方不为空，就计算价格
-      if (this.square != null) {
-        let total = this.square * this.price
+      //如果平方不为空，就计算新房价格
+      if (this.square != null && this.select === '新房') {
+        // 新房价格
+        let price1 = 8500
+        // 计算总价 
+        let total = this.square * price1
         console.log('总价为：' + total)
+        // 弹窗
         this.$dialog.alert({
           message: `您的报价为：\n ￥${total}`,
           confirmButtonText: '我知道了',
           confirmButtonColor: '#000'
         })
       }
-
+      //如果平方不为空，就计算老房价格
+      if (this.square != null && this.select === '旧房') {
+        // 旧房价格
+        let price2 = 9500
+        // 旧房总价 
+        let total = this.square * price2
+        console.log('总价为：' + total)
+        // 弹窗
+        this.$dialog.alert({
+          message: `您的报价为：\n ￥${total}`,
+          confirmButtonText: '我知道了',
+          confirmButtonColor: '#000'
+        })
+      }
     },
-    classQ(index,e){
-      this.now = index
-      console.log(e.target.dataset.s);
-     
-
+    // 获取案列数据
+    getData () {
+      let url = 'http://127.0.0.1:3000/anli/all'
+      this.axios.get(url).then(res => {
+        console.log(res);
+        this.data = res.data
+      })
     }
-    
-
-
-
-
-
   },
 }
 </script>
@@ -350,6 +406,61 @@ div.van-swipe-item {
         text-align: center;
         line-height: 45px;
         background-color: #eeeeee;
+      }
+    }
+  }
+}
+// 优秀案列推荐
+.anlie {
+  // border: 1px solid red;
+  // 推荐案列
+  background-color: #f9faf9;
+  margin-top: 20px;
+  > .recommend {
+    // border: 1px solid red;
+    padding-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 89.2%;
+    margin: auto;
+    background-color: #f9faf9;
+    // 案列详情
+    > .content {
+      margin: 10px 0;
+      border-radius: 8px;
+      width: 165px;
+      background-color: #ffffff;
+      > p {
+        // border: 1px solid red;
+        padding: 5px 0;
+        font-size: 12px;
+        text-align: left;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      > div {
+        font-size: 12px;
+        text-align: left;
+        padding: 5% 5% 10% 0%;
+        position: relative;
+        > span {
+          margin-right: 5px;
+          padding: 2%;
+          font-size: 12px;
+          background-color: #fcece0;
+          color: #ef8185;
+        }
+        > span:nth-child(3) {
+          position: absolute;
+          left: 70%;
+          top: 20%;
+          padding: 1%;
+          background-color: #fff;
+          font-size: 12px;
+          color: #000;
+        }
       }
     }
   }
