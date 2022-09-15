@@ -193,7 +193,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .mine {
   background-color: rgba(246, 246, 246);
 }

@@ -42,7 +42,7 @@
           </div>
         </div>
         <div class="three-one">
-          <div class="gallery">
+          <div class="gallery" @click="goVR('http://statics.bzw315.com/720/v/7/view/index.html')">
             <div class="text">
               <h4>线上展厅</h4>
               <p>12+life&nbsp;&nbsp;style</p>
@@ -173,6 +173,10 @@ export default {
     goIndex(){
       this.$router.push('/')
       this.$router.go(0)
+    },
+    // 跳转外网VR
+    goVR(url){
+      window.location.href = url
     },
     //地区
     onConfirm (value, index) {
