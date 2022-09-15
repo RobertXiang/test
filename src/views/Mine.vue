@@ -157,25 +157,26 @@
     </div>
 
     <!-- 尾部 -->
-    <van-tabbar v-model="active">
-      <van-tabbar-item icon="home-o">首页</van-tabbar-item>
-      <van-tabbar-item icon="friends-o">设计师</van-tabbar-item>
-      <van-tabbar-item icon="search">案例</van-tabbar-item>
-      <van-tabbar-item icon="manager-o">我的</van-tabbar-item>
+    <!-- 尾部导航栏 -->
+    <van-tabbar v-model="active" active-color="#ee0a24" inactive-color="#000">
+      <van-tabbar-item icon="home-o" to="/">首页</van-tabbar-item>
+      <van-tabbar-item icon="friends-o" to="designer">设计师</van-tabbar-item>
+      <van-tabbar-item icon="orders-o">案列</van-tabbar-item>
+      <van-tabbar-item icon="contact" to="mine">我的</van-tabbar-item>
     </van-tabbar>
   </div>
 </template>
 
 <script>
-import LoginHeader from "@/components/LoginHeader.vue";
+import LoginHeader from '@/components/LoginHeader.vue'
 export default {
   components: { LoginHeader },
   data() {
     return {
       active: 3,
-    };
+    }
   },
-};
+}
 </script>
 
 <style>
