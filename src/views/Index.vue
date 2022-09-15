@@ -5,37 +5,37 @@
     <!-- 一楼轮播 -->
     <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white" duration="1500">
        <!-- 跳转设计师 -->
-      <van-swipe-item @click="">
-        <img src="https://ikj-public.oss-cn-beijing.aliyuncs.com/market/249c8d5a/ce22c637/5187fcc4/ec445b2e/Teerr2Jhbm5lcu-8mjY5MF8yNDVfMjAyMi0wOC0xOFQxNjoyNjozOC4zODA=.png" alt="" width="100%" />
+      <van-swipe-item @click="goDesignter">
+        <img src="https://ikj-public.oss-cn-beijing.aliyuncs.com/market/249c8d5a/ce22c637/5187fcc4/ec445b2e/Teerr2Jhbm5lcu-8mjY5MF8yNDVfMjAyMi0wOC0xOFQxNjoyNjozOC4zODA=.png" alt="" width="400vm" />
       </van-swipe-item>
       <!-- 跳转0元设计 -->
-      <van-swipe-item @click="">
-        <img src="https://imgs.bzw315.com/upload/2017/4/13/636277026032137584.jpg?x-oss-process=image/resize,w_800/sharpen,100" alt="" width="100%" />
+      <van-swipe-item @click="goDesign">
+        <img src="https://imgs.bzw315.com/upload/2017/4/13/636277026032137584.jpg?x-oss-process=image/resize,w_800/sharpen,100" alt="" width="400vm"/>
       </van-swipe-item>
      
-      <!-- 跳转商场 -->
-      <van-swipe-item @click="">
-        <img src="https://ikj-public.oss-cn-beijing.aliyuncs.com/market/249c8d5a/ce22c637/5187fcc4/ec445b2e/NjAzOWZhZjAtNzhjOC00NDUwLWFmN2ItZjhjMDVjNTVjYWI0XzIwMjItMDYtMjdUMTY6MDI6MjIuMjg0.png" alt="" width="100%" />
+      <!-- 跳转关于我们 -->
+      <van-swipe-item @click="goAbout">
+        <img src="https://ikj-public.oss-cn-beijing.aliyuncs.com/market/249c8d5a/ce22c637/5187fcc4/ec445b2e/NjAzOWZhZjAtNzhjOC00NDUwLWFmN2ItZjhjMDVjNTVjYWI0XzIwMjItMDYtMjdUMTY6MDI6MjIuMjg0.png" alt="" width="400vm" />
       </van-swipe-item>
       <!-- 跳转十秒报价 -->
-      <van-swipe-item @click="">
-        <img src="https://imgs.bzw315.com/upload/2017/9/20/636414999875940870.jpg?x-oss-process=image/resize,w_800/sharpen,100" alt="" width="100%" />
+      <van-swipe-item @click="goQuote">
+        <img src="https://imgs.bzw315.com/upload/2017/9/20/636414999875940870.jpg?x-oss-process=image/resize,w_800/sharpen,100" alt="" width="400vm" />
       </van-swipe-item>
     </van-swipe>
     <!-- 二楼功能列表 -->
     <van-grid>
       <!-- 跳转十秒报价 -->
-      <van-grid-item @click="" icon="https://ikj-storage-front-prod.oss-cn-beijing.aliyuncs.com/app/html-m/sy/site.png" text="10秒报价" />
+      <van-grid-item to="price" icon="https://ikj-storage-front-prod.oss-cn-beijing.aliyuncs.com/app/html-m/sy/site.png" text="10秒报价" />
       <!-- 跳转0元设计 -->
-      <van-grid-item @click="" icon="https://ikj-storage-front-prod.oss-cn-beijing.aliyuncs.com/app/html-m/sy/devise.png" text="0元设计" />
+      <van-grid-item to="navdesign" icon="https://ikj-storage-front-prod.oss-cn-beijing.aliyuncs.com/app/html-m/sy/devise.png" text="0元设计" />
       <!-- 跳转装修案列 -->
-      <van-grid-item @click="" icon="https://ikj-storage-front-prod.oss-cn-beijing.aliyuncs.com/app/html-m/sy/site.png" text="装修案列" />
-      <van-grid-item @click="" icon="https://ikj-storage-front-prod.oss-cn-beijing.aliyuncs.com/app/html-m/sy/stores.png" text="空间商场" />
+      <van-grid-item to="spacemall" icon="https://ikj-storage-front-prod.oss-cn-beijing.aliyuncs.com/app/html-m/sy/site.png" text="装修商城" />
+      <van-grid-item to="about" icon="https://ikj-storage-front-prod.oss-cn-beijing.aliyuncs.com/app/html-m/sy/stores.png" text="关于我们" />
     </van-grid>
     <!-- 整装案列 -->
     <div class="case">
       <div class="three">
-        <div class="setmeal">
+        <div class="setmeal" @click="goHome">
           <div>
             <h4>整装套餐</h4>
             <p>全一线大牌&nbsp;&nbsp;一站搞定</p>
@@ -111,10 +111,10 @@
     </div>
     <!-- 尾部导航栏 -->
      <van-tabbar v-model="active" active-color="#ee0a24" inactive-color="#000">
-      <van-tabbar-item icon="home-o">首页</van-tabbar-item>
-      <van-tabbar-item icon="friends-o">设计师</van-tabbar-item>
-      <van-tabbar-item icon="orders-o">案列</van-tabbar-item>
-      <van-tabbar-item icon="contact">我的</van-tabbar-item>
+      <van-tabbar-item icon="home-o" to="/">首页</van-tabbar-item>
+      <van-tabbar-item icon="friends-o" to="desdetails">设计师</van-tabbar-item>
+      <van-tabbar-item icon="orders-o" >案列</van-tabbar-item>
+      <van-tabbar-item icon="contact" to="mine">我的</van-tabbar-item>
     </van-tabbar> 
     <!-- 完 -->
   </div>
@@ -151,23 +151,23 @@ export default {
     // 编程式跳转
     // 调至报价
     goQuote () {
-      this.$router.push('')
+      this.$router.push('price')
     },
     // 跳到设计师
     goDesignter () {
-      this.$router.push('')
+      this.$router.push('desdetails')
     },
-    // 调至商城
-    goStore () {
-      this.$router.push('')
+    // 调至关于我们
+    goAbout () {
+      this.$router.push('about')
     },
     // 调至设计报价
     goDesign () {
-      this.$router.push('')
+      this.$router.push('navdesign')
     },
-    // 调至装修案列
-    goWorks () {
-      this.$router.push('')
+    // 跳转套餐
+    goHome () {
+      this.$router.push('home')
     },
     //地区
     onConfirm (value, index) {
