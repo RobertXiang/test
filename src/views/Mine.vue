@@ -159,8 +159,10 @@
     <!-- 尾部 -->
     <!-- 尾部导航栏 -->
     <van-tabbar v-model="active" active-color="#ee0a24" inactive-color="#000">
-      <van-tabbar-item icon="home-o" to="/">首页</van-tabbar-item>
-      <van-tabbar-item icon="friends-o" to="designer">设计师</van-tabbar-item>
+      <van-tabbar-item icon="home-o" @click="goIndex">首页</van-tabbar-item>
+      <van-tabbar-item icon="friends-o" @click="goDesigner">
+        设计师
+      </van-tabbar-item>
       <van-tabbar-item icon="orders-o">案列</van-tabbar-item>
       <van-tabbar-item icon="contact" to="mine">我的</van-tabbar-item>
     </van-tabbar>
@@ -175,6 +177,18 @@ export default {
     return {
       active: 3,
     }
+  },
+  methods: {
+    //跳转首页自动刷新
+    goIndex() {
+      this.$router.push('/')
+      this.$router.go(0)
+    },
+    // 跳转设计师时自动刷新
+    goDesigner() {
+      this.$router.push('designer')
+      // this.$router.go(0)
+    },
   },
 }
 </script>

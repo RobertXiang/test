@@ -111,7 +111,7 @@
     </div>
     <!-- 尾部导航栏 -->
      <van-tabbar v-model="active" active-color="#ee0a24" inactive-color="#000">
-      <van-tabbar-item icon="home-o" to="/">首页</van-tabbar-item>
+      <van-tabbar-item icon="home-o" to="/" @click="goIndex">首页</van-tabbar-item>
       <van-tabbar-item icon="friends-o" to="designer">设计师</van-tabbar-item>
       <van-tabbar-item icon="orders-o" >案列</van-tabbar-item>
       <van-tabbar-item icon="contact" to="mine">我的</van-tabbar-item>
@@ -169,12 +169,18 @@ export default {
     goHome () {
       this.$router.push('home')
     },
+    //跳转页面自动刷新
+    goIndex(){
+      this.$router.push('/')
+      this.$router.go(0)
+    },
     //地区
     onConfirm (value, index) {
       // console.log(`当前值：${value}, 当前索引：${index}`);
       this.value = value
       this.show = false;
     },
+    // 地区关闭
     onCancel () {
       console.log(`取消`);
       this.show = false;
