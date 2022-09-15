@@ -48,7 +48,7 @@
               <p>12+life&nbsp;&nbsp;style</p>
             </div>
           </div>
-          <div class="floor">
+          <div class="floor" @click="goNewHome()">
             <div class="text">
               <h4>家装新体验</h4>
               </h4>
@@ -177,6 +177,10 @@ export default {
     // 跳转外网VR
     goVR(url){
       window.location.href = url
+    },
+    // 跳转家装新体验
+    goNewHome(){
+      this.$router.push('newhome')
     },
     //地区
     onConfirm (value, index) {

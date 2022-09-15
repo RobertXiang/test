@@ -82,6 +82,12 @@ const routes = [
     name: 'price',
     component: () => import('../views/Price.vue'),
   },
+  // 家装新体验
+  {
+    path: '/newhome',
+    name: 'NewHome',
+    component: () => import('../views/NewHome.vue'),
+  },
 ]
 
 const router = new VueRouter({

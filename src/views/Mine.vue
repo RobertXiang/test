@@ -12,7 +12,7 @@
         <router-link to="/">
           <img src="@/assets/icon/tx.png" alt="" />
         </router-link>
-        <router-link to="/">请点击登录</router-link>
+        <router-link to="login">请点击登录</router-link>
       </div>
       <!-- 登录之后的头部 -->
       <login-header style="display: none" />
