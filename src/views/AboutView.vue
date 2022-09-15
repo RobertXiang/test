@@ -2,7 +2,7 @@
   <div id="main">
     <!-- 顶部导航 -->
     <mt-header fixed title="关于我们">
-      <mt-button icon="back" slot="left"></mt-button>
+      <mt-button icon="back" slot="left" @click="goHome"></mt-button>
       <mt-button icon="more" slot="right"></mt-button>
     </mt-header>
 
@@ -58,7 +58,7 @@
     <!-- 尾部 -->
     <div id="footer">
       <div class="foot">
-        <span>首页</span>
+        <span  @click="goHome">首页</span>
         <span>APP下载</span>
         <span>关于我们</span>
       </div>
@@ -72,7 +72,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    goHome(){
+      this.$router.push("/");
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>

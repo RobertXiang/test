@@ -5,13 +5,25 @@ import Index from '../views/Index.vue'
 Vue.use(VueRouter)
 
 const routes = [
+  // 注册页面
+  {
+    path: '/register',
+    name: 'Register',
+    component: () => import('../views/Register.vue'),
+  },
+  //登录页面
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import('../views/Login.vue'),
+  },
   // 我的
   {
     path: '/mine',
     name: 'mine',
     component: () => import('../views/Mine.vue'),
   },
-  // Home
+  // Home:套餐详情
   {
     path: '/home',
     name: 'home',
@@ -20,7 +32,7 @@ const routes = [
   // 空间商城
   {
     path: '/spacemall',
-    name: '/spacemall',
+    name: 'spacemall',
     component: () => import('../views/SpaceMall.vue'),
   },
   // 我的订单
@@ -29,6 +41,7 @@ const routes = [
     name: 'orderform',
     component: () => import('../views/OrderForm.vue'),
   },
+  // 免费设计
   {
     path: '/navdesign',
     name: 'navdesign',
@@ -39,6 +52,7 @@ const routes = [
     name: 'navdetail',
     component: () => import('../views/NavDetail.vue'),
   },
+  // 首页
   {
     path: '/',
     name: 'index',
@@ -59,8 +73,15 @@ const routes = [
   {
     path: '/about',
     name: 'about',
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  }
+    component: () =>
+      import(/* webpackChunkName: "about" */ '../views/AboutView.vue'),
+  },
+  //十秒报价
+  {
+    path: '/price',
+    name: 'price',
+    component: () => import('../views/Price.vue'),
+  },
 ]
 
 const router = new VueRouter({

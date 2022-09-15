@@ -7,6 +7,8 @@ import store from './store'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 Vue.use(VueAxios, axios)
+// 配置基础路径
+axios.defaults.baseURL='http://127.0.0.1:3000'
 
 // ElementUI
 import ElementUI from 'element-ui';

@@ -1,11 +1,11 @@
 <template>
   <div>
     <mt-header fixed title="明星设计师">
-      <mt-button icon="back" slot="left">返回</mt-button>
+      <mt-button icon="back" slot="left" @click="goHome()">返回</mt-button>
       <mt-button icon="more" slot="right"></mt-button>
     </mt-header>
     <!-- 轮播图 -->
-    <mt-swipe style="height: 56vw" :auto="0">
+    <mt-swipe style="height: 56vw" :auto="2000">
       <mt-swipe-item>
         <div class="bt">
           <mt-button>五星设计师推荐</mt-button>
@@ -107,6 +107,10 @@ export default {
   },
 
   methods: {
+    goHome(){
+      this.$router.push("/");
+    },
+    
     godetail(index) {
       this.$router.push({
         path:'/desdetails',
