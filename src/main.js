@@ -3,27 +3,37 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-// axios
-import axios from 'axios'
-import VueAxios from 'vue-axios'
-Vue.use(VueAxios, axios)
-// 配置基础路径
-axios.defaults.baseURL='http://127.0.0.1:3000'
+// socket.io
+import VueSocketIO from 'vue-socket.io'
+import SocketIO from 'socket.io-client'
 
-// ElementUI
+Vue.use(
+  new VueSocketIO({
+    debug: false,
+    connection: SocketIO('http://127.0.0.1:3030', {
+      autoConnect: false // 取消自动连接     
+    }),
+    extraHeaders: { 'Access-Control-Allow-Origin': '*' }
+  })
+)
+
+
+// 引入elementui组件库
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
 
-// VantUI
-import Vant from 'vant';
-import 'vant/lib/index.css';
-Vue.use(Vant);
+//import css
+import 'vue-beauty/package/style/vue-beauty.min.css'
 
-// MintUI
-import MintUI from 'mint-ui'
-import 'mint-ui/lib/style.css'
-Vue.use(MintUI)
+//import components
+import vueBeauty from 'vue-beauty'
+Vue.use(vueBeauty)
+
+//引入axios
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+Vue.use(VueAxios, axios)
 
 Vue.config.productionTip = false
 

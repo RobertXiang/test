@@ -1,7 +1,6 @@
 <template>
-  <!-- 客服 -->
-  <div class="kf">
-    <!-- 头部 -->
+  <div class="ke-fu kf">
+    <!-- 客服 -->
     <div class="header">
       <img src="../assets/icon/tx.jpg" alt="" />
       <div>
@@ -11,12 +10,11 @@
       <i id="i1" class="el-icon-minus"></i>
       <i class="el-icon-close"></i>
     </div>
-
     <div class="chart-main-area">
       <!-- 聊天区域 -->
       <div class="chart-list" id="chart-list">
         <div class="user-logined" id="user-logined">
-          <span id="logined-user"></span>上线了
+          <!-- <span id="logined-user"></span>上线了 -->
         </div>
         <!-- 气泡 -->
         <div class="chart-item">
@@ -33,7 +31,7 @@
         </div>
         <div>
           <input
-            @click="socketSendmsg"
+            @click="click"
             type="button"
             id="send"
             class="chart-form-send"
@@ -42,41 +40,47 @@
         </div>
       </div>
     </div>
-
-    <div class="wrap">
-      <button @click="connected">连接Socket</button>
-    </div>
   </div>
 </template>
 
 <script>
 export default {
-  methods: {
-    connected() {
-      this.$socket.open(); // 开始连接socket
-    },
-    socketSendmsg() {
-      this.$socket.emit("my other event", { my: "data" });
-    },
+  data() {
+    let socket = io("http://localhost:3000/");
+    console.log(socket);
+    return {};
   },
-  sockets: {
-    connecting() {
-      console.log("正在连接");
-    },
-    disconnect() {
-      console.log("Socket 断开");
-    },
-    connect_failed() {
-      console.log("连接失败");
-    },
-    connect() {
-      console.log("socket connected");
-    },
-    news(data) {
-      console.log(data);
-    },
-    open(data) {
-      console.log(data);
+  methods: {
+    click() {
+      let socket = io("http://localhost:3000/");
+
+      // 2.获取文本框中得值
+      let val = message.value;
+      // trim() 去除字符串连段的空格
+      if (val.trim().length > 0 && val.trim().length < 50) {
+        // 发消息给服务端
+        socket.emit("textmsg", {
+          val: val,
+        });
+        // 清空文本框
+        message.value = "";
+
+        // 3.监听服务端发回来的消息
+        socket.on("textmsg", function (data) {
+          console.log(data.val);
+          // 把消息显示在消息列表中
+          let chatlist = document.getElementById("chart-list");
+          chatlist.innerHTML += `
+              <div style="margin-top: 10px;" class="chart-item">
+                  <div style="float: left;margin: 0 15px;" class="user-face">
+                    <img style="width: 40px;height: 40px;border-radius: 5px;" src="/designer/tx.jpg" alt="">
+                  </div>
+                  <div style="float: left;position: relative;padding: 10px;min-width: 100px;max-width: 520px;background: #fff;font-size: 12px;border-radius: 3px;" class="user-message">${data.val}</div>
+              </div>`;
+          // 让chatlist的滚动条持续在底部
+          chatlist.scrollTop = chatlist.scrollHeight;
+        });
+      }
     },
   },
 };
@@ -84,7 +88,9 @@ export default {
 
 <style scoped>
 .kf {
-  margin: 1000px;
+  position: fixed;
+  bottom: 80px;
+  margin-left: 74%;
   width: 350px;
   border-radius: 10px;
 }
@@ -119,11 +125,11 @@ export default {
 }
 .kf .chart-list {
   position: relative;
-  height: 350px;
+  height: 300px;
   overflow-y: auto;
   overflow-x: hidden;
 }
-.kf .chart-list .user-logined {
+/* .kf .chart-list .user-logined {
   position: absolute;
   width: 200px;
   bottom: 10px;
@@ -133,7 +139,7 @@ export default {
   color: #000;
   left: 20%;
   transition: all 0.8s ease-in-out;
-}
+} */
 .kf .chart-list .chart-item::after,
 .kf .chart-list .chart-item::before {
   content: ".";
@@ -143,19 +149,19 @@ export default {
   clear: both;
 }
 
-.chart-list .chart-item {
+.kf .chart-main-area .chart-list .chart-item {
   margin-top: 10px;
 }
-.chart-list .chart-item .user-face {
+.kf .chart-main-area .chart-list .chart-item .user-face {
   float: left;
   margin: 0 15px;
 }
-.chart-list .chart-item .user-face img {
+.kf .chart-main-area .chart-list .chart-item .user-face img {
   width: 40px;
   height: 40px;
   border-radius: 5px;
 }
-.chart-list .chart-item .user-message {
+.kf .chart-main-area .chart-list .chart-item .user-message {
   position: relative;
   float: left;
   padding: 10px;
@@ -177,7 +183,7 @@ export default {
   transform: rotate(45deg);
 }
 .chart-form {
-  height: 134px;
+  height: 100px;
   background: #fff;
   border-radius: 5px;
   border: 1px solid #dadada;
@@ -186,7 +192,7 @@ export default {
 .chart-form .chart-form-message {
   width: 100%;
   padding: 5px 10px;
-  height: 95px;
+  height: 60px;
   line-height: 1.5;
   resize: none;
   border: none;

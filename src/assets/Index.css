@@ -1,0 +1,434 @@
+/******* 通用 ******/
+body {
+  font-size: 16px !important;
+}
+* {
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  list-style: none;
+}
+h3{
+  color: white !important;
+  font-weight: 600 !important;
+}
+.center{
+  width: 1200px;
+  margin: 0 auto;
+}
+
+/******* 导航栏1 ******/
+.header .center{
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+
+.header{
+  background-color: #F5F6FB;
+}
+
+.header .txt a{
+  color: #aaaaaa;
+  padding: 0 5px;
+  font-size: 14px;
+  border-left: 1px solid gray;
+}
+
+
+/******* 导航栏2 ******/
+.head .left{
+  height: 70px;
+}
+.head .left ul{
+  border-bottom: none;
+}
+.head .left a img{
+  margin-top: 15px;
+  margin-right: 40px;
+}
+.head .center{
+  display: flex;
+  justify-content: space-between;
+}
+.head .center .left{
+  display: flex;
+}
+.el-menu--horizontal>.el-menu-item.is-active{
+  border-bottom: 2px solid #ff6400 !important;
+}
+.el-menu--horizontal>.el-menu-item{
+  height: 50px !important;
+}
+.el-menu-item{
+  padding: 0 5px !important;
+  margin: 0 15px !important;
+  font-size: 16px !important;
+}
+.head .right{
+  display: inline;
+  height: 70px;
+  padding-top: 10px;
+  margin-left: 40px;
+  display: flex;
+}
+.head .right img {
+  cursor: pointer;
+  width: 20px;
+  height: 30px;
+  margin-right: 22px;
+  margin-top: 5px;
+  vertical-align: middle;
+  display: inline;
+}
+.head .right button {
+  cursor: pointer;
+  display: inline;
+  border:none;
+  text-align: center;
+  margin-top: 5px;
+  background-color: rgba(255, 100, 0, 1);
+  border-radius: 16px;
+  height: 32px;
+  width: 88px;
+  color: #fff;
+}
+
+
+
+
+
+/******* 轮播图 ******/
+.el-carousel__container{
+  height: 600px !important;
+}
+
+
+/******* 服务功能 ******/
+.column .center{
+  display: flex;
+  justify-content:center;
+}
+.column .center ul{
+  display: flex;
+  justify-content: center;
+}
+.column .center ul li {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 150px;
+  width: 240px;
+  margin: 30px 0;
+  border: 1px solid #eee;
+}
+.column ul li img {
+  width: 60px;
+  height: 60px;
+}
+.column ul li p{
+  font-size: 24px;
+  color: #222222;
+  margin: 10px 0;
+}
+.column ul li span{
+  font-size: 14px;
+  color: #aaaaaa;    
+}
+
+
+
+
+/* 效果图 */
+.fw{
+  padding-top: 30px;
+  background-color: rgba(248, 248, 248);
+}
+.fw .zi{
+  width: 100%;
+  text-align: center;
+}
+.fw ul li h3{
+  color: rgba(0,0,0,.85) !important;
+}
+.fw ul{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.fw ul li{
+  width: 580px;
+  margin-bottom: 30px;
+}
+.fw ul li img{
+  width: 100%;
+  border-radius: 10px;
+}
+
+
+
+
+/******* 设计师 ******/
+.designer {
+  padding: 30px;
+}
+
+.designer .cent {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.designer .cent span {
+  color: gray;
+}
+
+.designer h1 {
+  margin: 20px;
+}
+
+.designer .card {
+  margin-top: 40px;
+}
+
+.designer .card ul {
+  padding: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.designer li {
+  cursor: pointer;
+  position: relative;
+  text-align: center;
+  width: 280px;
+  height: 280px;
+  border-radius: 10px;
+}
+
+.designer img {
+  border-radius: 10px;
+  width: 100%;
+  display: block;
+}
+
+.designer .item {
+  height: 100%;
+  position: absolute;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border-radius: 10px;
+  box-shadow: 3px 10px 5px rgba(0, 0, 0, 0.5);
+  transition: opacity 0.25s;
+  opacity: 0;
+}
+
+.designer .item h3 {
+  margin-top: 50%;
+}
+.designer .item:hover {
+  padding: 0 2vw;
+  opacity: 1;
+}
+
+
+
+
+
+/******* 脚部 ******/
+.loveKJ {
+  border-top: 1px solid #eee;
+  margin-top: 40px;
+}
+.loveKJ .center {
+  width: 1200px;
+  margin: 0 auto;
+  padding: 40px;
+}
+
+.loveKJ ul {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  cursor: pointer;
+}
+
+.loveKJ ul li h4 {
+  line-height: 70px;
+  font-weight: 600;
+}
+.loveKJ ul li h4:hover,
+.loveKJ ul li span:hover {
+  color: #ff6400;
+}
+
+.loveKJ ul li span {
+  display: block;
+  margin-top: 14px;
+}
+
+.loveKJ .center .s1 {
+  padding-bottom: 100px;
+  margin: 0 30%;
+  color: gray;
+}
+
+/******* 吸底组件 ******/
+.footer {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  height: 80px;
+}
+
+.footer .center {
+  width: 1200px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.footer .center .f1 img {
+  position: absolute;
+  top: -15px;
+}
+
+.footer .center .f2 h1 {
+  display: inline;
+  line-height: 80px;
+  color: white;
+  font-weight: 600;
+}
+
+.footer .center .f3 {
+  white-space:nowrap;
+  font-size: 18px;
+  line-height: 80px;
+  cursor: pointer;
+}
+.footer .center .f3 span:last-child {
+  border-left: 1px solid gainsboro;
+  padding: 15px;
+}
+
+.footer .f4 .el-select{
+  width: 170px;
+  border: none;
+}
+.footer .f4 .el-select .el-input__inner{
+  border: none;
+  line-height: 45px;
+  height: 45px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border: 2px solid #787878;
+  color: white;
+  font-size: 16px;
+}
+.footer .f4 .el-range-editor.is-active, .el-range-editor.is-active:hover, .el-select .el-input.is-focus .el-input__inner{
+  border-color: #787878 !important;
+}
+.footer .f4 .el-select .el-input__inner:focus{
+  border-color: #787878 !important;
+}
+
+.footer .f4 .el-select .el-input .el-select__caret{
+  color: white;
+}
+.footer .f4 .el-input--suffix .el-input__inner{
+  padding-left: 30px !important;
+}
+.footer .f4 .el-input__suffix{
+  right: 70px !important;
+}
+.footer .f4 .el-select .el-input .el-select__caret{
+  color: white !important
+}
+
+.footer .f4 .lx{
+  position: relative;
+}
+.footer .f4 .lx input:last-child{
+  position: absolute;
+  left:100px;
+  top: 10px;
+  width: 50px;
+  /* color: white; */
+  font-size: 16px;
+  background: transparent;
+  border-style: none;
+  outline: none;
+}
+.footer .f4 .lx input::-webkit-input-placeholder {
+  color: white;
+}
+.footer .f4{
+  display: flex;
+  align-items: center;
+}
+
+.footer .center .f4 input::-webkit-input-placeholder {
+  color: white;
+}
+
+.footer .center .f4 #int {
+  border: 2px solid #787878;
+  color: white;
+  background: transparent;
+  width: 140px;
+  outline: none;
+  border-radius: 5px;
+  line-height: 20px;
+  display: inline;
+  padding: 10px;
+  font-size: 16px;
+  margin-left: 20px;
+}
+
+.footer .center .f4 button {
+  border: none;
+  color: white;
+  background: #ff6400;
+  width: 120px;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 17px;
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+.footer .center .f4 #ix {
+  padding-bottom: 50px;
+  padding-left: 5px;
+  font-size: 22px;
+}
+
+/* 回到顶部 */
+.ant-back-top-content{
+  background-color: #ff6400 !important;
+}
+
+/* 人工客服 */
+.rgfw #xx{
+  cursor: pointer;
+  position: fixed;
+  bottom: 100px;
+  right: 100px;
+  font-size: 24px;
+  height: 40px;
+  width: 40px;
+  border-radius: 20px;
+  color: white;
+  text-align: center;
+  background-color: #ff6400;
+}
+.rgfw .anticon{
+  line-height: 40px;
+}
+.rgfw{
+  position: relative;
+}
