@@ -274,12 +274,12 @@ export default {
       }
       // 判断老人宠物 是否选择
       if (this.choices[0].elderly == true) {
-        this.scheme[2].choice.elderly = this.ce;
-        console.log(this.scheme[2].choice.elderly);
+        this.scheme[2].choice[0].elderly = this.ce;
+        console.log(this.scheme[2].choice[0].elderly);
       }
       if (this.choices[1].pets == true) {
-        this.scheme[2].choice.pets = this.cp;
-        console.log(this.scheme[2].choice.pets);
+        this.scheme[2].choice[1].pets = this.cp;
+        console.log(this.scheme[2].choice[1].pets);
       }
       // 判断风格 是否选择
       if (this.cs != null) {
@@ -320,6 +320,32 @@ export default {
 
       // console.log(this.scheme.phone);
       console.log(this.scheme);
+
+      // post请求上传
+      let url = 'http://127.0.0.1:3000/mfsj/set'
+      let sme = this.scheme
+      // 老人宠物
+      let cie = `${sme[2].choice[0].elderly} ${sme[2].choice[1].pets}`
+      console.log(cie);
+      let sps = ''
+      // 循环spaces
+      for(var i=0;i<sme[4].spaces.length;i++) {
+        sps += sme[4].spaces[i] + "\xa0"
+      }
+      console.log(sps);
+      // 循环other
+      let otr = ''
+      for(var i=0;i<sme[6].other.length;i++) {
+        otr += sme[6].other[i] + "\xa0"
+      }
+      console.log(otr);
+      let params = `house=${sme[0].house}&live=${sme[1].live}&choice=${cie}&style=${sme[3].style}&spaces=${sps}&preference=${sme[5].preference}&other=${otr}&HouseStatu=${sme[7].HouseStatu}&yhphone=${sme[8].phone}`
+      console.log(params);
+      this.axios.post(url,params).then(res=>{
+        console.log(res);
+      }).catch(err=>{
+        console.log('请求失败:' +err.status+','+err.statusText);
+      })
     },
   },
 };
