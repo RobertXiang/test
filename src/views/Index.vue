@@ -5,7 +5,7 @@
     <!-- 一楼轮播 -->
     <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white" duration="1500">
        <!-- 跳转设计师 -->
-      <van-swipe-item @click="goDesignter">
+      <van-swipe-item @click="goDesigner">
         <img src="https://ikj-public.oss-cn-beijing.aliyuncs.com/market/249c8d5a/ce22c637/5187fcc4/ec445b2e/Teerr2Jhbm5lcu-8mjY5MF8yNDVfMjAyMi0wOC0xOFQxNjoyNjozOC4zODA=.png" alt="" width="400vm" />
       </van-swipe-item>
       <!-- 跳转0元设计 -->
@@ -112,7 +112,7 @@
     <!-- 尾部导航栏 -->
      <van-tabbar v-model="active" active-color="#ee0a24" inactive-color="#000">
       <van-tabbar-item icon="home-o" to="/">首页</van-tabbar-item>
-      <van-tabbar-item icon="friends-o" to="desdetails">设计师</van-tabbar-item>
+      <van-tabbar-item icon="friends-o" to="designer">设计师</van-tabbar-item>
       <van-tabbar-item icon="orders-o" >案列</van-tabbar-item>
       <van-tabbar-item icon="contact" to="mine">我的</van-tabbar-item>
     </van-tabbar> 
@@ -154,8 +154,8 @@ export default {
       this.$router.push('price')
     },
     // 跳到设计师
-    goDesignter () {
-      this.$router.push('desdetails')
+    goDesigner () {
+      this.$router.push('designer')
     },
     // 调至关于我们
     goAbout () {
