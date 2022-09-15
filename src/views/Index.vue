@@ -91,7 +91,7 @@
     </div>
     <!-- 推荐案列 -->
     <div class="anlie">
-      <van-col span="7" style="font-size:22px;font-weight:550;margin-top:20px;margin-left:5px;">优秀案列</van-col>
+      <van-col span="7" style="font-size:22px;font-weight:550;margin-top:20px;margin-left:20px;">优秀案列</van-col>
       <van-col span="10" style="font-size:14px;margin-top:27px;">业主装修精选案列推荐&nbsp;</van-col>
       <!-- 案列 -->
       <div class="recommend" v-if="data">
