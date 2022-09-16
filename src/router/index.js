@@ -88,6 +88,17 @@ const routes = [
     name: 'NewHome',
     component: () => import('../views/NewHome.vue'),
   },
+  //案例模块
+  {
+    path: '/anlidetail',
+    name: 'Anlidetail',
+    component: () => import('../views/Anlidetail.vue')
+  },
+  {
+    path: '/anli',
+    name: 'Anli',
+    component: () => import('../views/Anli.vue')
+  },
 ]
 
 const router = new VueRouter({

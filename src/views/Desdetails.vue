@@ -99,7 +99,7 @@ export default {
   },
   methods: {
     getData1() {
-      let desid = Number(this.$route.query.index) + 1;
+      let desid = this.$route.query.index;
       console.log(this.$route.query);
       let url = `http://127.0.0.1:3000/des_deiles/details?des_id=${desid}`;
       this.axios.get(url).then((res) => {

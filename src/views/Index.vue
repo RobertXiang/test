@@ -113,7 +113,7 @@
      <van-tabbar v-model="active" active-color="#ee0a24" inactive-color="#000">
       <van-tabbar-item icon="home-o" to="/" @click="goIndex">首页</van-tabbar-item>
       <van-tabbar-item icon="friends-o" to="designer">设计师</van-tabbar-item>
-      <van-tabbar-item icon="orders-o" >案列</van-tabbar-item>
+      <van-tabbar-item icon="orders-o" @click="goAnli">案列</van-tabbar-item>
       <van-tabbar-item icon="contact" to="mine">我的</van-tabbar-item>
     </van-tabbar> 
     <!-- 完 -->
@@ -181,6 +181,10 @@ export default {
     // 跳转家装新体验
     goNewHome(){
       this.$router.push('newhome')
+    },
+    //跳转案例
+    goAnli() {
+      this.$router.push("/anli");
     },
     //地区
     onConfirm (value, index) {

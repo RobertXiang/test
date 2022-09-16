@@ -53,9 +53,9 @@
       <!-- 单个卡片内容 -->
       <div v-if="data">
         <div
-          @click="godetail(index)"
+          @click="godetail(msgs.desiger_id)"
           id="item"
-          v-for="(msgs, index) in data"
+          v-for="msgs in data"
           :key="msgs.desiger_id"
         >
           <div class="header">

@@ -163,7 +163,7 @@
       <van-tabbar-item icon="friends-o" @click="goDesigner">
         设计师
       </van-tabbar-item>
-      <van-tabbar-item icon="orders-o">案列</van-tabbar-item>
+      <van-tabbar-item icon="orders-o" @click="goAnli">案列</van-tabbar-item>
       <van-tabbar-item icon="contact" to="mine">我的</van-tabbar-item>
     </van-tabbar>
   </div>
@@ -189,6 +189,9 @@ export default {
       this.$router.push('designer')
       // this.$router.go(0)
     },
+    goAnli(){
+      this.$router.push('anli')
+    }
   },
 }
 </script>
