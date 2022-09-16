@@ -88,16 +88,17 @@ const routes = [
     name: 'NewHome',
     component: () => import('../views/NewHome.vue'),
   },
-  //案例模块
+  //案例详情
   {
     path: '/anlidetail',
     name: 'Anlidetail',
-    component: () => import('../views/Anlidetail.vue')
+    component: () => import('../views/Anlidetail.vue'),
   },
+  // 案列
   {
     path: '/anli',
     name: 'Anli',
-    component: () => import('../views/Anli.vue')
+    component: () => import('../views/Anli.vue'),
   },
 ]
 

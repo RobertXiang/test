@@ -108,7 +108,7 @@
           </div>
           <div class="list_item">
             <img
-              src="https://ikj-storage-front-prod.oss-cn-beijing.aliyuncs.com/app/html-m/jzxty/pattern3.png"
+              src="https://ikj-storage-front-prod.oss-cn-beijing.aliyuncs.com/app/html-m/jzxty/experience3.png"
               alt=""
               width="100px"
             />

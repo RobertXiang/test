@@ -4,15 +4,15 @@
     <van-nav-bar title="美墅装修" left-text="北京" />
     <!-- 一楼轮播 -->
     <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white" duration="1500">
-       <!-- 跳转设计师 -->
+      <!-- 跳转设计师 -->
       <van-swipe-item @click="goDesigner">
         <img src="https://ikj-public.oss-cn-beijing.aliyuncs.com/market/249c8d5a/ce22c637/5187fcc4/ec445b2e/Teerr2Jhbm5lcu-8mjY5MF8yNDVfMjAyMi0wOC0xOFQxNjoyNjozOC4zODA=.png" alt="" width="400vm" />
       </van-swipe-item>
       <!-- 跳转0元设计 -->
       <van-swipe-item @click="goDesign">
-        <img src="https://imgs.bzw315.com/upload/2017/4/13/636277026032137584.jpg?x-oss-process=image/resize,w_800/sharpen,100" alt="" width="400vm"/>
+        <img src="https://imgs.bzw315.com/upload/2017/4/13/636277026032137584.jpg?x-oss-process=image/resize,w_800/sharpen,100" alt="" width="400vm" />
       </van-swipe-item>
-     
+
       <!-- 跳转关于我们 -->
       <van-swipe-item @click="goAbout">
         <img src="https://ikj-public.oss-cn-beijing.aliyuncs.com/market/249c8d5a/ce22c637/5187fcc4/ec445b2e/NjAzOWZhZjAtNzhjOC00NDUwLWFmN2ItZjhjMDVjNTVjYWI0XzIwMjItMDYtMjdUMTY6MDI6MjIuMjg0.png" alt="" width="400vm" />
@@ -96,8 +96,8 @@
       <!-- 案列 -->
       <div class="recommend" v-if="data">
         <!-- 案列内容 -->
-        <div class="content" v-for="item in data.data">
-          <img :src="item.an_pic" alt="" width="165vm">
+        <div class="content" v-for="item in data.data" @click="goXiangqing(item.anli_id)">
+          <img :src="item.an_pic" alt="" width="175vm">
           <p>{{item.an_title}}</p>
           <div class="lanbel">
             <span>{{item.jushi}}</span>
@@ -110,12 +110,12 @@
       </div>
     </div>
     <!-- 尾部导航栏 -->
-     <van-tabbar v-model="active" active-color="#ee0a24" inactive-color="#000">
+    <van-tabbar v-model="active" active-color="#ee0a24" inactive-color="#000">
       <van-tabbar-item icon="home-o" to="/" @click="goIndex">首页</van-tabbar-item>
       <van-tabbar-item icon="friends-o" to="designer">设计师</van-tabbar-item>
-      <van-tabbar-item icon="orders-o" @click="goAnli">案列</van-tabbar-item>
+      <van-tabbar-item icon="orders-o" to="anli">案列</van-tabbar-item>
       <van-tabbar-item icon="contact" to="mine">我的</van-tabbar-item>
-    </van-tabbar> 
+    </van-tabbar>
     <!-- 完 -->
   </div>
 </template>
@@ -170,21 +170,28 @@ export default {
       this.$router.push('home')
     },
     //跳转页面自动刷新
-    goIndex(){
+    goIndex () {
       this.$router.push('/')
       this.$router.go(0)
     },
     // 跳转外网VR
-    goVR(url){
+    goVR (url) {
       window.location.href = url
     },
     // 跳转家装新体验
-    goNewHome(){
+    goNewHome () {
       this.$router.push('newhome')
     },
     //跳转案例
-    goAnli() {
+    goAnli () {
       this.$router.push("/anli");
+    },
+    //编程式跳转案列详情
+    goXiangqing (index) {
+      this.$router.push({
+        path: "/anlidetail",
+        query: { index },
+      });
     },
     //地区
     onConfirm (value, index) {
@@ -445,9 +452,10 @@ div.van-swipe-item {
     background-color: #f9faf9;
     // 案列详情
     > .content {
+    // border: 1px solid red;
       margin: 10px 0;
       border-radius: 8px;
-      width: 165px;
+      width: 175px;
       background-color: #ffffff;
       > p {
         // border: 1px solid red;
