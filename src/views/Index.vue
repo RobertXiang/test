@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <!-- 头部导航 -->
-    <van-nav-bar title="美墅装修" left-text="北京" />
+    <van-nav-bar title="美墅装修" />
     <!-- 一楼轮播 -->
     <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white" duration="1500">
       <!-- 跳转设计师 -->

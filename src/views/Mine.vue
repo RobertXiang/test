@@ -4,12 +4,23 @@
     <!-- 头部 -->
     <div class="header">
       <!-- fiexd 会固定在顶部 -->
-      <mt-navbar fixed>
-        <mt-tab-item>美墅装修</mt-tab-item>
-      </mt-navbar>
+      <van-nav-bar title="美墅装修" />
+      <!-- <p
+        style="
+          margin: 0 auto;
+          width: 120px;
+          font-size: 20px;
+          font-weight: bold;
+          position: relative;
+          top: 50px;
+          left: 20px;
+        "
+      >
+        美墅装修
+      </p> -->
       <!-- 头像 -->
       <div class="tx">
-        <router-link to="/">
+        <router-link to="login">
           <img src="@/assets/icon/tx.png" alt="" />
         </router-link>
         <router-link to="login">请点击登录</router-link>
@@ -189,9 +200,9 @@ export default {
       this.$router.push('designer')
       // this.$router.go(0)
     },
-    goAnli(){
+    goAnli() {
       this.$router.push('anli')
-    }
+    },
   },
 }
 </script>
@@ -229,7 +240,7 @@ export default {
 /* 头像样式 */
 .tx {
   position: relative;
-  padding-top: 5rem;
+  padding-top: 3rem;
 }
 .tx a img:first-child {
   width: 5rem;
@@ -239,7 +250,7 @@ export default {
 .tx a:last-child {
   font-size: 1.1rem;
   position: absolute;
-  top: 7rem;
+  top: 6rem;
   left: 8rem;
   color: black;
 }
