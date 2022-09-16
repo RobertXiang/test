@@ -339,10 +339,14 @@ export default {
         otr += sme[6].other[i] + "\xa0"
       }
       console.log(otr);
+
+      // 拼接所有数据
       let params = `house=${sme[0].house}&live=${sme[1].live}&choice=${cie}&style=${sme[3].style}&spaces=${sps}&preference=${sme[5].preference}&other=${otr}&HouseStatu=${sme[7].HouseStatu}&yhphone=${sme[8].phone}`
       console.log(params);
+
+      // 发post请求上传数据
       this.axios.post(url,params).then(res=>{
-        console.log(res);
+        this.$toast("领取成功");
       }).catch(err=>{
         console.log('请求失败:' +err.status+','+err.statusText);
       })
