@@ -21,10 +21,14 @@
           <a href="/" titile="美墅装修公司官网">
             <img
               class="logo"
-              src="https://ikj-storage-front-prod.oss-cn-beijing.aliyuncs.com/app/html-pc/components/Head/logo.png"
+              src="../assets/img/logo.jpg"
               alt=""
+              width="50px"
+              height="40px"
               title="爱空间装饰装修公司官网"
-          /></a>
+              style="position: relative; top: -5px; left: 20px"
+            />
+          </a>
           <el-menu
             :default-active="activeIndex"
             class="el-menu-demo"
@@ -124,9 +128,9 @@
               style="margin-top: 15px"
             />
             <h4 style="font-size: 24px; color: #414141">33天装修日历</h4>
-            <span style="font-size: 16px; margin: 0 0 15px; color: gray"
-              >每一天的进度有迹可循，标准化工艺工序100%落地，工期一天不浪费。</span
-            >
+            <span style="font-size: 16px; margin: 0 0 15px; color: gray">
+              每一天的进度有迹可循，标准化工艺工序100%落地，工期一天不浪费。
+            </span>
           </li>
           <li>
             <img
@@ -135,9 +139,9 @@
               style="margin-top: 15px"
             />
             <h4 style="font-size: 24px; color: #414141">锁定工期 解放身心</h4>
-            <span style="font-size: 16px; margin: 0 0 15px; color: gray"
-              >自有产业工人，企业100%直管；集团战略直采，大牌产品工厂直达；16种标准化SOP，100%统一工序。</span
-            >
+            <span style="font-size: 16px; margin: 0 0 15px; color: gray">
+              自有产业工人，企业100%直管；集团战略直采，大牌产品工厂直达；16种标准化SOP，100%统一工序。
+            </span>
           </li>
           <li>
             <img
@@ -148,9 +152,9 @@
             <h4 style="font-size: 24px; color: #414141">
               标准化交付体系 改变工期不确定
             </h4>
-            <span style="font-size: 16px; margin: 0 0 15px; color: gray"
-              >准时工期的4大关键：直管产业工人、自建仓储物流、标准化施工工序、APP锁定工期。</span
-            >
+            <span style="font-size: 16px; margin: 0 0 15px; color: gray">
+              准时工期的4大关键：直管产业工人、自建仓储物流、标准化施工工序、APP锁定工期。
+            </span>
           </li>
           <li>
             <img
@@ -161,9 +165,9 @@
             <h4 style="font-size: 24px; color: #414141">
               全球大牌厂家直发 工期提速30%
             </h4>
-            <span style="font-size: 16px; margin: 0 0 15px; color: gray"
-              >自建30000m²大仓+全国物流，供应链够强大，工期自然可控。</span
-            >
+            <span style="font-size: 16px; margin: 0 0 15px; color: gray">
+              自建30000m²大仓+全国物流，供应链够强大，工期自然可控。
+            </span>
           </li>
           <!-- <li>
             <img
@@ -244,9 +248,9 @@
         <ul>
           <li>
             <img height="66" src="@/assets/icon/logo.jpg" alt="" />
-            <span
-              >地址：四川省成都市武侯区天府大道北段1700号环球中心写字楼</span
-            >
+            <span>
+              地址：四川省成都市武侯区天府大道北段1700号环球中心写字楼
+            </span>
             <span>家装咨询： 400 - 6031 - 556</span>
             <span>电话反馈： 400 - 0511 - 699</span>
             <span>开放时间： 周一至周日 / 上午 9:00 至下午 6:00</span>
@@ -269,9 +273,9 @@
             <img src="@/assets/icon/app.png" alt="" />
           </li>
         </ul>
-        <span class="s1"
-          >美墅装修科技（北京）有限公司版权所有京ICP备15007819号-1</span
-        >
+        <span class="s1">
+          美墅装修科技（北京）有限公司版权所有京ICP备15007819号-1
+        </span>
       </div>
     </div>
 
@@ -304,8 +308,7 @@
                 :key="item.value"
                 :label="item.label"
                 :value="item.value"
-              >
-              </el-option>
+              ></el-option>
             </el-select>
             <input type="text" placeholder="面积" />
           </div>
@@ -329,7 +332,7 @@
 </template>
 
 <script>
-import KeFu from "@/components/KeFu.vue";
+import KeFu from '@/components/KeFu.vue'
 export default {
   components: { KeFu },
   data() {
@@ -337,60 +340,58 @@ export default {
       // 客服隐藏
       show: false,
       // 默认首页高亮
-      activeIndex: "1",
+      activeIndex: '1',
       // 吸底组件的城市选择
       options: [
         {
-          value: "1",
-          label: "北京",
+          value: '1',
+          label: '北京',
         },
         {
-          value: "2",
-          label: "上海",
+          value: '2',
+          label: '上海',
         },
         {
-          value: "3",
-          label: "成都",
+          value: '3',
+          label: '成都',
         },
         {
-          value: "4",
-          label: "重庆",
+          value: '4',
+          label: '重庆',
         },
         {
-          value: "5",
-          label: "大连",
+          value: '5',
+          label: '大连',
         },
       ],
-      value: "",
+      value: '',
       // 轮播图地址数组
       imges: [
-        { url: require("../assets/img/banner1.jpg") },
-        { url: require("../assets/img/banner2.jpg") },
-        { url: require("../assets/img/banner3.jpg") },
-        { url: require("../assets/img/banner4.jpg") },
-        { url: require("../assets/img/banner5.jpg") },
-        { url: require("../assets/img/banner6.jpg") },
+        { url: require('../assets/img/banner1.jpg') },
+        { url: require('../assets/img/banner2.jpg') },
+        { url: require('../assets/img/banner3.jpg') },
+        { url: require('../assets/img/banner4.jpg') },
+        { url: require('../assets/img/banner5.jpg') },
+        { url: require('../assets/img/banner6.jpg') },
       ],
-    };
+    }
   },
   methods: {
     connected() {
-      this.$socket.open(); // 开始连接socket
+      this.$socket.open() // 开始连接socket
     },
     // 客服显示与隐藏
     click() {
-      this.show = !this.show;
+      this.show = !this.show
       if (this.show) {
-        this.show = true;
+        this.show = true
       } else {
-        this.show = false;
+        this.show = false
       }
     },
   },
-};
+}
 </script>
 
-<style src='@/assets/Index.css'>
-</style>
-<style scoped>
-</style>
+<style src="@/assets/Index.css"></style>
+<style scoped></style>
