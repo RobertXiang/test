@@ -1,153 +1,223 @@
 <template>
-  <div>
-    <!-- views/Register.vue -->
-    <mt-header title="注册">
-      <mt-button
-        icon="back"
-        slot="left"
-        @click.native.capture="goIndex"
-      ></mt-button>
-      <router-link to="/login" slot="right">登录</router-link>
-    </mt-header>
-    <van-image width="100vw" height="100%" src="/loginbanner.jpg" />
-    <!-- 表单 -->
-    <mt-field
-      type="text"
-      placeholder="请输入账号"
-      label="账号："
-      v-model="name"
-      :state="nameState"
-      @blur.native.capture="checkName"
-    ></mt-field>
-    <mt-field
-      type="text"
-      placeholder="请输入手机号"
-      label="手机号"
-      v-model="phone"
-      :state="phoneState"
-      @blur.native.capture="checkPhone"
-    ></mt-field>
-    <mt-field
-      type="password"
-      placeholder="请输入密码"
-      label="密码"
-      v-model="pwd"
-      :state="pwdState"
-      @blur.native.capture="checkPwd"
-    ></mt-field>
-    <mt-field
-      type="password"
-      placeholder="请再次输入密码"
-      label="重复密码"
-      v-model="pwd2"
-      :state="pwd2State"
-      @blur.native.capture="checkPwd2"
-    ></mt-field>
-    <mt-button size="large" type="primary" @click.native="checkForm"
-      >立即注册</mt-button
-    >
-  </div>
+    <div class="reg">
+        <!-- 标题栏 -->
+        <van-nav-bar
+        title="注册"
+        left-arrow
+        @click-left="onClickLeft"
+        />
+        <!-- 表单 -->
+        <van-form>
+            <van-field
+                v-model="name"
+                name="用户名"
+                placeholder="请填写用户名"
+                left-icon="friends"
+                :rules="rules.nameyz"
+            />
+            <van-field
+                v-model="phone"
+                name="手机号"
+                placeholder="请填写手机号"
+                left-icon="phone"
+                :rules="rules.phoneyz"
+            />
+            <van-field
+                v-model="email"
+                name="邮箱"
+                placeholder="请填写邮箱"
+                left-icon="send-gift"
+                :rules="rules.emailyz"
+            />
+            <van-field
+                v-model="pwd"
+                name="密码"
+                type="password"
+                placeholder="请设置登录密码"
+                left-icon="todo-list"
+                :rules="rules.pwdyz"
+            />
+            <van-checkbox v-model="checked"
+            icon-size="14px"
+            checked-color="rgb(222,196,155)"
+            >我已阅读并同意《用户注册协议》</van-checkbox>
+            <div style="margin: 16px;">
+                <van-button round block type="info"
+                :disabled='!checked' 
+                native-type="submit"
+                @click="onSubmit"
+                >立即注册</van-button>
+            </div>
+            <div style="margin: 16px;">
+                <van-button round block type="info" native-type="submit"
+                @click="onChange"
+                >已有账号，立即登录</van-button>
+            </div>
+        </van-form>
+    </div>
 </template>
-
 <script>
+import { Toast } from 'vant';
 export default {
-  data() {
-    return {
-      name: "",
-      nameState: "",
-      phone: "",
-      phoneState: "",
-      pwd: "",
-      pwdState: "",
-      pwd2: "",
-      pwd2State: "",
-    };
-  },
-  methods: {
-    checkName() {
-      console.log("账号" + this.name);
-      let exp = /^\w{3,15}$/;
-      if (exp.test(this.name)) {
-        this.nameState = "success";
-        return true;
-      } else {
-        this.nameState = "error";
-        return false;
-      }
-    },
-    checkPhone() {
-      let exp = /^1[3-9]\d{9}$/;
-      if (exp.test(this.phone)) {
-        this.phoneState = "success";
-        return true;
-      } else {
-        this.phoneState = "error";
-        return false;
-      }
-    },
-    checkPwd() {
-      let exp = /^\d{6}$/;
-      if (exp.test(this.pwd)) {
-        this.pwdState = "success";
-        return true;
-      } else {
-        this.pwdState = "error";
-        return false;
-      }
-    },
-    checkPwd2() {
-      if (this.pwd2 == this.pwd) {
-        this.pwd2State = "success";
-        return true;
-      } else {
-        this.pwd2State = "error";
-        return false;
-      }
-    },
-    checkForm() {
-      if (this.checkName() && this.checkPwd() && this.checkPwd2()&&this.checkPhone()) {
-        console.log("验证通过，开始执行注册业务...");
+    data(){
+        return{
+            name:'',
+            phone:'',
+            email:'',
+            pwd:'',
+            checked:false,
+            //验证用户名 手机号 密码 邮箱
+            isname:false,
+            isPhone:false,
+            isEmail:false,
+            isPwd:false,
+            //验证规则
+            rules:{
+                nameyz:[
+                    {
+                       validator:(name)=>{
+                        let result=/^\w{3,15}$/.test(name)
+                        if(result){
+                            this.isname=true
+                        }else{
 
-        let params=`uname=${this.name}&upwd=${this.pwd}&phone=${this.phone}`
-        this.axios.post(`/user/register`,params).then(res=>{
-            console.log('注册业务',res);
-            if(res.data.code==200){
-                //业务码200  注册成功
-            this.$router.push('login')
-            }else if(res.data.code==401){
-                //业务码，
-                this.$messagebox('提示','用户已存在，请重试')
+                            this.isname=false
+                            
+                        }
+                       }   
+                    }
+                ],
+                phoneyz:[
+                    {
+                      validator:(phone)=>{
+                        let result=/^1[3-9]\d{9}$/.test(phone)
+                        if(result){
+                            this.isPhone=true
+                        }else{
+                            this.isPhone=false
+                        }
+                       }  
+                    }
+                    
+                ],
+                emailyz:[
+                    {
+                    validator:(email)=>{
+                        let result=/[\w\-]+@[a-z0-9A-Z]+(\.[A-Za-z]{2,4}){1,2}/.test(email)
+                        if(result){
+                            this.isEmail=true
+                        }else{
+                            this.isEmail=false
+                        }
+                       }  
+                    }
+                ],
+                pwdyz:[
+                    {
+                    validator:(pwd)=>{
+                        let result=/^(\w){6,10}$/.test(pwd)
+                        if(result){
+                            this.isPwd=true
+                        }else{
+                            this.isPwd=false
+                        }
+                       }  
+                    }
+                ],
+                
             }
-
-        })
-      } else {
-        console.log("请重新输入");
-      }
+        }
     },
-    goIndex() {
-      this.$router.push("/");
+    methods:{
+        onClickLeft(){
+            // 跳转到首页
+            this.$router.push('/');
+        },
+        onSubmit(){
+            //判断
+            if(this.isPhone && this.isPwd && this.isEmail){
+                this.axios.post('/user/register',`uname=${this.name}&phone=${this.phone}&email=${this.email}&upwd=${this.pwd}`)
+                .then((result)=>{
+                    console.log(result.data)
+                    if(result.data.code==200){
+                        Toast({
+                        message: '注册成功',
+                        position: 'bottom',
+                        duration: 1000,
+                        });
+                        setTimeout(()=>{
+                            this.$router.push('/login')
+                        },1200)
+                    }else{
+                        Toast({
+                        message: '注册失败',
+                        position: 'bottom',
+                        duration: 1000,
+                        });
+                    }
+                })
+            }else{
+                Toast({
+                    message: '用户名或者手机号或者密码或者邮箱格式错误',
+                    position: 'bottom',
+                    duration: 1000,
+                    });
+            }
+        },
+        onChange(){
+            this.$router.push('/login')
+        }
     },
-  },
-};
+}
 </script>
 
-<style lang="scss" scoped>
-.mint-header{
-    background-color: #5e7f96;
+<style>
+.reg{
+    background-image: url('/public/loginbanner.jpeg');
+    background-size: cover;
+    height: 100vh;
+}
+.reg .van-checkbox span{
+    color: rgba(255,255,255,0.7);
+}
+.reg .van-cell.van-field{
+    border-radius: 5px;
+}
+.reg .van-nav-bar{
+    background-color: rgb(61, 68, 103);
+    height: 50px;
+    border-radius: 5px;
+}
+.reg .van-nav-bar .van-icon{
+    color: white;
+    font-size: 24px;
+}
+.reg .van-nav-bar__title{
     color: #fff;
-    border-radius: 3px;
+    font-size: 20px;
+}
+
+.reg .van-cell{
     font-size: 16px;
-}
-.mint-cell.mint-field{
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    margin: 4px;
-    padding: 3px;
-}
-.mint-button--large{
-    margin: 10px auto;
-    padding: 5px;
     width: 90%;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+.reg .van-field__control{
+    margin-left: 10px;
+}
+.reg .van-checkbox{
+    font-size: 14px;
+    margin-top: 20px;
+    margin-left: 80px;
+}
+.reg .van-button--block{
+    background-color: rgb(222,196,155);
+    border: 1px solid rgb(222,196,155);
+}
+
+.reg .van-form > div:nth-child(7) button{
+    background-color: #fff;
+    color: rgb(222,196,155);
 }
 </style>
