@@ -33,26 +33,31 @@
       <div class="tit">
         <span>设计师榜</span>
         <van-field
-        readonly
-        clickable
-        :value="value"
-        placeholder="选择城市"
-        @click="showPicker = true"
-      />
-        
-      <van-icon name="arrow-down" @click="showPicker = true" />
-      <van-popup v-model="showPicker" round position="bottom">
-        <van-picker
-          show-toolbar
-          :columns="columns"
-          @cancel="showPicker = false"
-          @confirm="onConfirm"
+          readonly
+          clickable
+          :value="value"
+          placeholder="选择城市"
+          @click="showPicker = true"
         />
-      </van-popup>
+
+        <van-icon name="arrow-down" @click="showPicker = true" />
+        <van-popup v-model="showPicker" round position="bottom">
+          <van-picker
+            show-toolbar
+            :columns="columns"
+            @cancel="showPicker = false"
+            @confirm="onConfirm"
+          />
+        </van-popup>
       </div>
       <!-- 单个卡片内容 -->
       <div v-if="data">
-        <div @click="godetail(index)" id="item" v-for="(msgs,index) in data" :key="msgs.desiger_id">
+        <div
+          @click="godetail(index)"
+          id="item"
+          v-for="(msgs, index) in data"
+          :key="msgs.desiger_id"
+        >
           <div class="header">
             <!-- 头像 -->
             <img :src="msgs.dpic" alt="" />
@@ -96,67 +101,86 @@ export default {
   data() {
     return {
       data: null,
-      value:'全国',
+      value: '全国',
       showPicker: false,
-      columns: ["全国","成都","北京", "广州", "贵阳", "济南", "南昌", "上海", "深圳", "天津","太原","武汉","西安","郑州"],
-    };
+      columns: [
+        '全国',
+        '成都',
+        '北京',
+        '广州',
+        '贵阳',
+        '济南',
+        '南昌',
+        '上海',
+        '深圳',
+        '天津',
+        '太原',
+        '武汉',
+        '西安',
+        '郑州',
+      ],
+    }
   },
 
   mounted() {
-    this.getData();
+    this.getData()
   },
 
   methods: {
-    goHome(){
-      this.$router.push("/");
+    goHome() {
+      this.$router.push('/')
+      this.$router.go(0)
     },
-    
+
     godetail(index) {
       this.$router.push({
-        path:'/desdetails',
-        query:{index}
-      });
-      console.log(this.$route);
+        path: '/desdetails',
+        query: { index },
+      })
+      console.log(this.$route)
     },
 
     onConfirm(value) {
-      this.value = value;
+      this.value = value
       // 调用接口 http://127.0.0.1:3000/designer/city?city=valve 动态获取列表数据
       // getData(valve);
-      this.showPicker = false;
+      this.showPicker = false
       //清空data数据列表
-      this.data=null;
-      if(this.value=='全国'){
+      this.data = null
+      if (this.value == '全国') {
         //调用all接口
         this.getData()
-      }else{
+      } else {
         //调用具体city
-        let url="http://127.0.0.1:3000/designer/city?city="+this.value
+        let url = 'http://127.0.0.1:3000/designer/city?city=' + this.value
         //判断是否200，再判断是否data有值，如果有值则渲染，没有值则展示空页面逻辑
-        this.axios.get(url).then(res=>{
-          if(res.status==200){
-            if(res.data.code == 200 && (res.data.data!=null && res.data.data.length>0)){
-              this.data=res.data.data
-            }else{
+        this.axios.get(url).then(res => {
+          if (res.status == 200) {
+            if (
+              res.data.code == 200 &&
+              res.data.data != null &&
+              res.data.data.length > 0
+            ) {
+              this.data = res.data.data
+            } else {
               alert('亲，您查询的城市还没有入驻呢！')
             }
-          }else{
+          } else {
             alert('服务端错误，请稍后再试！')
           }
         })
       }
-      
     },
 
     getData() {
-      let url = "http://localhost:3000/designer/all";
-      this.axios.get(url).then((res) => {
-        console.log(res);
-        this.data = res.data.msg;
-      });
+      let url = 'http://localhost:3000/designer/all'
+      this.axios.get(url).then(res => {
+        console.log(res)
+        this.data = res.data.msg
+      })
     },
   },
-};
+}
 </script>
 
 <style scoped>
@@ -244,16 +268,16 @@ export default {
   border-radius: 16px 16px 0px 0px;
   width: 94%;
 }
-::v-deep .van-cell{
+::v-deep .van-cell {
   width: 100px;
-  right:-32%;
+  right: -32%;
   font-size: 16px;
 }
-::v-deep .van-cell .van-field__control{
+::v-deep .van-cell .van-field__control {
   text-align: right;
   padding-right: 35%;
 }
-::v-deep .van-picker__toolbar button{
+::v-deep .van-picker__toolbar button {
   font-size: 18px;
 }
 #item {

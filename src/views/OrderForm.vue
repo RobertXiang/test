@@ -2,7 +2,12 @@
   <!-- 我的订单 -->
   <div class="order-form">
     <!-- 头部 -->
-    <van-nav-bar title="我的订单" left-text="" left-arrow />
+    <van-nav-bar
+      title="我的订单"
+      left-text=""
+      left-arrow
+      @click-left="goIndex()"
+    />
 
     <!-- 导航栏 -->
     <van-tabs v-model="active">
@@ -23,7 +28,10 @@
             <li class="olb_font_font fl over2">
               仓鼠笼子送礼包47基础笼亚克力金丝熊小别墅小仓鼠大双层齐全窝包邮
             </li>
-            <li class="olb_money_money fl">实付：<label>￥9.9</label></li>
+            <li class="olb_money_money fl">
+              实付：
+              <label>￥9.9</label>
+            </li>
           </ul>
           <div class="clear"></div>
         </div>
@@ -62,9 +70,14 @@ export default {
   data() {
     return {
       active: 0,
-    };
+    }
   },
-};
+  methods: {
+    goIndex() {
+      this.$router.push('/')
+    },
+  },
+}
 </script>
 
 <style>

@@ -42,13 +42,13 @@
           </div>
         </div>
         <div class="three-one">
-          <div class="gallery">
+          <div class="gallery" @click="goVR('http://statics.bzw315.com/720/v/7/view/index.html')">
             <div class="text">
               <h4>线上展厅</h4>
               <p>12+life&nbsp;&nbsp;style</p>
             </div>
           </div>
-          <div class="floor">
+          <div class="floor" @click="goNewHome()">
             <div class="text">
               <h4>家装新体验</h4>
               </h4>
@@ -173,6 +173,14 @@ export default {
     goIndex(){
       this.$router.push('/')
       this.$router.go(0)
+    },
+    // 跳转外网VR
+    goVR(url){
+      window.location.href = url
+    },
+    // 跳转家装新体验
+    goNewHome(){
+      this.$router.push('newhome')
     },
     //地区
     onConfirm (value, index) {

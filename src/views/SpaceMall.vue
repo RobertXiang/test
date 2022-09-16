@@ -2,8 +2,12 @@
   <!-- 空间商城 -->
   <div class="space-mall">
     <!-- 头部 -->
-    <van-nav-bar title="家装商城" left-text="" left-arrow />
-
+    <van-nav-bar
+      title="家装商城"
+      left-text=""
+      left-arrow
+      @click-left="goIndex()"
+    />
     <!-- 内容 -->
     <!-- 1.城市 -->
     <div class="c1">
@@ -26,7 +30,7 @@
 </template>
 
 <script>
-import { Dialog } from "vant";
+import { Dialog } from 'vant'
 
 export default {
   data() {
@@ -34,40 +38,44 @@ export default {
       data: {},
       show: false,
       subtotal: 0,
-    };
+    }
   },
   mounted() {
-    this.getData();
+    this.getData()
   },
   methods: {
     showPopup() {
-      this.show = true;
+      this.show = true
       Dialog.confirm({
-        title: "提示",
-        message: "是否加入我的订单",
+        title: '提示',
+        message: '是否加入我的订单',
       })
         .then(() => {
           // 点击确认
-          let sid = item.sid;
-          let piric = item.piric;
-          let title = item.title;
-          let pic = item.pic;
-          let url = `http://127.0.0.1:3000/shop?sid=${sid}&sid=${piric}&sid=${title}&sid=${pic}`;
-          this.axios.get(url).then((res) => {});
+          let sid = item.sid
+          let piric = item.piric
+          let title = item.title
+          let pic = item.pic
+          let url = `http://127.0.0.1:3000/shop?sid=${sid}&sid=${piric}&sid=${title}&sid=${pic}`
+          this.axios.get(url).then(res => {})
         })
         .catch(() => {
           // on cancel
-        });
+        })
     },
     getData() {
-      let url = `http://127.0.0.1:3000/shop/all`;
-      this.axios.get(url).then((res) => {
-        console.log(res);
-        this.data = res.data;
-      });
+      let url = `http://127.0.0.1:3000/shop/all`
+      this.axios.get(url).then(res => {
+        console.log(res)
+        this.data = res.data
+      })
+    },
+    // 跳转至首页
+    goIndex() {
+      this.$router.push('/')
     },
   },
-};
+}
 </script>
 
 <style>
