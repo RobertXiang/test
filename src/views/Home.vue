@@ -15,7 +15,7 @@
     <el-container>
       <!-- 侧边栏 -->
       <el-aside :width="isCollapse ? '64px' : '200px'">
-        <div class="toggle-button" @click="toggleCollapse">|||</div>
+        <!-- <div class="toggle-button" @click="toggleCollapse">|||</div> -->
         <!-- 侧边栏菜单区域 -->
         <!-- <div background-color="#fff" text-color="black" active-text-color="orange" unique-opened :collapse="isCollapse" :collapse-transition="false" router :default-active="activePath"> -->
           <!-- <el-submenu >
