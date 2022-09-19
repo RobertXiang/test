@@ -36,7 +36,7 @@ export default {
       uname:'',
       // 这是登录表单的数据绑定对象
       loginForm: {
-        uname: "yuanfan",
+        uname: "张山",
         upwd: "123456"
       },
       // 这是表单的验证规则对象
@@ -44,7 +44,7 @@ export default {
         // 验证用户名是否合法
         uname: [
           { required: true, message: '请输入登录名称', trigger: 'blur' },
-          { min: 3, max: 10, message: '长度在 3 到 10 个字符', trigger: 'blur' }
+          { min: 1, max: 10, message: '长度在 3 到 10 个字符', trigger: 'blur' }
         ],
         // 验证密码是否合法
         upwd: [
