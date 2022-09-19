@@ -36,9 +36,9 @@
           </template>
         </el-table-column>
         <el-table-column label="下单时间" prop="create_time">
-          <template slot-scope="scope">
+          <!-- <template slot-scope="scope">
             {{scope.row.create_time | dateFormat}}
-          </template>
+          </template> -->
         </el-table-column>
         <el-table-column label="操作">
           <template>
@@ -92,8 +92,8 @@ export default {
         pagenum: 1,
         pagesize: 10
       },
-      total: 0,
-      orderlist: [],
+      total: 5,
+      orderlist: [{order_number:'120432',order_price:'130000',pay_status:1,is_send:'待发货',create_time:'2022-09-12-10-35'},{order_number:'130445',order_price:'80000',pay_status:1,is_send:'待发货',create_time:'2022-09-12-10-35'},{order_number:'122234',order_price:'150000',pay_status:1,is_send:'待发货',create_time:'2022-09-13-8-35'},{order_number:'1204453',order_price:'60000',pay_status:1,is_send:'待发货',create_time:'2022-09-12-10-35'},{order_number:'7544564',order_price:'100000',pay_status:1,is_send:'待发货',create_time:'2022-09-16-10-00'},],
       addressVisible: false,
       addressForm: {
         address1: [],
@@ -116,18 +116,22 @@ export default {
     this.getOrderList()
   },
   methods: {
-    async getOrderList() {
-      const { data: res } = await this.$http.get('orders', {
-        params: this.queryInfo
-      })
+     getOrderList() {
+this.$http.post('order/reg').then(res=>{
+  console.log('订单数据',res);
+})
 
-      if (res.meta.status !== 200) {
-        return this.$message.error('获取订单列表失败！')
-      }
+      // const { data: res } = await this.$http.get('orders', {
+      //   params: this.queryInfo
+      // })
 
-      console.log(res)
-      this.total = res.data.total
-      this.orderlist = res.data.goods
+      // if (res.meta.status !== 200) {
+      //   return this.$message.error('获取订单列表失败！')
+      // }
+
+      // console.log(res)
+      // this.total = res.data.total
+      // this.orderlist = res.data.goods
     },
     handleSizeChange(newSize) {
       this.queryInfo.pagesize = newSize

@@ -23,18 +23,17 @@
       <!-- table表格区域 -->
       <el-table :data="goodslist" border stripe>
         <el-table-column type="index"></el-table-column>
-        <el-table-column label="商品名称" prop="goods_name"></el-table-column>
-        <el-table-column label="商品价格(元)" prop="goods_price" width="95px"></el-table-column>
-        <el-table-column label="商品重量" prop="goods_weight" width="70px"></el-table-column>
-        <el-table-column label="创建时间" prop="add_time" width="140px">
-          <template slot-scope="scope">
+        <el-table-column label="商品名称" prop="title"></el-table-column>
+        <el-table-column label="商品价格(元)" prop="piric" width="95px"></el-table-column>
+        <el-table-column label="商店" prop="store" width="140px">
+          <!-- <template slot-scope="scope">
             {{scope.row.add_time | dateFormat}}
-          </template>
+          </template> -->
         </el-table-column>
         <el-table-column label="操作" width="130px">
           <template slot-scope="scope">
             <el-button type="primary" icon="el-icon-edit" size="mini"></el-button>
-            <el-button type="danger" icon="el-icon-delete" size="mini" @click="removeById(scope.row.goods_id)"></el-button>
+            <el-button type="danger" icon="el-icon-delete" size="mini" @click="removeById(scope.row.sid)"></el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -57,9 +56,13 @@ export default {
         pagesize: 10
       },
       // 商品列表
-      goodslist: [],
+      goodslist: [{goods_name:'欧式精装',goods_price:'130000',add_time:'2022-09-09'},
+      {goods_name:'中式精装',goods_price:'150000',add_time:'2022-09-09'},
+      {goods_name:'旧房改造',goods_price:'80000',add_time:'2022-09-09'},
+      {goods_name:'新概念装修',goods_price:'100000',add_time:'2022-09-09'},
+      {goods_name:'简装',goods_price:'50000',add_time:'2022-09-09'},],
       // 总数据条数
-      total: 0
+      total: 5
     }
   },
   created() {
@@ -67,19 +70,24 @@ export default {
   },
   methods: {
     // 根据分页获取对应的商品列表
-    async getGoodsList() {
-      const { data: res } = await this.$http.get('goods', {
-        params: this.queryInfo
+    getGoodsList() {
+      this.$http.get('shop/all').then(res=>{
+        console.log('商品情况',res);
+        this.goodslist=res.data.data
+        this.total=res.data.data.length
       })
+      // const { data: res } = await this.$http.get('goods', {
+      //   params: this.queryInfo
+      // })
 
-      if (res.meta.status !== 200) {
-        return this.$message.error('获取商品列表失败！')
-      }
+      // if (res.meta.status !== 200) {
+      //   return this.$message.error('获取商品列表失败！')
+      // }
 
-      this.$message.success('获取商品列表成功！')
-      console.log(res.data)
-      this.goodslist = res.data.goods
-      this.total = res.data.total
+      // this.$message.success('获取商品列表成功！')
+      // console.log(res.data)
+      // this.goodslist = res.data.goods
+      // this.total = res.data.total
     },
     handleSizeChange(newSize) {
       this.queryInfo.pagesize = newSize
@@ -104,9 +112,9 @@ export default {
         return this.$message.info('已经取消删除！')
       }
 
-      const { data: res } = await this.$http.delete(`goods/${id}`)
-
-      if (res.meta.status !== 200) {
+      const { data: res } = await this.$http.get(`shop/delete/${id}`)
+      console.log('删除情况',res);
+      if (res.code!== 200) {
         return this.$message.error('删除失败！')
       }
 

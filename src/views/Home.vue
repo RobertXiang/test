@@ -3,10 +3,13 @@
     <!-- 头部区域 -->
     <el-header>
       <div>
-        <img src="../assets/heima.png" alt="">
+        <img src="../assets/logo.jpg" style="width:80px" alt="">
         <span>美墅装修后台管理系统</span>
       </div>
+      <div style="margin-right:10px;">
+      <span style="margin-right:10px;font-size:20px;font-weight: 800;">欢迎：{{this.$store.state.uname}}</span>
       <el-button type="info" @click="logout">退出</el-button>
+    </div>
     </el-header>
     <!-- 页面主体区域 -->
     <el-container>
@@ -81,9 +84,14 @@
 </template>
 
 <script>
+  import { mapState } from 'vuex'
 export default {
+  computed: {
+   ...mapState(['uname'])
+  },
   data() {
     return {
+   
       // 左侧菜单数据
       menulist: [{authName:'首页',id:'145',path:'/home'},{authName:'角色管理',id:'125',path:'/user'},{authName:'商品管理',id:'101',path:'/good'},{authName:'订单管理',id:'102',path:'/order'},],
       iconsObj: {
@@ -102,11 +110,21 @@ export default {
       
     }
   },
+  mounted () {
+    window.addEventListener('unload', this.saveState)
+;
+  },
   created() {
+    console.log(this.$store.state.uname);
     // this.getMenuList()
     // this.activePath = window.sessionStorage.getItem('activePath')
   },
   methods: {
+    //保持vuex数据
+    saveState() {
+      sessionStorage.setItem('state', JSON.stringify(this.$store.state))
+    },
+
     logout() {
       window.sessionStorage.clear()
       this.$router.push('/login')
@@ -154,13 +172,14 @@ go(index){
   height: 100%;
 }
 .el-header {
-  background-color: #000d4d;
+  background-color: #ffffff;
   display: flex;
   justify-content: space-between;
   padding-left: 0;
   align-items: center;
-  color: #fff;
-  font-size: 20px;
+  color: rgb(124, 24, 24);
+  font-size: 30px;
+  font-weight: 1000;
   > div {
     display: flex;
     align-items: center;
@@ -203,7 +222,7 @@ cursor: pointer;
 }
 
 .toggle-button {
-  background-color: #130310;
+  background-color: #645257;
   font-size: 10px;
   line-height: 24px;
   color: #fff;

@@ -26,12 +26,14 @@
 </template>
 
 <script>
+  import {mapState } from 'vuex'
 //引入qs
 import qs from 'qs'
 export default {
+  
   data () {
     return {
-
+      uname:'',
       // 这是登录表单的数据绑定对象
       loginForm: {
         uname: "yuanfan",
@@ -62,21 +64,28 @@ export default {
       console.log(this.loginForm)
       this.$refs.loginFormRef.validate((valid) => {
         if (!valid) return
-        let loginData = this.$qs.stringify(this.loginForm)
-        this.$http.post('user/login/uname', loginData).then(res => {
-          this.$message.success('登录成功')
+        // let loginData = this.$qs.stringify(this.loginForm)
+        const params=`uname=${this.loginForm.uname}&upwd=${this.loginForm.upwd}`
+        this.$http.post('user/login/uname', params).then(res => {
           console.log(res)
+          if(res.data.code==200){
+          this.$message.success('登录成功')
+   
+          this.data=res.data
+          //调用vuex,把用户名全局分享，存入vuex
+          this.$store.commit('updateUname',this.data.data.uname)
+          // console.log('vuex的uname',this.$store.state.uname);
                 // 1. 将登录成功之后的 token，保存到客户端的 sessionStorage 中
         //   1.1 项目中出了登录之外的其他API接口，必须在登录之后才能访问
         //   1.2 token 只应在当前网站打开期间生效，所以将 token 保存在 sessionStorage 中
-        window.sessionStorage.setItem('token', res.data.token)
+        // window.sessionStorage.setItem('token', res.data.token)
         // 2. 通过编程式导航跳转到后台主页，路由地址是 /home
         console.log(1)
         this.$router.push('/home')
         console.log(2)
-        }).catch(err => {
-          console.log(err)
-          return this.$message.error('登录失败！')
+          }else{
+            this.$message.error('登录失败')
+          }
         })
 
 console.log(0)
