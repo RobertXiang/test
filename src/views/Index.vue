@@ -23,8 +23,8 @@
               class="logo"
               src="../assets/img/logo.jpg"
               alt=""
-              width="50px"
-              height="40px"
+              width="60%"
+              height="60%"
               title="爱空间装饰装修公司官网"
               style="position: relative; top: -5px; left: 20px"
             />
