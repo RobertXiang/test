@@ -2,12 +2,15 @@
   <!-- 案例详情 -->
   <div id="main">
     <!-- 顶部导航栏 -->
-    <div class="pic1">
-      <img
-        src="https://ikj-public.oss-cn-beijing.aliyuncs.com/market/d10af457/daa1deed/54e2c36b/5f295e7e/bDRjZ2V2MW0yXzIwMjItMDYtMTNUMTY6MTU6MzMuMDY4.jpg"
+    <div class="pic1" v-if="data">
+      <div v-for="i in data.data" :key="i.xqid">
+        <img
+        :src="i.xqpic"
         alt=""
       />
       <van-nav-bar left-text="" left-arrow @click-left="goAnli()"></van-nav-bar>
+      </div>
+      
     </div>
 <div v-if="data">
   <div class="text" v-for="p in data.data" :key="p.xqid">

@@ -63,7 +63,7 @@
         <span>关于我们</span>
       </div>
       <div class="foota">
-        <span>小白羊科技（成都）有限公司</span>
+        <span>美墅科技（成都）有限公司</span>
       <span>蜀ICP备12012345号-13</span>
       </div>
       

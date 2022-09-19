@@ -50,6 +50,7 @@
           />
         </van-popup>
       </div>
+
       <!-- 单个卡片内容 -->
       <div v-if="data">
         <div
@@ -194,7 +195,7 @@ export default {
   color: #000;
   top: 0px;
   padding: 6px;
-  height: 44px;
+  height: 5vh;
 }
 ::v-deep .mint-header i {
   font-size: 20px;
