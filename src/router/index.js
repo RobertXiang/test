@@ -100,6 +100,12 @@ const routes = [
     name: 'Anli',
     component: () => import('../views/Anli.vue'),
   },
+  // 首页案列
+  {
+    path: '/indexdetail',
+    name: 'IndexDetail',
+    component: () => import('../views/IndexDetail.vue'),
+  },
 ]
 
 const router = new VueRouter({

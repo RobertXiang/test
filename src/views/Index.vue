@@ -189,7 +189,7 @@ export default {
     //编程式跳转案列详情
     goXiangqing (index) {
       this.$router.push({
-        path: "/anlidetail",
+        path: "/indexdetail",
         query: { index },
       });
     },
