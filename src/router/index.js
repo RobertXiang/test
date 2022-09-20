@@ -18,13 +18,21 @@ const routes = [{ path: '/', redirect: '/login' },
             {
                 path: '/good',
                 component: () =>
-                    import ('../views/Good/Good')
+                    import ('../views/Good/Good'),
+                    children:[
+                        {
+                            path: '/add',
+                            component: () =>
+                                import ('../views/Good/Add.vue')
+                        },
+                    ]
             },
             {
                 path: '/order',
                 component: () =>
                     import ('../views/Order/Order')
             },
+           
 
 
         ]

@@ -11,8 +11,8 @@
     <el-card>
       <el-row :gutter="20">
         <el-col :span="8">
-          <el-input placeholder="请输入内容" v-model="queryInfo.query" clearable @clear="getGoodsList">
-            <el-button slot="append" icon="el-icon-search" @click="getGoodsList"></el-button>
+          <el-input placeholder="请输入内容" v-model="sid" clearable >
+            <el-button slot="append" icon="el-icon-search" @click="searchGood"></el-button>
           </el-input>
         </el-col>
         <el-col :span="4">
@@ -42,6 +42,74 @@
       <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="queryInfo.pagenum" :page-sizes="[5, 10, 15, 20]" :page-size="queryInfo.pagesize" layout="total, sizes, prev, pager, next, jumper" :total="total" background>
       </el-pagination>
     </el-card>
+
+    <!-- 添加商品弹出框 -->
+     <!-- 添加商品区域 -->
+     <el-dialog title="添加商品信息" :visible.sync="dialogFormVisible">
+  
+   
+  
+  <!-- 标签页 tab-->
+  
+      <el-form label="基本信息填写" ref="addFormRef" :model="addForm" :rule="addFormRules" label-width="100px" class="demo-ruleForm" label-position="top">
+        <el-form-item label="商品编号" prop="sid">
+        <el-input v-model="addForm.sid" ></el-input>
+    </el-form-item>
+     <el-form-item label="商品名称" prop="title">
+        <el-input v-model="addForm.title" ></el-input>
+    </el-form-item>
+     <el-form-item label="商品价格" prop="piric">
+        <el-input v-model="addForm.piric" ></el-input>
+    </el-form-item>
+     <el-form-item label="商店名" prop="goods_weight">
+        <el-input v-model="addForm.store" ></el-input>
+    </el-form-item>
+    <el-form-item label="商品图片" prop="pic">
+        <el-input v-model="addForm.pic" ></el-input>
+    </el-form-item>
+    <el-form-item label="商品成本" prop="dpiric">
+        <el-input v-model="addForm.dpiric" ></el-input>
+    </el-form-item>
+    <el-form-item label="squan" prop="squan">
+        <el-input v-model="addForm.squan" ></el-input>
+    </el-form-item>
+ 
+    
+        
+      </el-form>
+      
+     
+    
+        
+      <el-button @click="dialogFormVisible = false">取 消</el-button>
+      <el-button type="primary" @click="addShop">确 定</el-button>
+
+   
+    
+  </el-dialog>
+     
+     <!-- 编辑对话框 -->
+    <!-- <el-dialog title="商品编辑" :visible.sync="editDialogVisible" clearable >
+    <el-form :model="form"  ref="editFormRef">
+      <el-form-item label="名称"  prop="goods_name">
+        <el-input v-model="form.goods_name" :value="shoplist.goods_name"></el-input>
+      </el-form-item>
+          <el-form-item label="价格" prop="goods_price" >
+        <el-input v-model="form.goods_price"></el-input>
+      </el-form-item>
+         <el-form-item label="重量" prop="goods_weight" >
+        <el-input v-model="form.goods_weight" ></el-input>
+      </el-form-item>
+       <el-form-item label="数量"  prop="goods_number">
+        <el-input v-model="form.goods_number" ></el-input>
+      </el-form-item>
+  
+    </el-form>
+    <div slot="footer" class="dialog-footer">
+      <el-button @click="dialogFormVisible = false">取 消</el-button>
+      <el-button type="primary" @click="editShop">确 定</el-button>
+    </div>
+  </el-dialog> -->
   </div>
 </template>
 
@@ -49,6 +117,50 @@
 export default {
   data() {
     return {
+       //标签栏靠左
+       tabPosition: 'left',
+     //激活标签
+     activeIndex:'0',
+                //添加商品基本信息
+                addForm:{
+                 sid:99,
+                  title:'发送',
+                  pic:'大叔大婶',
+                 dpiric:899,
+                  squan:'合法的规划',
+                  piric:544,
+                
+                 store:'阿顺丰到付',
+                 
+
+                },
+       //添加分类表单的验证规则对象
+       addFormRules:{
+        title:[
+            {
+                required:true,
+                message:'请输入名称',trigger:'blur'
+            }
+        ],
+         store:[
+            {
+                required:true,
+                message:'请输入商店名',trigger:'blur'
+            },{
+
+            }
+        ],
+         piric:[
+            {
+                required:true,
+                message:'请输入价格',trigger:'blur'
+            }
+        ],
+      
+      },
+      //默认弹出框为关闭
+      dialogFormVisible:false,
+      sid:'',
       // 查询参数对象
       queryInfo: {
         query: '',
@@ -65,8 +177,11 @@ export default {
       total: 5
     }
   },
-  created() {
-    this.getGoodsList()
+  // created() {
+  //   this.getGoodsList()
+  // },
+  mounted () {
+    this.getGoodsList();
   },
   methods: {
     // 根据分页获取对应的商品列表
@@ -76,19 +191,14 @@ export default {
         this.goodslist=res.data.data
         this.total=res.data.data.length
       })
-      // const { data: res } = await this.$http.get('goods', {
-      //   params: this.queryInfo
-      // })
-
-      // if (res.meta.status !== 200) {
-      //   return this.$message.error('获取商品列表失败！')
-      // }
-
-      // this.$message.success('获取商品列表成功！')
-      // console.log(res.data)
-      // this.goodslist = res.data.goods
-      // this.total = res.data.total
+      
+      
     },
+    //查询数据
+    searchGood(){
+     
+    },
+
     handleSizeChange(newSize) {
       this.queryInfo.pagesize = newSize
       this.getGoodsList()
@@ -122,11 +232,22 @@ export default {
       this.getGoodsList()
     },
     goAddpage() {
-      this.$router.push('/goods/add')
-    }
+      this.dialogFormVisible=true
+    },
+    //添加框开关
+    addDialogForm(){
+              this.dialogFormVisible=true
+            },
+      addShop(){
+        this.$refs.addFormRef.validate(valid=>{
+          if(!valid)return
+          const params=`sid=${this.addForm.sid}&title=${this.addForm.title}&pic=${this.addForm.pic}&dpiric=${this.addForm.dpiric}&squan=${this.addForm.squan}&piric=${this.addForm.piric}&store=${this.addForm.store}`
+          this.$http.post('shop/set',params).then(res=>{
+            console.log('插入成功',res);
+          })
+        })
+      }
   }
 }
 </script>
 
-<style lang="less" scoped>
-</style>

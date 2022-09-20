@@ -3,22 +3,26 @@
     <div class="login_box">
       <!-- 头像区域 -->
       <div class="avatar_box">
-        <img src="../assets/logo.png" alt="">
+        <img src="../assets/logo.jpg" alt="">
       </div>
+      
       <!-- 登录表单区域 -->
       <el-form ref="loginFormRef" :model="loginForm" :rules="loginFormRules" label-width="0px" class="login_form">
         <!-- 用户名 -->
         <el-form-item prop="uname">
-          <el-input v-model="loginForm.uname" prefix-icon="iconfont icon-user"></el-input>
+          <div class="input">
+          <el-input v-model="loginForm.uname" prefix-icon="iconfont icon-user"  ></el-input>
+        </div>
         </el-form-item>
         <!-- 密码 -->
         <el-form-item prop="upwd">
           <el-input v-model="loginForm.upwd" prefix-icon="iconfont icon-3702mima" type="password"></el-input>
         </el-form-item>
+   
         <!-- 按钮区域 -->
         <el-form-item class="btns">
-          <el-button type="primary" @click="login">登录</el-button>
-          <el-button type="info" @click="resetLoginForm">重置</el-button>
+          <el-button type="primary" @click="login" style="width:100px;font-size: 22px;">登录</el-button>
+          <el-button type="info" @click="resetLoginForm" style="width:100px;font-size: 22px;">重置</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -74,6 +78,7 @@ export default {
           this.data=res.data
           //调用vuex,把用户名全局分享，存入vuex
           this.$store.commit('updateUname',this.data.data.uname)
+          this.$store.commit('updateUid',this.data.data.uid)
           // console.log('vuex的uname',this.$store.state.uname);
                 // 1. 将登录成功之后的 token，保存到客户端的 sessionStorage 中
         //   1.1 项目中出了登录之外的其他API接口，必须在登录之后才能访问
@@ -103,18 +108,18 @@ console.log(0)
   }
 
   .login_box {
-    width: 450px;
-    height: 300px;
-    background-color: #fff;
-    border-radius: 3px;
+    width: 800px;
+    height: 600px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
 
     .avatar_box {
-      height: 130px;
-      width: 130px;
+      height: 300px;
+      width: 300px;
       border: 1px solid #eee;
       border-radius: 50%;
       padding: 10px;
@@ -133,14 +138,28 @@ console.log(0)
   }
 
   .login_form {
+    
     position: absolute;
-    bottom: 0;
-    width: 100%;
-    padding: 0 20px;
-    box-sizing: border-box;
+  right: 17%;
+    bottom: 150px;
+    width: 60%;
+ 
+    padding: 10px 20px;
+    // box-sizing: border-box;
+    .el-form-item{
+   
+      height: 50px;
+      .input{
+      .el-input__inner{
+      height: 40px !important;
+    }
+  }
+    }
+   
   }
 
   .btns {
+ 
     display: flex;
     justify-content: flex-end;
   }

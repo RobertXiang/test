@@ -117,8 +117,9 @@ export default {
   },
   methods: {
      getOrderList() {
-this.$http.post('order/reg').then(res=>{
+this.$http.get(`order/${this.$store.state.uid}`).then(res=>{
   console.log('订单数据',res);
+  this.orderlist=res.data.data
 })
 
       // const { data: res } = await this.$http.get('orders', {

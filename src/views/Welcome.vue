@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard">
-    <div class="dashboard-header">后台数据统计汇总</div>
+    <div class="dashboard-header" style="font-size:40px">后台数据统计汇总</div>
     <el-row class="dashboard-content">
       <el-col :span="6" class="dashboard-left">
         <div class="dashboard-left-element">

@@ -7,14 +7,14 @@
         <span>美墅装修后台管理系统</span>
       </div>
       <div style="margin-right:10px;">
-      <span style="margin-right:10px;font-size:20px;font-weight: 800;">欢迎：{{this.$store.state.uname}}</span>
-      <el-button type="info" @click="logout">退出</el-button>
+      <span style="margin-right:10px;font-size:20px;font-weight: 800;color:whitesmoke">欢迎：{{this.$store.state.uname}}</span>
+      <el-button type="info" @click="logout" style="font-size:18px;padding: 12px;">退出</el-button>
     </div>
     </el-header>
     <!-- 页面主体区域 -->
     <el-container>
       <!-- 侧边栏 -->
-      <el-aside :width="isCollapse ? '64px' : '200px'">
+      <el-aside width="250px">
         <!-- <div class="toggle-button" @click="toggleCollapse">|||</div> -->
         <!-- 侧边栏菜单区域 -->
         <!-- <div background-color="#fff" text-color="black" active-text-color="orange" unique-opened :collapse="isCollapse" :collapse-transition="false" router :default-active="activePath"> -->
@@ -172,7 +172,7 @@ go(index){
   height: 100%;
 }
 .el-header {
-  background-color: #ffffff;
+  background-image: linear-gradient(90deg,white,#35020b);
   display: flex;
   justify-content: space-between;
   padding-left: 0;
@@ -190,17 +190,22 @@ go(index){
 }
 
 .el-aside {
-  background-color: #fff9f6;
+ background-image: linear-gradient(rgba(255, 249, 249, 0.678),#85e5fd);
+  font-size: 18px;
+  width: 200px;
+  
  div{
+  margin-top: 18px;
     border-right: none;
     height: 50px;
     line-height: 50px;
-  
+    padding: 8px;
+    
     border-bottom: #000d4d;
 cursor: pointer;
 
 :hover{
-  color: orange;
+  color: orangered;
 }
 :active{
   color: orange;
@@ -214,11 +219,13 @@ cursor: pointer;
 }
 
 .el-main {
-  background-color: #eee;
+  background-color: rgba(218, 217, 197, 0.226);
+  color: #000d4d;
+  font-size: 14px;
 }
 
 .iconfont {
-  margin-right: 10px;
+  margin-right: 15px;
 }
 
 .toggle-button {

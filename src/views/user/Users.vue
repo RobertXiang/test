@@ -13,7 +13,7 @@
       <el-row :gutter="20">
         <el-col :span="8">
           <el-input placeholder="请输入内容" v-model="uid" clearable>
-            <el-button slot="append" icon="el-icon-search" @click="getUserList"></el-button>
+            <el-button slot="append" icon="el-icon-search" @click="searchUser"></el-button>
           </el-input>
         </el-col>
         <el-col :span="4">
@@ -22,7 +22,7 @@
       </el-row>
 
       <!-- 用户列表区域 -->
-      <el-table :data="userlist" border stripe>
+      <el-table :data="userlist" border stripe >
         <el-table-column type="index"></el-table-column>
         <el-table-column label="姓名" prop="uname"></el-table-column>
         <el-table-column label="邮箱" prop="email"></el-table-column>
@@ -81,7 +81,7 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex'
+  // import { mapState } from 'vuex'
 export default {
   data() {
     // 验证邮箱的规则
@@ -110,6 +110,7 @@ export default {
     }
 
     return {
+      user:[],
       //查询uid
       uid:'',
       // 获取用户列表的参数对象
@@ -162,8 +163,15 @@ export default {
       }
     }
   },
-  created() {
-    this.getUserList()
+  // created() {
+   
+  //   this.getUserList()
+    
+  //     this.searchUser()
+    
+  // },
+  mounted () {
+    this.getUserList();
   },
  
   methods: {
@@ -173,21 +181,26 @@ export default {
   
     //获取用户列表
     getUserList() {
-      if(!this.uid){
+   
      this.$http.get('user/all').then(res=>{
       console.log('用户列表',res);
       if(res.data.code==200){
         this.userlist=res.data.data
         this.total=res.data.data.length
       }
-     })}else{ this.$http.get(`user/${this.uid}`).then(res=>{
-        console.log('查询情况',res);
-        if(res.data.data.code==200){
-        
+     })},
+  searchUser(){
+    
+ this.$http.get(`user/${this.uid}`).then(res=>{
+  console.log('查询情况',res);
+        if(res.data.code==200){
+       
           this.userlist=res.data.data
-        
+      console.log('查询结果',this.userlist);
         }
-      })}
+ })
+       
+      
     },
     // //查询用户
     // searchUser(){
