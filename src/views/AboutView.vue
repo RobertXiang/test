@@ -16,7 +16,8 @@
       <!-- 聊天区域 -->
       <div class="chart-list" id="chart-list">
         <div class="user-logined" id="user-logined">
-          <span id="logined-user"></span>上线了
+          <span id="logined-user"></span>
+          上线了
         </div>
         <!-- 气泡 -->
         <div class="chart-item">
@@ -53,33 +54,33 @@
 export default {
   methods: {
     connected() {
-      this.$socket.open(); // 开始连接socket
+      this.$socket.open() // 开始连接socket
     },
     socketSendmsg() {
-      this.$socket.emit("my other event", { my: "data" });
+      this.$socket.emit('my other event', { my: 'data' })
     },
   },
   sockets: {
     connecting() {
-      console.log("正在连接");
+      console.log('正在连接')
     },
     disconnect() {
-      console.log("Socket 断开");
+      console.log('Socket 断开')
     },
     connect_failed() {
-      console.log("连接失败");
+      console.log('连接失败')
     },
     connect() {
-      console.log("socket connected");
+      console.log('socket connected')
     },
     news(data) {
-      console.log(data);
+      console.log(data)
     },
     open(data) {
-      console.log(data);
+      console.log(data)
     },
   },
-};
+}
 </script>
 
 <style scoped>
@@ -102,8 +103,8 @@ export default {
   margin-right: 5px;
   border-radius: 50%;
 }
-.kf [class*=" el-icon-"],
-[class^="el-icon-"] {
+.kf [class*=' el-icon-'],
+[class^='el-icon-'] {
   margin: 0 2px;
 }
 .kf .header div span {
@@ -136,7 +137,7 @@ export default {
 }
 .kf .chart-list .chart-item::after,
 .kf .chart-list .chart-item::before {
-  content: ".";
+  content: '.';
   display: block;
   height: 0;
   visibility: hidden;
@@ -166,7 +167,7 @@ export default {
   border-radius: 3px;
 }
 .chart-list .chart-item .user-message::before {
-  content: " ";
+  content: ' ';
   position: absolute;
   width: 10px;
   height: 10px;
