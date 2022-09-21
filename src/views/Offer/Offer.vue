@@ -25,7 +25,7 @@
             {{ data.row.live }} - {{ data.row.choice }}
           </template>
         </el-table-column>
-        <el-table-column prop="style" label="喜欢装修风格"> </el-table-column>
+        <el-table-column prop="style" label="装修风格"> </el-table-column>
         <el-table-column prop="spaces" label="个性选择"> </el-table-column>
         <el-table-column prop="preference" label="卫生间选择">
         </el-table-column>
