@@ -32,6 +32,11 @@ const routes = [{ path: '/', redirect: '/login' },
                 component: () =>
                     import ('../views/Order/Order')
             },
+            {
+                path: '/offer',
+                component: () =>
+                    import ('../views/Offer/Offer.vue')
+            },
            
 
 
