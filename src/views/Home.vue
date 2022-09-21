@@ -185,9 +185,6 @@ export default {
     },
     goOffer() {
       this.$router.push("/offer");
-      this.axios.get(url).then((res)=>{
-        console.log(res);
-      })
     },
   },
 };
