@@ -5,6 +5,24 @@ import Index from '../views/Index.vue'
 Vue.use(VueRouter)
 
 const routes = [
+  // 关于我们
+  {
+    path: '/aboutus',
+    name: 'aboutus',
+    component: () => import('../views/AboutUs.vue'),
+  },
+  // 省心施工
+  {
+    path: '/construct',
+    name: 'construct',
+    component: () => import('../views/ConsTruct.vue'),
+  },
+  {
+    // 甄选套餐
+    path: '/combomeal',
+    name: 'combomeal',
+    component: () => import('../views/ComboMeal.vue'),
+  },
   {
     path: '/',
     name: 'index',
