@@ -67,7 +67,7 @@
           <span>订单管理</span>
         </div>
         <div @click="goOffer">
-          <i class="iconfont icon-danju"></i>
+          <i class="iconfont icon-offer"></i>
           <span>报价处理</span>
         </div>
         <!-- <el-submenu :index="item.id + ''" v-for="item in menulist" :key="item.id" @click="saveNavState"> -->
@@ -122,6 +122,7 @@ export default {
         101: "iconfont icon-shangpin",
         102: "iconfont icon-danju",
         145: "iconfont icon-baobiao",
+        108: "iconfont icon-offer",
       },
       // 是否折叠
       isCollapse: false,
@@ -184,6 +185,9 @@ export default {
     },
     goOffer() {
       this.$router.push("/offer");
+      this.axios.get(url).then((res)=>{
+        console.log(res);
+      })
     },
   },
 };
