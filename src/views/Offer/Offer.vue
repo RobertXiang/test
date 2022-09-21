@@ -16,6 +16,8 @@
         </el-col>
       </el-row>
       <el-table border :data="data" style="width: 100%">
+        <el-table-column prop="mid" width="50">
+        </el-table-column>
         <el-table-column prop="HouseStatu" label="房屋状态" width="120">
         </el-table-column>
         <el-table-column prop="house" label="房屋类型" width="120">
