@@ -231,7 +231,7 @@ export default {
         width: 100px;
         margin: 15px 10px;
         > p {
-          border: 1px solid red;
+          // border: 1px solid red;
           font-size: 15px;
           width: 100%;
           text-align: center;
