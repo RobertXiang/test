@@ -347,6 +347,7 @@ export default {
       // 发post请求上传数据
       this.axios.post(url,params).then(res=>{
         this.$toast("领取成功");
+        this.$router.push('/')
       }).catch(err=>{
         console.log('请求失败:' +err.status+','+err.statusText);
       })
