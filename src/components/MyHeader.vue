@@ -37,12 +37,15 @@
               <router-link to="/combomeal">甄选套餐</router-link>
             </el-menu-item>
             <el-menu-item index="3">
-              <router-link to="/construct">省心施工</router-link>
+              <router-link to="/houseCase">整屋案例</router-link>
             </el-menu-item>
             <el-menu-item index="4">
+              <router-link to="/construct">省心施工</router-link>
+            </el-menu-item>
+            <el-menu-item index="5">
               <router-link to="/aboutus">关于我们</router-link>
             </el-menu-item>
-            <el-submenu style="font-size:16px !important" index="5">
+            <el-submenu style="font-size:16px !important" index="6">
               <template slot="title">APP精选</template>
               <img src="../assets/icon/app.png" alt />
             </el-submenu>

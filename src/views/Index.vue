@@ -1,13 +1,13 @@
 <template>
   <div class="index">
     <!-- 轮播图 -->
-    <div class="banner">
+    <!-- <div class="banner">
       <el-carousel :interval="5000" arrow="always">
         <el-carousel-item v-for="item in imges" :key="item">
           <img width="100%" :src="item.url" alt height="600px" />
         </el-carousel-item>
       </el-carousel>
-    </div>
+    </div>-->
 
     <!-- 轮播图下方小图标 -->
     <div class="column">
@@ -164,7 +164,7 @@
     </div>
 
     <!-- 吸底组件 -->
-    <div class="footer">
+    <div class="footer" v-show="Gbshow">
       <!-- 版心 -->
       <div class="center">
         <div class="f1" style="display: flex">
@@ -179,8 +179,13 @@
           <span>元</span>
         </div>
         <div class="f3">
-          <span style="padding: 15px">新房</span>
-          <span>老房</span>
+          <span
+            v-for="(nav, i) in navs"
+            :key="i"
+            @click="now=i"
+            :class="{active:now==i}"
+            style="padding: 15px"
+          >{{nav}}</span>
         </div>
         <div class="f4">
           <div class="lx">
@@ -192,11 +197,11 @@
                 :value="item.value"
               ></el-option>
             </el-select>
-            <input type="text" placeholder="面积" />
+            <input class="mj" type="text" placeholder="面积" />
           </div>
           <input id="int" type="text" placeholder="联系方式" />
-          <button>立即预约</button>
-          <i id="ix" class="el-icon-close"></i>
+          <button @click="getValue">立即预约</button>
+          <i @click="clickGb" id="ix" class="el-icon-close"></i>
         </div>
       </div>
     </div>
@@ -220,6 +225,8 @@ export default {
     return {
       // 客服隐藏
       show: false,
+      // 吸底组件显示
+      Gbshow: true,
       // 吸底组件的城市选择
       options: [
         {
@@ -244,6 +251,9 @@ export default {
         }
       ],
       value: "",
+      // 新老房切换
+      navs: ["新房", "老房"],
+      now: 0,
       // 轮播图地址数组
       imges: [
         { url: require("../assets/img/banner1.jpg") },
@@ -267,6 +277,35 @@ export default {
       } else {
         this.show = false;
       }
+    },
+    // 关闭吸底组件
+    clickGb() {
+      if (this.Gbshow) {
+        this.Gbshow = false;
+        setInterval(() => {
+          // 滑动展开
+          $(".footer").slideDown(2000);
+        }, 2000);
+      }
+    },
+    getValue() {
+      let int = document.querySelector("#int");
+      let mj = document.querySelector(".mj");
+      // 获取输入框中的值
+      if (this.now == 1) {
+        ("老房");
+      } else {
+        ("新房");
+      }
+
+      let homeValue = this.now;
+      let intValue = int.value;
+      let mjValue = mj.value;
+      let cityValue = this.options[this.value - 1].label;
+      console.log(intValue);
+      console.log(mjValue);
+      console.log(cityValue);
+      console.log(homeValue);
     }
   }
 };
