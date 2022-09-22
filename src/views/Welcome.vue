@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard">
-    <div class="dashboard-header" style="font-size:40px">后台数据统计汇总</div>
+    <div class="dashboard-header" style="font-size:40px;color:#eee">后台数据统计汇总</div>
     <el-row class="dashboard-content">
       <el-col :span="6" class="dashboard-left">
         <div class="dashboard-left-element">
@@ -41,7 +41,8 @@ export default {
           left: "center",
           top: "bottom",
           textStyle: {
-            fontSize: 14,
+            fontSize: 18,
+            color:"white",
           },
         },
         tooltip: {
@@ -59,6 +60,10 @@ export default {
               { value: 234, name: "联盟广告" },
               { value: 548, name: "搜索引擎" },
             ],
+             textStyle: {
+          color: "white",
+          fontSize:16
+        },
             emphasis: {
               itemStyle: {
                 shadowBlur: 10,
@@ -67,7 +72,11 @@ export default {
               },
             },
           },
-        ]
+        ],
+        textStyle: {
+          color: "white",
+          fontSize:18
+        },
       },
       // 柱状图参数
       option2: {
@@ -76,11 +85,17 @@ export default {
           left: "center",
           top: "bottom",
           textStyle: {
-            fontSize: 14
+            fontSize: 18,
+            color:"white"
           },
         },
         xAxis: {
           data: ["新房", "旧房", "设计", "家具", "其他"],
+        
+        },
+        textStyle: {
+          color: "white",
+          fontSize:18
         },
         yAxis: {},
         series: [
@@ -89,6 +104,9 @@ export default {
             type: "bar",
             barWidth: 30, // 柱图宽度
             data: [5, 20, 36, 16, 10],
+            textStyle:{
+          color:"white"
+         }
           },
         ]
       },
@@ -99,12 +117,18 @@ export default {
           left: "center",
           top: "bottom",
           textStyle: {
-            fontSize: 14
+            fontSize: 18,
+            color:"white"
           },
         },
         xAxis: {
           type: "category",
           data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+          
+        },
+        textStyle: {
+          color: "white",
+          fontSize:18
         },
         yAxis: {
           type: "value",
@@ -119,6 +143,7 @@ export default {
             type: "line",
             smooth: true,
           },
+          
         ]
       },
       // 雷达图参数
@@ -128,7 +153,8 @@ export default {
           left: "center",
           top: "bottom",
           textStyle: {
-            fontSize: 14
+            fontSize: 18,
+            color:"white"
           },
         },
         tooltip: {
@@ -164,7 +190,8 @@ export default {
           },
         ],
         textStyle: {
-          color: "#000000"
+          color: "white",
+          fontSize:18
         },
       },
       // 地图
@@ -201,7 +228,9 @@ export default {
         宁夏: [106.3586, 38.1775],
         吉林: [125.8154, 44.2584],
         湖南: [113.0823, 28.2568],
+        
       },
+      
       provinceSale: [
         { name: "河南", value: 108 },
         { name: "黑龙江", value: 27 },
@@ -211,6 +240,8 @@ export default {
         { name: "新疆", value: 14 },
         { name: "云南", value: 671},
       ],
+      
+      
     };
   },
   mounted () {
@@ -264,7 +295,8 @@ export default {
           top: "bottom",
           left: "center",
           textStyle: {
-            fontSize: 14
+            fontSize: 20,
+            color:"white"
           },
         },
         // 左侧小导航图标
@@ -279,7 +311,12 @@ export default {
             { start: 50, end: 100 },
             { start: 0, end: 50 },
           ],
-          color: ["#9fb5ea", "#F4E925", "#85daef", "#74e2ca", "#e6ac53"],
+          textStyle: {
+            fontSize: 20,
+            color:"white"
+          },
+          color: ["red", "purple", "darkblue", "black", "green"],
+          
         },
         // 布局
         grid: [{ x: "100%", y: "100%", width: "100%", height: "100%" }],
@@ -315,6 +352,7 @@ export default {
             })(),
           },
         ],
+       
         // 布局e
         geo: {
           show: true,
@@ -332,14 +370,14 @@ export default {
           roam: false,
           itemStyle: {
             normal: {
-              areaColor: "#008080",
-              // borderColor: '#3fdaff',
-              // borderWidth: 1,
-              // shadowColor: "rgba(63, 218, 255, 0.5)",
-              // shadowBlur: 10,
+              areaColor: "#00FFC9",
+              borderColor: '#637EFF',
+              borderWidth: 1,
+              shadowColor: "rgba(63, 218, 255, 0.5)",
+              shadowBlur: 10,
             },
             emphasis: {
-              areaColor: "#2B91B7",
+              areaColor: "#FFDD74",
             },
           },
         },
@@ -366,9 +404,15 @@ export default {
               emphasis: {
                 show: true,
               },
+              
             },
+            
           },
         ],
+        textStyle: {
+            fontSize: 18,
+            // color:"red"
+          },
       };
       map.setOption(option);
     },
@@ -381,7 +425,7 @@ export default {
     width: 100%;
     height: 100%;
     margin: 0 auto;
-    background-color: rgb(252, 249, 245);
+    background-color:#20283F;
   }
   .dashboard-header {
     width: 100%;

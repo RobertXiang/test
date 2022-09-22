@@ -103,14 +103,18 @@ console.log(0)
 
 <style lang="less" scoped>
   .login_container {
-    background-color: #ff964a;
+    
+    background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+
+    animation: Gradient 15s ease infinite;
     height: 100%;
   }
 
   .login_box {
     width: 800px;
     height: 600px;
-    background-color: rgb(255, 255, 255);
+   
+  background: linear-gradient(-90deg, #daf6fc 0%, #cee1fd 100%);
     border-radius: 10px;
     position: absolute;
     left: 50%;
@@ -127,7 +131,7 @@ console.log(0)
       position: absolute;
       left: 50%;
       transform: translate(-50%, -50%);
-      background-color: #fff;
+      background-color: rgb(121, 7, 7);
       img {
         width: 100%;
         height: 100%;
@@ -163,4 +167,10 @@ console.log(0)
     display: flex;
     justify-content: flex-end;
   }
+  /deep/ .el-input__inner{
+          height: 50x;
+          font-size: 20px;
+         
+          
+        }
 </style>

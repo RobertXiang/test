@@ -4,11 +4,11 @@
     <el-breadcrumb separator-class="el-icon-arrow-right">
       <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item>订单管理</el-breadcrumb-item>
-      <el-breadcrumb-item>订单列表</el-breadcrumb-item>
+     
     </el-breadcrumb>
 
     <!-- 卡片视图区域 -->
-    <el-card>
+    <el-card style="background-color:#20283F;border: #20283F;">
       <el-row>
         <el-col :span="8">
           <el-input placeholder="请输入内容">
@@ -18,7 +18,7 @@
       </el-row>
 
       <!-- 订单列表数据 -->
-      <el-table :data="orderlist" border stripe>
+      <el-table :data="orderlist" stripe >
         <el-table-column type="index"></el-table-column>
         <el-table-column label="订单编号" prop="order_number"></el-table-column>
         <el-table-column label="订单价格" prop="order_price"></el-table-column>
@@ -172,4 +172,44 @@ this.$http.get(`order/${this.$store.state.uid}`).then(res=>{
 .el-cascader {
   width: 100%;
 }
+.el-breadcrumb  /deep/  .el-breadcrumb__inner 
+      {
+        font-size:20px;
+        color: #ccc !important;				//你想要设置的字体颜色
+    }
+     //   表格
+ 
+     .el-table {
+      border: 1px solid black !important;
+          border-top:none ;
+          border-left: none;
+          font-size: 20px !important;
+          color: #4e5561 !important;
+          background: #093e74 !important;
+          &::before {
+            height: 0 !important;
+          }
+          /deep/ td, /deep/ th.is-leaf {
+            border-width: 0 !important;
+          }
+          /deep/ thead tr th{
+            background: #021b34 !important;
+            color: #fdfcfc !important;
+          }
+          /deep/ tr:hover > td {
+            background: transparent !important;
+          }
+          ::-webkit-scrollbar-corner {
+            background: #021b34;
+          }
+        }
+        /deep/ .el-input__inner{
+          height: 40px;
+          font-size: 20px;
+        }
+// 或者
+// ::v-deep .el-input__inner{
+//           height: 40px;
+//         }
+
 </style>

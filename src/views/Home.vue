@@ -36,8 +36,32 @@
           </li>
           
 </ul> -->
+<el-menu
+      default-active="1"
+    
+      background-color="#20283F"
+      text-color="#fff"
+      active-text-color="#ffd04b" style="border:none;">
+     
+      <el-menu-item index="1" @click="goHome" style="font-size:22px;margin-top:10px;text-align: center;">
+        <i class="iconfont icon-baobiao"></i>
+        <span slot="title" >首页统计</span>
+      </el-menu-item>
+      <el-menu-item index="2" @click="goUser" style="font-size:22px;margin-top:10px;text-align: center;">
+        <i class="iconfont icon-user" ></i>
+        <span slot="title">用户管理</span>
+      </el-menu-item>
+      <el-menu-item index="3" @click="goGood" style="font-size:22px;margin-top:10px;text-align: center;">
+        <i class="iconfont icon-tijikongjian"></i>
+        <span slot="title">商品管理</span>
+      </el-menu-item>
+      <el-menu-item index="4" @click="goOrder" style="font-size:22px;margin-top:10px;text-align: center;">
+        <i class="iconfont icon-danju"></i>
+        <span slot="title">订单管理</span>
+      </el-menu-item>
+    </el-menu>
 
-          <div @click="goHome">
+          <!-- <div @click="goHome" class="active">
             <i class="iconfont icon-baobiao"></i>
             <span>首页统计</span>
           </div>
@@ -52,7 +76,7 @@
            <div @click="goOrder">
             <i class="iconfont icon-danju"></i>
             <span>订单管理</span>
-          </div>
+          </div> -->
           <!-- <el-submenu :index="item.id + ''" v-for="item in menulist" :key="item.id" @click="saveNavState"> -->
             <!-- 一级菜单的模板区域 -->
             <!-- <template slot="title"> -->
@@ -172,12 +196,12 @@ go(index){
   height: 100%;
 }
 .el-header {
-  background-image: linear-gradient(90deg,white,#35020b);
+  background-color: #20283F;
   display: flex;
   justify-content: space-between;
   padding-left: 0;
   align-items: center;
-  color: rgb(124, 24, 24);
+  color: #eee;
   font-size: 30px;
   font-weight: 1000;
   > div {
@@ -190,36 +214,45 @@ go(index){
 }
 
 .el-aside {
- background-image: linear-gradient(rgba(255, 249, 249, 0.678),#85e5fd);
+background-color: #20283F;
   font-size: 18px;
   width: 200px;
+
   
  div{
+  text-align: center;
   margin-top: 18px;
     border-right: none;
     height: 50px;
     line-height: 50px;
     padding: 8px;
-    
+    color: #eee;
     border-bottom: #000d4d;
 cursor: pointer;
 
-:hover{
-  color: orangered;
-}
-:active{
-  color: orange;
-}
+// :hover{
+//   color: orangered;
+//   background-color: yellow;
+// // }
+// :active{
+//   color: orange;
+  
+// }
 
   }
-  .class{
-    color:orange;
-  }
+//   :hover{
+//   color: rgb(71, 30, 148);
+//   background-color: rgb(169, 231, 228);
+// }
+//   .active{
+//     color: rgb(71, 30, 148);
+//   background-color: rgb(169, 231, 228);
+//   }
   
 }
 
 .el-main {
-  background-color: rgba(218, 217, 197, 0.226);
+  background-color:#1A2036;
   color: #000d4d;
   font-size: 14px;
 }
@@ -237,4 +270,5 @@ cursor: pointer;
   letter-spacing: 0.2em;
   cursor: pointer;
 }
+
 </style>

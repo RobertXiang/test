@@ -4,33 +4,45 @@
     <el-breadcrumb separator-class="el-icon-arrow-right">
       <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item>商品管理</el-breadcrumb-item>
-      <el-breadcrumb-item>商品列表</el-breadcrumb-item>
+     
     </el-breadcrumb>
 
     <!-- 卡片视图区域 -->
-    <el-card>
-      <el-row :gutter="20">
+    <el-card style="background-color:#20283F;border: #20283F;">
+    <el-row :gutter="20">
         <el-col :span="8">
-          <el-input placeholder="请输入内容" v-model="sid" clearable >
+          <el-input placeholder="请输入商品id" v-model="sid" clearable >
             <el-button slot="append" icon="el-icon-search" @click="searchGood"></el-button>
           </el-input>
         </el-col>
         <el-col :span="4">
-          <el-button type="primary" @click="goAddpage">添加商品</el-button>
+          <el-button type="primary" @click="goAddpage" style="font-size:20px">添加商品</el-button>
         </el-col>
       </el-row>
 
+        <!-- 搜索与添加区域 -->
+        <!-- <el-row :gutter="20" style="height:40px">
+        <el-col :span="8">
+          <el-input placeholder="请输入商品的ID" v-model="sid" clearable >
+            <el-button slot="append" icon="el-icon-search" @click="searchGood" style="font-size:30px"></el-button>
+          </el-input>
+        </el-col>
+        <el-col :span="4">
+          <el-button type="primary"  @click="goAddpage" style="font-size:20px">添加商品</el-button>
+        </el-col>
+      </el-row> -->
+
       <!-- table表格区域 -->
-      <el-table :data="goodslist" border stripe>
-        <el-table-column type="index"></el-table-column>
+      <el-table :data="goodslist" stripe >
+        <el-table-column label="ID" prop="sid" width="50px"></el-table-column>
         <el-table-column label="商品名称" prop="title"></el-table-column>
-        <el-table-column label="商品价格(元)" prop="piric" width="95px"></el-table-column>
-        <el-table-column label="商店" prop="store" width="140px">
+        <el-table-column label="商品价格(元)" prop="piric" width="120px"></el-table-column>
+        <el-table-column label="商店" prop="store" width="300px">
           <!-- <template slot-scope="scope">
             {{scope.row.add_time | dateFormat}}
           </template> -->
         </el-table-column>
-        <el-table-column label="操作" width="130px">
+        <el-table-column label="操作" width="160px">
           <template slot-scope="scope">
             <el-button type="primary" icon="el-icon-edit" size="mini"></el-button>
             <el-button type="danger" icon="el-icon-delete" size="mini" @click="removeById(scope.row.sid)"></el-button>
@@ -64,14 +76,18 @@
      <el-form-item label="商店名" prop="goods_weight">
         <el-input v-model="addForm.store" ></el-input>
     </el-form-item>
-    <el-form-item label="商品图片" prop="pic">
+    <!-- <el-form-item label="商品图片" prop="pic">
         <el-input v-model="addForm.pic" ></el-input>
-    </el-form-item>
+    </el-form-item> -->
     <el-form-item label="商品成本" prop="dpiric">
         <el-input v-model="addForm.dpiric" ></el-input>
     </el-form-item>
     <el-form-item label="squan" prop="squan">
         <el-input v-model="addForm.squan" ></el-input>
+    </el-form-item>
+    <el-form-item label="图片地址" prop="pic">
+     <el-input v-model="addForm.pic"></el-input>
+     
     </el-form-item>
  
     
@@ -117,6 +133,7 @@
 export default {
   data() {
     return {
+      sid:'',
        //标签栏靠左
        tabPosition: 'left',
      //激活标签
@@ -126,9 +143,9 @@ export default {
                  sid:99,
                   title:'发送',
                   pic:'大叔大婶',
-                 dpiric:899,
+                 dpiric:'436345',
                   squan:'合法的规划',
-                  piric:544,
+                  piric:'12234',
                 
                  store:'阿顺丰到付',
                  
@@ -165,7 +182,8 @@ export default {
       queryInfo: {
         query: '',
         pagenum: 1,
-        pagesize: 10
+        pagesize: 10,
+        tableList:[]
       },
       // 商品列表
       goodslist: [{goods_name:'欧式精装',goods_price:'130000',add_time:'2022-09-09'},
@@ -182,6 +200,7 @@ export default {
   // },
   mounted () {
     this.getGoodsList();
+
   },
   methods: {
     // 根据分页获取对应的商品列表
@@ -190,21 +209,50 @@ export default {
         console.log('商品情况',res);
         this.goodslist=res.data.data
         this.total=res.data.data.length
+       this.queryInfo.tableList=this.goodslist.slice(this.queryInfo.pagenum-1,this.queryInfo.pagesize)//表单数据列第一次加载进来，默认第一页数据
       })
       
       
     },
     //查询数据
     searchGood(){
-     
-    },
+    if(!this.sid){
+      this.getGoodsList()
+    }else{
+    
+    this.$http.get(`shop/${this.sid}`).then(res=>{
+     console.log('查询情况',res);
+           if(res.data.code==200){
+          
+             this.goodslist=res.data.data
+         console.log('查询结果',this.goodlist);
+           }
+    })
+  }
+         
+       },
 
     handleSizeChange(newSize) {
       this.queryInfo.pagesize = newSize
+     
       this.getGoodsList()
     },
     handleCurrentChange(newPage) {
       this.queryInfo.pagenum = newPage
+      let first=this.queryInfo.pagesize-20
+      let last=this.queryInfo.pagesize*newPage
+      if(this.goodslist.length<=this.queryInfo.pagesize){
+        //20条数据以下情况
+        this.tableList=this.goodslist
+      }else{
+        if(this.queryInfo.pagesize*newPage>=this.goodslist.length){
+          //最后一页的数据
+          this.tableList=this.goodslist.slice(first)
+        }else{
+          //点击不是最后一页
+          this.tableList=this.goodslist.slice(first,last)
+        }
+      }
       this.getGoodsList()
     },
     async removeById(id) {
@@ -243,11 +291,65 @@ export default {
           if(!valid)return
           const params=`sid=${this.addForm.sid}&title=${this.addForm.title}&pic=${this.addForm.pic}&dpiric=${this.addForm.dpiric}&squan=${this.addForm.squan}&piric=${this.addForm.piric}&store=${this.addForm.store}`
           this.$http.post('shop/set',params).then(res=>{
-            console.log('插入成功',res);
+           
+            if(res.data.data.code==200){  
+              console.log('插入成功',res);
+              this.$message.success('添加成功')
+              this.dialogFormVisible=false
+            }else{this.$message.error('添加失败，请检查数据')}
+          
           })
         })
-      }
+      },
+      
+    
+
+
+
   }
 }
 </script>
+<style lang="less" scoped>
+  .el-breadcrumb  /deep/  .el-breadcrumb__inner 
+      {
+        font-size: 20px;
+        color: #ccc !important;				//你想要设置的字体颜色
+    }
+     //   表格
+ 
+     .el-table {
+          border-top:none ;
+          border-left: none;
+          border-right: none;
+          font-size: 20px !important;
+          color: #4e5561 !important;
+          background: #093e74 !important;
+          &::before {
+            height: 0 !important;
+          }
+          /deep/ td, /deep/ th.is-leaf {
+            border-width: 0 !important;
+          }
+          /deep/ thead tr th{
+            background: #021b34 !important;
+            color: #fdfcfc !important;
+          }
+          /deep/ tr:hover > td {
+            background: transparent !important;
+          }
+          ::-webkit-scrollbar-corner {
+            background: #021b34;
+          }
+        }
+        /deep/ .el-input__inner{
+          height: 50x;
+          font-size: 20px;
+         
+          
+        }
+// 或者
+// ::v-deep .el-input__inner{
+//           height: 40px;
+//         }
 
+</style>
