@@ -31,7 +31,7 @@
               alt=""
               width="100px"
             />
-            <p>家装设计组</p>
+            <p>供应链管理组</p>
           </div>
           <div class="list_item">
             <img
@@ -39,7 +39,7 @@
               alt=""
               width="100px"
             />
-            <p>家装设计组</p>
+            <p>工人管理组</p>
           </div>
           <div class="list_item">
             <img
@@ -47,7 +47,7 @@
               alt=""
               width="100px"
             />
-            <p>家装设计组</p>
+            <p>客户服务组</p>
           </div>
           <div class="list_item">
             <img
@@ -55,7 +55,7 @@
               alt=""
               width="100px"
             />
-            <p>家装设计组</p>
+            <p>售后服务组</p>
           </div>
           <div class="list_item">
             <img
@@ -63,7 +63,7 @@
               alt=""
               width="100px"
             />
-            <p>家装设计组</p>
+            <p>工作管理组</p>
           </div>
           <!-- item完 -->
         </div>
@@ -230,6 +230,12 @@ export default {
         // border: 1px solid red;
         width: 100px;
         margin: 15px 10px;
+        > p {
+          // border: 1px solid red;
+          font-size: 15px;
+          width: 100%;
+          text-align: center;
+        }
       }
     }
   }

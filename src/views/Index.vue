@@ -97,7 +97,7 @@
       <div class="recommend" v-if="data">
         <!-- 案列内容 -->
         <div class="content" v-for="item in data.data" @click="goXiangqing(item.anli_id)">
-          <img :src="item.an_pic" alt="" width="175vm">
+          <img :src="item.an_pic" alt="" width="100%" style=" border-radius: 5px;">
           <p>{{item.an_title}}</p>
           <div class="lanbel">
             <span>{{item.jushi}}</span>
@@ -455,7 +455,7 @@ div.van-swipe-item {
     // border: 1px solid red;
       margin: 10px 0;
       border-radius: 8px;
-      width: 175px;
+      width: 47.5%;
       background-color: #ffffff;
       > p {
         // border: 1px solid red;
