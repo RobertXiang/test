@@ -19,8 +19,8 @@ CREATE TABLE user(
   birthday date         #出生年月
 ) ;
 #用户表插入数据
-INSERT INTO `user` VALUES (1, 'yuanfan', '123456', '731099831@qq.com', '13628101692', 'null', '1', '1993-01-09');
-INSERT INTO `user` VALUES (2, '张山', '123456', '7555@163.com', '13710009711', 'null', '0', '1987-09-08');
+INSERT INTO `user` VALUES (1, 'yuanfan', '123456', '731099831@qq.com', '13628101692', '15.jpg', '1', '1993-01-09');
+INSERT INTO `user` VALUES (2, '张山', '123456', '7555@163.com', '13710009711', '20.jpg', '1', '1987-09-08');
 
 
 
@@ -1096,10 +1096,14 @@ CREATE TABLE mfsj(
   preference varchar(12),
   other varchar(24),
   HouseStatu varchar(12),
-  yhphone varchar(16)
+  yhphone varchar(16),
+  city varchar(12),
+  asea varchar(16),
+  phone varchar(16),
+  newandold varchar(12)
   -- foreign key(yhphone) references user(phone)
 );
-INSERT INTO `mfsj` VALUES (1, '平层住宅', '亲子共住', '有老人 有宠物', '现代简约', '书房 儿童房 衣帽间', '干湿分离', '定制家具 暖气','新房','13628101692');
+INSERT INTO `mfsj` VALUES (1, '平层住宅', '亲子共住', '有老人 有宠物', '现代简约', '书房 儿童房 衣帽间', '干湿分离', '定制家具 暖气','新房','13628101692','成都','110','13628101692','新房');
 
 
 
@@ -1173,3 +1177,18 @@ CREATE TABLE mszx_order_detail(
   foreign key(product_id) references shopping(sid)
    
 );
+
+/***商品订单表****/
+DROP TABLE IF EXISTS `product_order`;
+CREATE TABLE  product_order(
+orderid INT PRIMARY KEY AUTO_INCREMENT,  #唯一id
+user_id INT,  #与用户id 
+product_id INT,  #商品id
+price varchar(12), #价格
+propic varchar(255),  #商品图片
+num INT,
+protitle varchar(64),
+foreign key(user_id) references user(uid),
+foreign key(product_id) references shopping(sid)
+);
+INSERT INTO `product_order` VALUES (1, 1, 1,'￥175','https://a.vpimg4.com/upload/merchandise/pdcpos/1100001789/2022/0510/92/9f308229-3b41-4e11-bb83-080b18904dd9.jpg', 1,'开关插座面板家用套餐86型墙壁房屋装修暗装五孔防水盒5孔五孔');

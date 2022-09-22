@@ -12,7 +12,7 @@ router.get('/show',(req,res)=>{
 });
 
 
-//用户注册接口
+//移动端用户注册接口
 // 接口地址http://127.0.0.1:3000/user/register
 router.post('/register',(req,res,next)=>{
 	//获取post传递参数
@@ -42,6 +42,44 @@ router.post('/register',(req,res,next)=>{
 	})
 	}
 })
+
+// PC端用户注册接口
+//接口地址：http://127.0.0.1:3000/user/pcreg
+//post  传递参数：phone    upwd
+router.post('/pcreg',(req,res,next)=>{
+	let obj=req.body
+	// 验证手机号的格式
+	if(!/^1[3-9]\d{9}$/.test( obj.phone ) ){
+		res.send({code:401,msg:'手机号码格式错误'})
+	}else{
+		//定义sql语句
+	let sql='select uid from user where phone = ?'
+	//执行sql语句
+	pool.query(sql,[obj.phone],(err,results)=>{
+		if(err) {
+			next (err)
+			return
+		};
+		if(results.length!= 0){
+			res.send({msg:'用户已存在',code:401});
+		}else{
+			// 将用户的相关信息插入到用户数据表中
+			sql = 'insert into user set ?;'
+			pool.query(sql,[obj],(err,results)=>{
+			 if(err)throw err;
+			 res.send({msg:'注册成功！',code:200,result:results});
+			})
+		}
+	})
+	}
+})
+
+
+
+
+
+
+
 
 //用户验证接口
 // 接口地址：http://127.0.0.1:3000/user/reg/exist
@@ -180,7 +218,7 @@ router.post("/login/phone",(req,res)=>{
 router.post('/set',(req,res,next)=>{
 	console.log(req.body);
 	let obj = req.body
-	let sql='update user set uname=?,upwd=?,phone=?,avater=? birthday=? where uid=?;'
+	let sql='update user set uname=?,upwd=?,phone=?,avater=?,birthday=? where uid=?;'
 	pool.query(sql,[obj.uname,obj.upwd,obj.phone,obj.avater,obj.birthday,obj.uid],(err,results)=>{
 		if(err){
 			next(err)
