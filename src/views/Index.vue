@@ -484,5 +484,4 @@ export default {
   }
 };
 </script>
-<style src="@/assets/css/index.css"></style>
-<style scoped></style>
+<style src="../assets/index.css"></style>
