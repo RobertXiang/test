@@ -23,6 +23,21 @@ router.get('/all',(req,res,next)=>{
     })
 })
 
+/****通过商品id查询用户信息*****/
+// http://127.0.0.1:3000/shopping/1
+// get 接口  传递参数 sid
+router.get('/:sid',(req,res,next)=>{
+	let obj=req.params
+	let sql='select * from shopping where sid=?'
+	pool.query(sql,[obj.sid],(err,result)=>{
+		if(err){
+			next(err)
+			return
+		}
+		res.send({code:200,msg:"查询成功",data:result})
+	})
+})
+
 // 插入数据接口
 // 接口地址：http://127.0.0.1:3000/shop/set
 //  post 传递参数: sid title pic dpiric squan piric store
