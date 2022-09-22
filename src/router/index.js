@@ -29,10 +29,23 @@ const routes = [
     name: 'combomeal',
     component: () => import('../views/ComboMeal.vue'),
   },
+  // 首页
   {
     path: '/',
     name: 'index',
     component: Index
+  },
+  // 登录
+  {
+    path: '/login',
+    name: 'login',
+    // component: () => import('./pathToComponent'),
+  },
+  // 注册
+  {
+    path: 'pathName',
+    name: 'routeName',
+    // component: () => import('./pathToComponent'),
   },
   {
     path: '/about',

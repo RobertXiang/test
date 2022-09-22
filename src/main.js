@@ -3,21 +3,6 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-// socket.io
-import VueSocketIO from 'vue-socket.io'
-import SocketIO from 'socket.io-client'
-
-Vue.use(
-  new VueSocketIO({
-    debug: false,
-    connection: SocketIO('http://127.0.0.1:3030', {
-      autoConnect: false // 取消自动连接     
-    }),
-    extraHeaders: { 'Access-Control-Allow-Origin': '*' }
-  })
-)
-
-
 // 引入elementui组件库
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
