@@ -74,17 +74,33 @@
     </van-form>
     <!-- 底部栏 -->
     <div class="tabbar" style="display: flex; background-color: #aaa">
-      <van-row>
+      <van-row style="margin-top: 2%">
         <van-col style="display: flex; flex-direction: column" span="10">
-          <van-icon name="phone-o"></van-icon>
+          <van-icon
+            name="phone-o"
+            style="position: relative; left: 25%"
+          ></van-icon>
           <span>8888-8888888</span>
         </van-col>
-        <van-col style="display: flex; flex-direction: column" span="10">
-          <van-icon name="records"></van-icon>
+        <van-col
+          style="
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            left: 25%;
+          "
+          span="10"
+        >
+          <van-icon
+            style="position: relative; left: 25%"
+            name="records"
+          ></van-icon>
           <span>装修报价</span>
         </van-col>
       </van-row>
-      <van-button round color="orange">立即预约</van-button>
+      <van-button round color="orange" style="position: relative; left: 5%">
+        立即预约
+      </van-button>
     </div>
   </div>
 </template>
@@ -139,5 +155,10 @@ export default {
   opacity: 80%;
   text-align: center;
   line-height: 100%;
+}
+.tabbar span {
+  /* border: 1px solid red; */
+  display: block;
+  width: 150%;
 }
 </style>
