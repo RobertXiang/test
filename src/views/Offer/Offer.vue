@@ -2,12 +2,12 @@
   <div>
     <!-- 面包屑导航区域 -->
     <el-breadcrumb separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>商品管理</el-breadcrumb-item>
-      <el-breadcrumb-item>添加商品</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/home' }" style="font-size:20px;color:white">首页</el-breadcrumb-item>
+      <el-breadcrumb-item style="font-size:20px;color:white">报价管理</el-breadcrumb-item>
+     
     </el-breadcrumb>
     <!-- 卡片视图区域 -->
-    <el-card>
+    <el-card  style="background-color:#20283F;border: #20283F;">
       <el-row>
         <el-col :span="8">
           <el-input placeholder="请输入内容">
@@ -35,10 +35,10 @@
         <el-table-column prop="yhphone" label="手机号"> </el-table-column>
         <el-table-column fixed="right" label="操作" width="150">
           <template slot-scope="scope">
-            <el-button @click="handleClick(scope.row)" type="text" size="small"
+            <el-button @click="handleClick(scope.row)" type="text" size="big"
               >联系</el-button
             >
-            <el-button @click="delClick(scope.row)" type="text" size="small"
+            <el-button @click="delClick(scope.row)" type="text" size="big"
               >删除</el-button
             >
           </template>
@@ -103,4 +103,55 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+  <style>
+  /* *{
+    background-color: #20283F;
+    color: white;
+  } */
+  .el-table .warning-row {
+    background: rgb(190, 224, 247);
+  }
+
+  /* .el-table .success-row {
+    background: #c9cefd;
+  } */
+  .el-breadcrumb ::v-deep .el-breadcrumb__inner {
+  color: #f7ede1 !important;
+}
+</style>
+
+<style lang="less" scoped>
+  .el-breadcrumb  /deep/  .el-breadcrumb__inner 
+      {
+        color: #ccc !important;				//你想要设置的字体颜色
+    }
+ //   表格
+ 
+        .el-table {
+          border-top:none ;
+          border-left: none;
+          font-size: 20px !important;
+          color: #4e5561 !important;
+          background: #093e74 !important;
+          &::before {
+            height: 0 !important;
+          }
+          /deep/ td, /deep/ th.is-leaf {
+            border-width: 0 !important;
+          }
+          /deep/ thead tr th{
+            background: #021b34 !important;
+            color: #fdfcfc !important;
+          }
+          /deep/ tr:hover > td {
+            background: transparent !important;
+          }
+          ::-webkit-scrollbar-corner {
+            background: #021b34;
+          }
+        }
+        /deep/ .el-input__inner{
+          height: 40px;
+          font-size: 20px;
+        }
+</style>

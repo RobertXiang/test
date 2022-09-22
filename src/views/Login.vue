@@ -106,7 +106,7 @@ console.log(0)
     
     background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
 
-    animation: Gradient 15s ease infinite;
+    animation: Gradient 8s ease infinite;
     height: 100%;
   }
 
@@ -114,7 +114,7 @@ console.log(0)
     width: 800px;
     height: 600px;
    
-  background: linear-gradient(-90deg, #daf6fc 0%, #cee1fd 100%);
+  background: linear-gradient(-90deg, #daf6fc 0%, #fdced4 100%);
     border-radius: 10px;
     position: absolute;
     left: 50%;

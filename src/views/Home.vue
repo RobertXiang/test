@@ -72,9 +72,12 @@
         <i class="iconfont icon-danju"></i>
         <span slot="title">订单管理</span>
       </el-menu-item>
+      <el-menu-item index="5" @click="goOffer" style="font-size:22px;margin-top:10px;text-align: center;">
+        <i class="iconfont icon-danju"></i>
+        <span slot="title">报价管理</span>
+      </el-menu-item>
     </el-menu>
 
-<<<<<<< HEAD
           <!-- <div @click="goHome" class="active">
             <i class="iconfont icon-baobiao"></i>
             <span>首页统计</span>
@@ -99,36 +102,6 @@
               <!-- 文本 -->
               <!-- <span>{{item.authName}}</span> -->
             <!-- </template> -->
-=======
-        <div @click="goHome">
-          <i class="iconfont icon-baobiao"></i>
-          <span>首页统计</span>
-        </div>
-        <div @click="goUser">
-          <i class="iconfont icon-user"></i>
-          <span>角色管理</span>
-        </div>
-        <div @click="goGood">
-          <i class="iconfont icon-tijikongjian"></i>
-          <span>商品管理</span>
-        </div>
-        <div @click="goOrder">
-          <i class="iconfont icon-danju"></i>
-          <span>订单管理</span>
-        </div>
-        <div @click="goOffer">
-          <i class="iconfont icon-offer"></i>
-          <span>报价处理</span>
-        </div>
-        <!-- <el-submenu :index="item.id + ''" v-for="item in menulist" :key="item.id" @click="saveNavState"> -->
-        <!-- 一级菜单的模板区域 -->
-        <!-- <template slot="title"> -->
-        <!-- 图标 -->
-        <!-- <i :class="iconsObj[item.id]"></i> -->
-        <!-- 文本 -->
-        <!-- <span>{{item.authName}}</span> -->
-        <!-- </template> -->
->>>>>>> 9b990f1ef03eb0646d35f52befde03647580f3d8
 
         <!-- 二级菜单 -->
         <!-- <div-item :index="'/' + subItem.path" v-for="subItem in item.children" :key="subItem.id" @click="saveNavState('/' + subItem.path)"> -->
@@ -246,11 +219,7 @@ export default {
   height: 100%;
 }
 .el-header {
-<<<<<<< HEAD
   background-color: #20283F;
-=======
-  background-image: linear-gradient(90deg, white, #35020b);
->>>>>>> 9b990f1ef03eb0646d35f52befde03647580f3d8
   display: flex;
   justify-content: space-between;
   padding-left: 0;
@@ -268,7 +237,6 @@ export default {
 }
 
 .el-aside {
-<<<<<<< HEAD
 background-color: #20283F;
   font-size: 18px;
   width: 200px;
@@ -277,19 +245,10 @@ background-color: #20283F;
  div{
   text-align: center;
   margin-top: 18px;
-=======
-  background-image: linear-gradient(rgba(255, 249, 249, 0.678), #85e5fd);
-  font-size: 18px;
-  width: 200px;
-
-  div {
-    margin-top: 18px;
->>>>>>> 9b990f1ef03eb0646d35f52befde03647580f3d8
     border-right: none;
     height: 50px;
     line-height: 50px;
     padding: 8px;
-<<<<<<< HEAD
     color: #eee;
     border-bottom: #000d4d;
 cursor: pointer;
@@ -302,11 +261,6 @@ cursor: pointer;
 //   color: orange;
   
 // }
-=======
-
-    border-bottom: #000d4d;
-    cursor: pointer;
->>>>>>> 9b990f1ef03eb0646d35f52befde03647580f3d8
 
     :hover {
       color: orangered;
@@ -315,7 +269,6 @@ cursor: pointer;
       color: orange;
     }
   }
-<<<<<<< HEAD
 //   :hover{
 //   color: rgb(71, 30, 148);
 //   background-color: rgb(169, 231, 228);
@@ -325,11 +278,6 @@ cursor: pointer;
 //   background-color: rgb(169, 231, 228);
 //   }
   
-=======
-  .class {
-    color: orange;
-  }
->>>>>>> 9b990f1ef03eb0646d35f52befde03647580f3d8
 }
 
 .el-main {

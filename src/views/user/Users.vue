@@ -1,4 +1,4 @@
-<template  style="background-color:#20283F">
+<template>
   <div>
     <!-- 面包屑导航区域 -->
     <el-breadcrumb separator-class="el-icon-arrow-right" style="color:white;font-size: 20px;">
