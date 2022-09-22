@@ -149,7 +149,7 @@ export default {
   methods: {
     onClickLeft() {
       // 跳转到首页
-      this.$router.push('/')
+      this.$router.push('login')
     },
     onSubmit() {
       //判断
@@ -206,9 +206,11 @@ export default {
   border-radius: 5px;
 }
 .reg .van-nav-bar {
+  color: black !important;
   background-color: rgb(61, 68, 103);
   height: 50px;
   border-radius: 5px;
+  color: black;
 }
 .reg .van-nav-bar .van-icon {
   color: white;

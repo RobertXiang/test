@@ -1,21 +1,37 @@
 <template>
   <div class="log">
     <!-- 头部导航栏 -->
-    <mt-header title="美墅装修">
+    <mt-header title="">
       <mt-button
         icon="back"
         slot="left"
         @click.native.capture="goindex"
       ></mt-button>
-      <router-link to="/register" slot="right">注册</router-link>
+      <mt-button slot="right">
+        <van-cell @click="showPopup">帮助</van-cell>
+        <van-popup
+          v-model="show"
+          round
+          style="height: 15%; text-align: center; width: 60%"
+        >
+          <p style="margin-top: 12%">客服热线：</p>
+          <p>0428-88888-6666</p>
+        </van-popup>
+      </mt-button>
     </mt-header>
-    <!-- 背景图样式设置 -->
-    <van-image
-      width="100vw"
-      src="https://ikj-storage-front-prod.oss-cn-beijing.aliyuncs.com/app/html-pc/xsybj/xsybjhead.png"
-    />
+    <!-- 提示 -->
+    <h2 style="width: 100%; text-align: center">美墅装修账号登录</h2>
+    <div style="text-align: center; margin-top: 15%">
+      <img
+        src="../../public/logo.jpg"
+        width="35%"
+        style="border-radius: 10%"
+        alt=""
+      />
+      <p style="font-size: 16px">让每个人都享受装修的乐趣</p>
+    </div>
     <!-- 表单验证单 -->
-    <van-tabs v-model="active">
+    <van-tabs v-model="active" style="margin-top: 15%">
       <van-tab title="账号密码登录" class="box">
         <!-- 表单登录 -->
         <van-form>
@@ -25,14 +41,26 @@
             placeholder="请输入用户名"
             left-icon="friends"
             :rules="[{ pattern: /^.{3,20}$/, message: '请输入正确用户名' }]"
+            style="
+              border: 1px solid #ddd;
+              border-radius: 5%;
+              background-color: rgb(240 240 240);
+              display: inner-block;
+            "
           />
           <van-field
             v-model="pwd"
             name="密码"
             type="password"
-            placeholder="请设置登录密码"
+            placeholder="请输入登录密码"
             left-icon="todo-list"
             :rules="[{ validator, message: '请输入正确密码' }]"
+            style="
+              border: 1px solid #ddd;
+              border-radius: 5%;
+              background-color: rgb(240 240 240);
+              display: inner-block;
+            "
           />
           <div style="margin: 16px">
             <van-button
@@ -41,9 +69,12 @@
               type="info"
               native-type="submit"
               @click="onBlur"
-            >
-              立即登录
-            </van-button>
+              size:large
+              round:true
+              text="登录"
+              color="rgba(11, 132, 255, 0.3)"
+              style="font-size: 20px"
+            ></van-button>
           </div>
           <div style="margin: 16px">
             <van-button
@@ -51,9 +82,10 @@
               block
               type="info"
               native-type="submit"
+              color="rgba(255,255,255,0)"
               @click="onChange"
             >
-              没有账号，立即注册
+              <p style="color: black; font-size: 18px">没有账号?立即注册</p>
             </van-button>
           </div>
         </van-form>
@@ -67,6 +99,12 @@
             placeholder="请填写手机号"
             left-icon="phone"
             :rules="[{ pattern: /^1[3-9]\d{9}$/, message: '请输入正确手机号' }]"
+            style="
+              border: 1px solid #ddd;
+              border-radius: 5%;
+              background-color: rgb(240 240 240);
+              display: inner-block;
+            "
           />
           <van-field
             v-model="pwd"
@@ -75,6 +113,12 @@
             placeholder="请设置登录密码"
             left-icon="todo-list"
             :rules="[{ validator, message: '请输入正确密码' }]"
+            style="
+              border: 1px solid #ddd;
+              border-radius: 5%;
+              background-color: rgb(240 240 240);
+              display: inner-block;
+            "
           />
           <div style="margin: 16px">
             <van-button
@@ -83,9 +127,12 @@
               type="info"
               native-type="submit"
               @click="onSubmit"
-            >
-              立即登录
-            </van-button>
+              size:large
+              round:true
+              text="登录"
+              color="rgba(11, 132, 255, 0.3)"
+              style="font-size: 20px"
+            ></van-button>
           </div>
           <div style="margin: 16px">
             <van-button
@@ -94,8 +141,11 @@
               type="info"
               native-type="submit"
               @click="onChange"
+              hairline
+              color="rgba(255,255,255,0)"
+              style="font-size:18px,color:black;"
             >
-              没有账号，立即注册
+              <p style="color: black; font-size: 18px">没有账号?立即注册</p>
             </van-button>
           </div>
         </van-form>
@@ -108,6 +158,7 @@ import { Toast } from 'vant'
 export default {
   data() {
     return {
+      show: false, //弹出提示
       active: 0,
       name: '',
       phone: '',
@@ -116,6 +167,10 @@ export default {
     }
   },
   methods: {
+    //弹出提示
+    showPopup() {
+      this.show = true
+    },
     onClickLeft() {
       // 跳转到首页
       this.$router.push('/')
@@ -205,16 +260,17 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .log {
-  background-image: url('/public/loginbanner.jpeg');
+  background-color: white;
   background-size: cover;
   height: 100vh;
 }
 .log .mint-header {
   height: 50px;
   font-size: 18px;
-  background-color: rgb(61, 68, 103);
+  background-color: rgb(255, 255, 255);
+  color: black;
 }
 .log .van-tabs__wrap {
   margin: 10px;
@@ -222,7 +278,7 @@ export default {
 .log .van-tabs__wrap .van-tab {
   font-size: 18px;
   border: 1px solid #ccc;
-  /* border-radius: 8px; */
+  border-radius: 8px;
   box-sizing: border-box;
 }
 .log .van-form .van-cell {
