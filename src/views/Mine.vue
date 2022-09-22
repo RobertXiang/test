@@ -20,14 +20,15 @@
       </p> -->
       <!-- 头像 -->
       <div class="tx">
-        <div class="text" v-if="$store.state.islogin" >
-          <img  src="https://img01.yzcdn.cn/vant/cat.jpeg" alt=""/>
-          <span>{{ this.user[0].uname}}</span>
+        <div class="text" v-if="$store.state.islogin">
+          <img :src="`/avatar/${this.avater}`" alt="" />
+          <span>{{ this.user[0].uname }}</span>
           <button @click="out">退出登录</button>
+          <button @click="$router.push('/newPwd')">修改密码</button>
         </div>
         <div class="text" v-else @click="login">
-            <img src="@/assets/icon/tx.png" alt="" />
-            <span>未登录，点击登录</span>
+          <img src="@/assets/icon/tx.png" alt="" />
+          <span>未登录，点击登录</span>
         </div>
       </div>
 
@@ -184,50 +185,52 @@
 </template>
 
 <script>
-import LoginHeader from "@/components/LoginHeader.vue";
+import LoginHeader from '@/components/LoginHeader.vue'
 export default {
   components: { LoginHeader },
   data() {
     return {
       active: 3,
-      uid: sessionStorage.getItem("uid"),
-      user: [{ phone: "", uname: "" }],
-    };
+      uid: sessionStorage.getItem('uid'),
+      avater: sessionStorage.getItem('avater'),
+      user: [{ phone: '', uname: '' }],
+    }
   },
   mounted() {
-    this.axios.get(`/user/${this.uid}`).then((res) => {
-      console.log(res.data);
-      this.user = res.data.data;
-    });
+    this.axios.get(`/user/${this.uid}`).then(res => {
+      console.log(res.data)
+      this.user = res.data.data
+    })
   },
   methods: {
     //跳转首页自动刷新
     goIndex() {
-      this.$router.push("/");
-      this.$router.go(0);
+      this.$router.push('/')
+      this.$router.go(0)
     },
     // 跳转设计师时自动刷新
     goDesigner() {
-      this.$router.push("designer");
+      this.$router.push('designer')
       // this.$router.go(0)
     },
     goAnli() {
-      this.$router.push("anli");
+      this.$router.push('anli')
     },
     out() {
-      this.$router.push("/");
+      this.$router.push('/')
       // 修改vuex中的登录状态
-      this.$store.commit("logout");
-      sessionStorage.removeItem("islogin");
-      sessionStorage.removeItem("uname");
-      sessionStorage.removeItem("phone");
-      sessionStorage.removeItem("uid");
+      this.$store.commit('logout')
+      sessionStorage.removeItem('islogin')
+      sessionStorage.removeItem('uname')
+      sessionStorage.removeItem('phone')
+      sessionStorage.removeItem('uid')
+      sessionStorage.removeItem('avater')
     },
     login() {
-      this.$router.push("/login");
+      this.$router.push('/login')
     },
   },
-};
+}
 </script>
 
 <style scoped>
@@ -266,34 +269,32 @@ export default {
   position: relative;
   padding-top: 1.5rem;
 }
-.tx .text{
+.tx .text {
   /* height: 2rem; */
   /* margin-left: 2rem; */
   display: flex;
   justify-content: center;
   text-align: center;
-  
 }
-.tx .text img{
-  width: 3rem;
-  height: 3rem;
+.tx .text img {
+  width: 4rem;
+  height: 4rem;
   display: block;
-  border-radius:1.5rem ;
+  border-radius: 2rem;
   margin-left: 1.5rem;
 }
-.tx .text span{
+.tx .text span {
   margin: 1rem;
 }
-.tx .text button{
-width: 5rem;
-height: 2rem;
-padding: 0px;
-margin-top: 1rem;
-background-color:rgba(255,255,255,0.1);
-/* border: none; */
-border:1px solid #ccc;
-border-radius: 1rem;
-
+.tx .text button {
+  width: 5rem;
+  height: 2rem;
+  padding: 0px;
+  margin-top: 1rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  /* border: none; */
+  border: 1px solid #ccc;
+  border-radius: 1rem;
 }
 
 /* .tx a img:first-child {
@@ -307,11 +308,7 @@ border-radius: 1rem;
   top: 6rem;
   left: 8rem;
   color: black;
-} */ 
-
-
-
-
+} */
 
 /* 会员按钮样式 */
 .hy {

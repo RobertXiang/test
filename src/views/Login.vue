@@ -131,6 +131,7 @@ export default {
                         sessionStorage.setItem('islogin',true)
                         sessionStorage.setItem('uname',this.name)
                         sessionStorage.setItem('uid',result.data.data.uid)
+                        sessionStorage.setItem('avater',result.data.data.avater)
                 }else{
                     Toast({
                         message: '登录失败',
@@ -161,6 +162,7 @@ export default {
                         sessionStorage.setItem('islogin',true)
                         sessionStorage.setItem('phone',this.phone)
                         sessionStorage.setItem('uid',result.data.data.uid)
+                        sessionStorage.setItem('avater',result.data.data.avater)
                 }else{
                     Toast({
                         message: '登录失败',

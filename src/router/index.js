@@ -5,6 +5,12 @@ import Index from '../views/Index.vue'
 Vue.use(VueRouter)
 
 const routes = [
+  // 修改密码页面
+  {
+    path: '/newPwd',
+    name: 'NewPwd',
+    component: () => import('../views/NewPwd.vue'),
+  },
   // 注册页面
   {
     path: '/register',
