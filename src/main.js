@@ -15,9 +15,15 @@ import 'vue-beauty/package/style/vue-beauty.min.css'
 import vueBeauty from 'vue-beauty'
 Vue.use(vueBeauty)
 
+//全局注入swiper模块
+import VAS from 'vue-awesome-swiper'
+Vue.use(VAS)
+import 'swiper/css/swiper.css'
+
 //引入axios
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+axios.defaults.baseURL='http://127.0.0.1:3000'
 Vue.use(VueAxios, axios)
 
 Vue.config.productionTip = false

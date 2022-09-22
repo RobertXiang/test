@@ -6,11 +6,15 @@
         <div class="city">
           <i style="font-size:20px" class="el-icon-location-outline"></i>
           <span id="dw" style="margin-left:5px">正在定位中...</span>
-          <!-- <span v-for="dws in result" :key="dws" id="dw" style="margin-left:5px">{{dws.city}}</span> -->
         </div>
-        <div class="txt">
-          <a style="border: none" href="#">注册</a>
+        <div class="txt" v-if="!phone">
+          <a style="border: none" href="/register">注册</a>
           <a href="/login">登录</a>
+        </div>
+        <!-- 成功 -->
+        <div class="txt" v-if="phone">
+          <span>欢迎 {{ phone }}</span>
+          <span class="out" @click="out">退出登录</span>
         </div>
       </div>
     </div>
@@ -64,6 +68,7 @@
 <script>
 // 引入amap加载器
 import AMapLoader from "@amap/amap-jsapi-loader";
+import { mapMutations, mapState } from "vuex";
 
 export default {
   data() {
@@ -93,10 +98,27 @@ export default {
     });
   },
 
+  computed: {
+    ...mapState(["phone"])
+  },
+
   watch: {
     $route() {
       console.log(this.$route.path);
       this.activeIndex = this.$route.path;
+    }
+  },
+
+  methods: {
+    ...mapMutations(["logout"]),
+    out() {
+      this.$store.commit("logout");
+      sessionStorage.removeItem("islogin");
+      sessionStorage.removeItem("uname");
+      sessionStorage.removeItem("phone");
+      sessionStorage.removeItem("uid");
+      sessionStorage.removeItem("avater");
+      this.$router.push("/");
     }
   }
 };
@@ -105,5 +127,12 @@ export default {
 <style lang="scss" scoped>
 a {
   text-decoration: none !important;
+}
+
+.out {
+  border: none;
+  font-size: 14px;
+  color: #aaa;
+  margin-left: 10px;
 }
 </style>

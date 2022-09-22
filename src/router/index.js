@@ -39,13 +39,13 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    // component: () => import('./pathToComponent'),
+    component: () => import('../views/Login.vue'),
   },
   // 注册
   {
-    path: 'pathName',
-    name: 'routeName',
-    // component: () => import('./pathToComponent'),
+    path: '/register',
+    name: 'register',
+    component: () => import('../views/Register.vue'),
   },
   {
     path: '/about',
