@@ -378,10 +378,10 @@
     <v-back-top style="bottom: 150px"></v-back-top>
 
     <!-- 人工客服 -->
-    <!-- <div class="rgfw">
+    <div class="rgfw">
       <v-icon @click.native="click" id="xx" type="message"></v-icon>
-      <ke-fu v-show="show"></ke-fu>
-    </div>-->
+      <ke-fu v-if="show" :show="show"></ke-fu>
+    </div>
   </div>
 </template>
 
@@ -432,11 +432,6 @@ export default {
     // 客服显示与隐藏
     click() {
       this.show = !this.show;
-      if (this.show) {
-        this.show = true;
-      } else {
-        this.show = false;
-      }
     },
     // 关闭吸底组件
     clickGb() {
@@ -489,6 +484,5 @@ export default {
   }
 };
 </script>
-
-<style src="@/assets/Index.css"></style>
+<style src="@/assets/css/index.css"></style>
 <style scoped></style>

@@ -1,42 +1,43 @@
 <template>
-  <div class="ke-fu kf">
+  <div class="ke-fu kf" id="chart-container" v-if="close">
     <!-- 客服 -->
     <div class="header">
-      <img src="../assets/icon/tx.jpg" alt="" />
+      <img src="/logo.ico" alt />
       <div>
-        <h5 style="color: white">小刘</h5>
+        <h5 style="color: white">美墅装修</h5>
         <span>装修怕麻烦，就选爱空间整装，超省心！</span>
       </div>
       <i id="i1" class="el-icon-minus"></i>
-      <i class="el-icon-close"></i>
+      <i class="el-icon-close" @click="talk"></i>
     </div>
     <div class="chart-main-area">
       <!-- 聊天区域 -->
       <div class="chart-list" id="chart-list">
-        <div class="user-logined" id="user-logined">
-          <!-- <span id="logined-user"></span>上线了 -->
-        </div>
+        <div class="user-logined" id="user-logined"></div>
         <!-- 气泡 -->
         <div class="chart-item">
           <div class="user-face">
-            <img src="../assets/icon/tx.jpg" alt="" />
+            <img src="/logo.ico" alt />
           </div>
-          <div class="user-message">111</div>
+          <div class="user-xinxi">
+            <div style="font-size: 12px; color: #333">客服</div>
+            <div class="user-message">这里是美墅装修客服,请问有什么可以为您服务?</div>
+          </div>
         </div>
       </div>
       <!-- 发表区域 -->
       <div class="chart-form">
         <div>
-          <textarea class="chart-form-message" id="message"></textarea>
+          <textarea
+            class="chart-form-message"
+            id="message"
+            v-model="val"
+            placeholder="请您输入...一次最多35字"
+            maxlength="35"
+          ></textarea>
         </div>
         <div>
-          <input
-            @click="click"
-            type="button"
-            id="send"
-            class="chart-form-send"
-            value="发送"
-          />
+          <input @click="send" type="button" id="send" class="chart-form-send" value="发送" />
         </div>
       </div>
     </div>
@@ -45,72 +46,104 @@
 
 <script>
 export default {
+  props: ["show"],
   data() {
-    let socket = io("http://localhost:3000/");
-    console.log(socket);
-    return {};
+    return {
+      socket: io("http://localhost:3030/"),
+      val: "",
+      close: this.show
+    };
   },
   methods: {
-    click() {
-      let socket = io("http://localhost:3000/");
-
-      // 2.获取文本框中得值
-      let val = message.value;
-      // trim() 去除字符串连段的空格
-      if (val.trim().length > 0 && val.trim().length < 50) {
-        // 发消息给服务端
-        socket.emit("textmsg", {
-          val: val,
-        });
-        // 清空文本框
-        message.value = "";
-
-        // 3.监听服务端发回来的消息
-        socket.on("textmsg", function (data) {
-          console.log(data.val);
-          // 把消息显示在消息列表中
-          let chatlist = document.getElementById("chart-list");
-          chatlist.innerHTML += `
-              <div style="margin-top: 10px;" class="chart-item">
-                  <div style="float: left;margin: 0 15px;" class="user-face">
-                    <img style="width: 40px;height: 40px;border-radius: 5px;" src="/designer/tx.jpg" alt="">
-                  </div>
-                  <div style="float: left;position: relative;padding: 10px;min-width: 100px;max-width: 520px;background: #fff;font-size: 12px;border-radius: 3px;" class="user-message">${data.val}</div>
-              </div>`;
-          // 让chatlist的滚动条持续在底部
-          chatlist.scrollTop = chatlist.scrollHeight;
-        });
+    send() {
+      let inp = document.querySelector("#message");
+      let val = this.val.trim();
+      if (val == "") {
+        inp.focus();
+        return;
       }
+      this.socket.emit("textmsg", {
+        name: window.sessionStorage.phone,
+        val,
+        avatar: "/default.jpeg"
+      });
+      this.val = "";
+      inp.focus();
     },
+    talk() {
+      this.socket.close();
+      this.close = !close;
+    }
   },
+  mounted() {
+    // this.close=this.show
+    console.log(this.socket);
+    this.socket.on("textmsg", function(data) {
+      console.log(data);
+      let chatlist = document.querySelector("#chart-list");
+      if (data.name == window.sessionStorage.phone) {
+        chatlist.innerHTML += `
+            <div class="chart-item-me">
+            <div class="me-body">
+              <div style="font-size: 12px; color: #333;text-align: end;">用户${data.name}</div>
+              <div class="user-message-me">${data.val}</div>
+            </div>
+            <div class="user-face-me">
+               <img style="width:40px;height:40px;border-radius: 5px;" src="${data.avatar}" alt="" />
+            </div>
+          </div>
+            `;
+      } else {
+        chatlist.innerHTML += `
+            <div class="chart-item">
+          <div class="user-face">
+            <img src="${data.avatar}" alt="" />
+          </div>
+          <div class="user-xinxi">
+            <div  style="font-size: 12px; color: #333;">${data.name}</div>
+            <div class="user-message">${data.val}</div>
+          </div>
+        </div>
+       `;
+      }
+      chatlist.scrollTop = chatlist.scrollHeight;
+    });
+  }
 };
 </script>
-
+<style src="@/assets/css/chart.css"></style>
 <style scoped>
 .kf {
   position: fixed;
   bottom: 80px;
   margin-left: 74%;
-  width: 350px;
+  width: 450px;
   border-radius: 10px;
 }
 .kf .header {
+  width: 100%;
   background-color: orange;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   padding: 10px;
+  box-sizing: border-box;
   padding-right: 0;
   color: white;
   display: flex;
 }
+.kf .header > div {
+  flex: 1;
+}
 .kf .header img {
   width: 40px;
+  height: 40px;
   margin-right: 5px;
   border-radius: 50%;
 }
 .kf [class*=" el-icon-"],
 [class^="el-icon-"] {
   margin: 0 2px;
+  margin-right: 10px;
 }
 .kf .header div span {
   font-size: 14px;
@@ -147,40 +180,6 @@ export default {
   height: 0;
   visibility: hidden;
   clear: both;
-}
-
-.kf .chart-main-area .chart-list .chart-item {
-  margin-top: 10px;
-}
-.kf .chart-main-area .chart-list .chart-item .user-face {
-  float: left;
-  margin: 0 15px;
-}
-.kf .chart-main-area .chart-list .chart-item .user-face img {
-  width: 40px;
-  height: 40px;
-  border-radius: 5px;
-}
-.kf .chart-main-area .chart-list .chart-item .user-message {
-  position: relative;
-  float: left;
-  padding: 10px;
-  min-width: 100px;
-  max-width: 520px;
-  background: #fff;
-  font-size: 12px;
-  border-radius: 3px;
-}
-.chart-list .chart-item .user-message::before {
-  content: " ";
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  background: #fff;
-  top: 10px;
-  left: -5px;
-  z-index: 222;
-  transform: rotate(45deg);
 }
 .chart-form {
   height: 100px;

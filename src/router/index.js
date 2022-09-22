@@ -5,6 +5,12 @@ import Index from '../views/Index.vue'
 Vue.use(VueRouter)
 
 const routes = [
+  //案例详情
+  {
+    path: "/hcd",
+    name: "Hcd",
+    component: () => import("../views/houseCasedetail.vue"),
+  },
   // 整屋案例
   {
     path: '/houseCase',
