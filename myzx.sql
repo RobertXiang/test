@@ -14,7 +14,7 @@ CREATE TABLE user(
   upwd varchar(32),        #密码
   email varchar(64),         #邮箱
   phone varchar(16),         #手机号
-  avater varchar(128) DEFAULT NULL,   # 头像图片路径
+  avater varchar(128) DEFAULT '20.jpg',   # 头像图片路径
   genter char(1) NULL DEFAULT '1',   #性别  女 -0  男 --1
   birthday date         #出生年月
 ) ;
