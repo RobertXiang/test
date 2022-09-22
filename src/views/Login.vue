@@ -129,7 +129,7 @@ export default {
         .post('/user/login/uname', `uname=${this.name}&upwd=${this.pwd}`)
         .then(result => {
           console.log(result.data)
-          console.log(result.data.data.uid)
+          // console.log(result.data.data.uid)
           if (result.data.code == 200) {
             Toast({
               message: '登录成功',
