@@ -9,37 +9,46 @@
 
     <!-- 卡片视图区域 -->
     <el-card style="background-color:#20283F;border: #20283F;">
-      <el-row>
+      <el-row :gutter="20">
         <el-col :span="8">
           <el-input placeholder="请输入内容">
             <el-button slot="append" icon="el-icon-search"></el-button>
           </el-input>
         </el-col>
+        <el-col :span="4">
+          <el-button type="primary" @click="addDialogVisible = true" style="font-size:20px">添加订单</el-button>
+        </el-col>
       </el-row>
 
       <!-- 订单列表数据 -->
       <el-table :data="orderlist" stripe >
-        <el-table-column type="index"></el-table-column>
-        <el-table-column label="订单编号" prop="order_number"></el-table-column>
-        <el-table-column label="订单价格" prop="order_price"></el-table-column>
-        <el-table-column label="是否付款" prop="pay_status">
+      
+        <el-table-column label="订单编号" prop="oid"></el-table-column>
+        <el-table-column label="订单状态" prop="status">
           <template slot-scope="scope">
-            <el-tag type="success" v-if="scope.row.pay_status === '1'">已付款</el-tag>
-            <el-tag type="danger" v-else>未付款</el-tag>
+          
+            <el-tag type="warning" v-if="scope.row.status==1">等待付款</el-tag>
+            <el-tag type="primary" v-if="scope.row.status==2">等待发货</el-tag>
+            <el-tag type="primary" v-if="scope.row.status==3">运输中</el-tag>
+            <el-tag type="success" v-if="scope.row.status==4">已签收</el-tag>
+            <el-tag type="info" v-if="scope.row.status==5">已取消</el-tag>
           </template>
+
         </el-table-column>
-        <el-table-column label="是否发货" prop="is_send">
+        <el-table-column label="付款时间" prop="pay_time">
+         
+        </el-table-column>
+        <el-table-column label="发货时间" prop="deliver_time">
+
+        </el-table-column>
+        <el-table-column label="签收时间" prop="received_time">
+         
+        </el-table-column>
+        <!-- <el-table-column label="下单时间" prop="create_time">
           <template slot-scope="scope">
-            <template>
-              {{scope.row.is_send}}
-            </template>
-          </template>
-        </el-table-column>
-        <el-table-column label="下单时间" prop="create_time">
-          <!-- <template slot-scope="scope">
             {{scope.row.create_time | dateFormat}}
-          </template> -->
-        </el-table-column>
+          </template>
+        </el-table-column> -->
         <el-table-column label="操作">
           <template>
             <el-button size="mini" type="primary" icon="el-icon-edit" @click="showBox"></el-button>
@@ -93,7 +102,8 @@ export default {
         pagesize: 10
       },
       total: 5,
-      orderlist: [{order_number:'120432',order_price:'130000',pay_status:1,is_send:'待发货',create_time:'2022-09-12-10-35'},{order_number:'130445',order_price:'80000',pay_status:1,is_send:'待发货',create_time:'2022-09-12-10-35'},{order_number:'122234',order_price:'150000',pay_status:1,is_send:'待发货',create_time:'2022-09-13-8-35'},{order_number:'1204453',order_price:'60000',pay_status:1,is_send:'待发货',create_time:'2022-09-12-10-35'},{order_number:'7544564',order_price:'100000',pay_status:1,is_send:'待发货',create_time:'2022-09-16-10-00'},],
+      orderlist:[],
+      fakelist: [{oid:'120432',status:'4',pay_status:1,deliver_time:'2022-09-13-10-10',received_time:'2022-09-15-10-10',pay_time:'2022-09-12-10-35'},{oid:'120432',status:'3',pay_status:1,deliver_time:'2022-09-13-10-10',received_time:'',pay_time:'2022-09-12-10-35'},{oid:'120432',status:'5',pay_status:1,deliver_time:'',received_time:'',pay_time:''},],
       addressVisible: false,
       addressForm: {
         address1: [],
@@ -119,7 +129,13 @@ export default {
      getOrderList() {
 this.$http.get(`order/${this.$store.state.uid}`).then(res=>{
   console.log('订单数据',res);
-  this.orderlist=res.data.data
+  if(!res.data.data){
+    this.orderlist=this.fakelist
+  }else if(res.data.code==200){this.orderlist=res.data.data}else{
+    console.log('获取失败');
+  }
+  
+  // this.total=res.data.data.length
 })
 
       // const { data: res } = await this.$http.get('orders', {
@@ -180,7 +196,7 @@ this.$http.get(`order/${this.$store.state.uid}`).then(res=>{
      //   表格
  
      .el-table {
-      border: 1px solid black !important;
+      border: none !important;
           border-top:none ;
           border-left: none;
           font-size: 20px !important;
@@ -203,10 +219,10 @@ this.$http.get(`order/${this.$store.state.uid}`).then(res=>{
             background: #021b34;
           }
         }
-        /deep/ .el-input__inner{
-          height: 40px;
-          font-size: 20px;
-        }
+        // /deep/ .el-input__inner{
+        //   height: 30px;
+        //   font-size: 2px;
+        // }
 // 或者
 // ::v-deep .el-input__inner{
 //           height: 40px;

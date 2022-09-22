@@ -16,7 +16,7 @@
         </el-col>
       </el-row>
       <el-table border :data="data" style="width: 100%">
-        <el-table-column prop="mid" width="50">
+        <el-table-column prop="mid" width="50" label="ID">
         </el-table-column>
         <el-table-column prop="HouseStatu" label="房屋状态" width="120">
         </el-table-column>
@@ -82,6 +82,7 @@ export default {
     // 点击获取电话
     handleClick(r) {
       console.log(r.yhphone);
+      this.$message.success('正在向客户致电，请稍后...')
     },
     // 报价完成 点击删除用户信息
     delClick(r) {
@@ -150,8 +151,8 @@ export default {
             background: #021b34;
           }
         }
-        /deep/ .el-input__inner{
-          height: 40px;
-          font-size: 20px;
-        }
+        // /deep/ .el-input__inner：nth-child(1){
+        //   height: 30px;
+        //   font-size: 20px;
+        // }
 </style>

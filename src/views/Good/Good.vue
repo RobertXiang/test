@@ -51,7 +51,7 @@
       </el-table>
 
       <!-- 分页区域 -->
-      <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="queryInfo.pagenum" :page-sizes="[5, 10, 15, 20]" :page-size="queryInfo.pagesize" layout="total, sizes, prev, pager, next, jumper" :total="total" background>
+      <el-pagination @current-change="handleCurrentChange"   :page-size="queryInfo.pagesize" layout="total,  prev, pager, next" :total="total" background>
       </el-pagination>
     </el-card>
 
@@ -82,7 +82,7 @@
     <el-form-item label="商品成本" prop="dpiric">
         <el-input v-model="addForm.dpiric" ></el-input>
     </el-form-item>
-    <el-form-item label="squan" prop="squan">
+    <el-form-item label="其他" prop="squan">
         <el-input v-model="addForm.squan" ></el-input>
     </el-form-item>
     <el-form-item label="图片地址" prop="pic">
@@ -182,9 +182,11 @@ export default {
       queryInfo: {
         query: '',
         pagenum: 1,
-        pagesize: 10,
-        tableList:[]
+        pagesize: 20,
+       
       },
+      //表格内数据
+      tableList:[],
       // 商品列表
       goodslist: [{goods_name:'欧式精装',goods_price:'130000',add_time:'2022-09-09'},
       {goods_name:'中式精装',goods_price:'150000',add_time:'2022-09-09'},
@@ -206,10 +208,20 @@ export default {
     // 根据分页获取对应的商品列表
     getGoodsList() {
       this.$http.get('shop/all').then(res=>{
-        console.log('商品情况',res);
+        // console.log('商品情况',res);
+        // let data=res.data.data
+        // let arr=[{}]
+        // for(var i in data){
+        //   arr.push(data[i])
+        // }
+        // this.goodslist=arr
+        // console.log('arr',arr,typeof arr);
         this.goodslist=res.data.data
         this.total=res.data.data.length
-       this.queryInfo.tableList=this.goodslist.slice(this.queryInfo.pagenum-1,this.queryInfo.pagesize)//表单数据列第一次加载进来，默认第一页数据
+        console.log('类型',typeof this.goodslist);
+        // this.tableList=res.data.data
+        //  console.log('表格数据',this.tableList);
+      //  this.tableList=this.goodslist.slice(this.queryInfo.pagenum-1,this.queryInfo.pagesize)//表单数据列第一次加载进来，默认第一页数据
       })
       
       
@@ -218,6 +230,7 @@ export default {
     searchGood(){
     if(!this.sid){
       this.getGoodsList()
+      console.log(1);
     }else{
     
     this.$http.get(`shop/${this.sid}`).then(res=>{
@@ -226,33 +239,34 @@ export default {
           
              this.goodslist=res.data.data
          console.log('查询结果',this.goodlist);
+         
            }
     })
   }
          
        },
 
-    handleSizeChange(newSize) {
-      this.queryInfo.pagesize = newSize
+    // handleSizeChange(newSize) {
+    //   this.queryInfo.pagesize = newSize
      
-      this.getGoodsList()
-    },
+    //   this.getGoodsList()
+    // },
     handleCurrentChange(newPage) {
       this.queryInfo.pagenum = newPage
-      let first=this.queryInfo.pagesize-20
-      let last=this.queryInfo.pagesize*newPage
-      if(this.goodslist.length<=this.queryInfo.pagesize){
-        //20条数据以下情况
-        this.tableList=this.goodslist
-      }else{
-        if(this.queryInfo.pagesize*newPage>=this.goodslist.length){
-          //最后一页的数据
-          this.tableList=this.goodslist.slice(first)
-        }else{
-          //点击不是最后一页
-          this.tableList=this.goodslist.slice(first,last)
-        }
-      }
+      // let first=this.queryInfo.pagesize-20
+      // let last=this.queryInfo.pagesize*newPage
+      // if(this.goodslist.length<=this.queryInfo.pagesize){
+      //   //20条数据以下情况
+      //   this.tableList=this.goodslist
+      // }else{
+      //   if(this.queryInfo.pagesize*newPage>=this.goodslist.length){
+      //     //最后一页的数据
+      //     this.tableList=this.goodslist.slice(first)
+      //   }else{
+      //     //点击不是最后一页
+      //     this.tableList=this.goodslist.slice(first,last)
+      //   }
+      // }
       this.getGoodsList()
     },
     async removeById(id) {
@@ -291,9 +305,10 @@ export default {
           if(!valid)return
           const params=`sid=${this.addForm.sid}&title=${this.addForm.title}&pic=${this.addForm.pic}&dpiric=${this.addForm.dpiric}&squan=${this.addForm.squan}&piric=${this.addForm.piric}&store=${this.addForm.store}`
           this.$http.post('shop/set',params).then(res=>{
-           
-            if(res.data.data.code==200){  
-              console.log('插入成功',res);
+          //  console.log('插');
+          //  console.log('插入成功',res);
+            if(res.data.code==200){  
+              // console.log('插入成功',res);
               this.$message.success('添加成功')
               this.dialogFormVisible=false
             }else{this.$message.error('添加失败，请检查数据')}
