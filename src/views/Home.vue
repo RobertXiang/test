@@ -3,13 +3,26 @@
     <!-- 头部区域 -->
     <el-header>
       <div>
-        <img src="../assets/logo.jpg" style="width:80px" alt="">
+        <img src="../assets/logo.jpg" style="width: 80px" alt="" />
         <span>美墅装修后台管理系统</span>
       </div>
-      <div style="margin-right:10px;">
-      <span style="margin-right:10px;font-size:20px;font-weight: 800;color:whitesmoke">欢迎：{{this.$store.state.uname}}</span>
-      <el-button type="info" @click="logout" style="font-size:18px;padding: 12px;">退出</el-button>
-    </div>
+      <div style="margin-right: 10px">
+        <span
+          style="
+            margin-right: 10px;
+            font-size: 20px;
+            font-weight: 800;
+            color: whitesmoke;
+          "
+          >欢迎：{{ this.$store.state.uname }}</span
+        >
+        <el-button
+          type="info"
+          @click="logout"
+          style="font-size: 18px; padding: 12px"
+          >退出</el-button
+        >
+      </div>
     </el-header>
     <!-- 页面主体区域 -->
     <el-container>
@@ -18,12 +31,12 @@
         <!-- <div class="toggle-button" @click="toggleCollapse">|||</div> -->
         <!-- 侧边栏菜单区域 -->
         <!-- <div background-color="#fff" text-color="black" active-text-color="orange" unique-opened :collapse="isCollapse" :collapse-transition="false" router :default-active="activePath"> -->
-          <!-- <el-submenu >
+        <!-- <el-submenu >
 
 
           </el-submenu> -->
-          <!-- 一级菜单 -->
-          <!-- <ul>
+        <!-- 一级菜单 -->
+        <!-- <ul>
   <li v-for="(item,index) of menulist" :key="index" 
   :class="{active: isActive === index}"
   @click="changeClass(index)"> 
@@ -61,6 +74,7 @@
       </el-menu-item>
     </el-menu>
 
+<<<<<<< HEAD
           <!-- <div @click="goHome" class="active">
             <i class="iconfont icon-baobiao"></i>
             <span>首页统计</span>
@@ -85,17 +99,47 @@
               <!-- 文本 -->
               <!-- <span>{{item.authName}}</span> -->
             <!-- </template> -->
+=======
+        <div @click="goHome">
+          <i class="iconfont icon-baobiao"></i>
+          <span>首页统计</span>
+        </div>
+        <div @click="goUser">
+          <i class="iconfont icon-user"></i>
+          <span>角色管理</span>
+        </div>
+        <div @click="goGood">
+          <i class="iconfont icon-tijikongjian"></i>
+          <span>商品管理</span>
+        </div>
+        <div @click="goOrder">
+          <i class="iconfont icon-danju"></i>
+          <span>订单管理</span>
+        </div>
+        <div @click="goOffer">
+          <i class="iconfont icon-offer"></i>
+          <span>报价处理</span>
+        </div>
+        <!-- <el-submenu :index="item.id + ''" v-for="item in menulist" :key="item.id" @click="saveNavState"> -->
+        <!-- 一级菜单的模板区域 -->
+        <!-- <template slot="title"> -->
+        <!-- 图标 -->
+        <!-- <i :class="iconsObj[item.id]"></i> -->
+        <!-- 文本 -->
+        <!-- <span>{{item.authName}}</span> -->
+        <!-- </template> -->
+>>>>>>> 9b990f1ef03eb0646d35f52befde03647580f3d8
 
-            <!-- 二级菜单 -->
-            <!-- <div-item :index="'/' + subItem.path" v-for="subItem in item.children" :key="subItem.id" @click="saveNavState('/' + subItem.path)"> -->
-              <!-- <template slot="title"> -->
-                <!-- 图标 -->
-                <!-- <i class="el-icon-menu"></i> -->
-                <!-- 文本 -->
-                <!-- <span>{{subItem.authName}}</span> -->
-              <!-- </template> -->
-            <!-- </div-item> -->
-          <!-- </el-submenu> -->
+        <!-- 二级菜单 -->
+        <!-- <div-item :index="'/' + subItem.path" v-for="subItem in item.children" :key="subItem.id" @click="saveNavState('/' + subItem.path)"> -->
+        <!-- <template slot="title"> -->
+        <!-- 图标 -->
+        <!-- <i class="el-icon-menu"></i> -->
+        <!-- 文本 -->
+        <!-- <span>{{subItem.authName}}</span> -->
+        <!-- </template> -->
+        <!-- </div-item> -->
+        <!-- </el-submenu> -->
         <!-- </div> -->
       </el-aside>
       <!-- 右侧内容主体 -->
@@ -108,35 +152,39 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex'
+import { mapState } from "vuex";
 export default {
   computed: {
-   ...mapState(['uname'])
+    ...mapState(["uname"]),
   },
   data() {
     return {
-   
       // 左侧菜单数据
-      menulist: [{authName:'首页',id:'145',path:'/home'},{authName:'角色管理',id:'125',path:'/user'},{authName:'商品管理',id:'101',path:'/good'},{authName:'订单管理',id:'102',path:'/order'},],
+      menulist: [
+        { authName: "首页", id: "145", path: "/home" },
+        { authName: "角色管理", id: "125", path: "/user" },
+        { authName: "商品管理", id: "101", path: "/good" },
+        { authName: "订单管理", id: "102", path: "/order" },
+        { authName: "报价处理", id: "108", path: "/offer" },
+      ],
       iconsObj: {
-        '125': 'iconfont icon-user',
-        '103': 'iconfont icon-tijikongjian',
-        '101': 'iconfont icon-shangpin',
-        '102': 'iconfont icon-danju',
-        '145': 'iconfont icon-baobiao'
+        125: "iconfont icon-user",
+        103: "iconfont icon-tijikongjian",
+        101: "iconfont icon-shangpin",
+        102: "iconfont icon-danju",
+        145: "iconfont icon-baobiao",
+        108: "iconfont icon-offer",
       },
       // 是否折叠
       isCollapse: false,
       // 被激活的链接地址
-      activePath: '',
+      activePath: "",
 
-      isActive:0,
-      
-    }
+      isActive: 0,
+    };
   },
-  mounted () {
-    window.addEventListener('unload', this.saveState)
-;
+  mounted() {
+    window.addEventListener("unload", this.saveState);
   },
   created() {
     console.log(this.$store.state.uname);
@@ -146,12 +194,12 @@ export default {
   methods: {
     //保持vuex数据
     saveState() {
-      sessionStorage.setItem('state', JSON.stringify(this.$store.state))
+      sessionStorage.setItem("state", JSON.stringify(this.$store.state));
     },
 
     logout() {
-      window.sessionStorage.clear()
-      this.$router.push('/login')
+      window.sessionStorage.clear();
+      this.$router.push("/login");
     },
     // 获取所有的菜单
     // async getMenuList() {
@@ -162,7 +210,7 @@ export default {
     // },
     // 点击按钮，切换菜单的折叠与展开
     toggleCollapse() {
-      this.isCollapse = !this.isCollapse
+      this.isCollapse = !this.isCollapse;
     },
     // // 保存链接的激活状态
     // saveNavState(activePath) {
@@ -170,25 +218,27 @@ export default {
     //   this.activePath = activePath
     //   this.$router.push('/activePath')
     // },
-go(index){
-  this.isActive=index
-  this.$router.push('/'+item[index].path)
-},
-    goHome(){
-      this.$router.push('/home')
+    go(index) {
+      this.isActive = index;
+      this.$router.push("/" + item[index].path);
     },
-       goUser(){
-      this.$router.push('/users')
+    goHome() {
+      this.$router.push("/home");
     },
-       goGood(){
-      this.$router.push('/good')
+    goUser() {
+      this.$router.push("/users");
     },
-       goOrder(){
-      this.$router.push('/order')
+    goGood() {
+      this.$router.push("/good");
     },
-
-  }
-}
+    goOrder() {
+      this.$router.push("/order");
+    },
+    goOffer() {
+      this.$router.push("/offer");
+    },
+  },
+};
 </script>
 
 <style lang="less" scoped>
@@ -196,7 +246,11 @@ go(index){
   height: 100%;
 }
 .el-header {
+<<<<<<< HEAD
   background-color: #20283F;
+=======
+  background-image: linear-gradient(90deg, white, #35020b);
+>>>>>>> 9b990f1ef03eb0646d35f52befde03647580f3d8
   display: flex;
   justify-content: space-between;
   padding-left: 0;
@@ -214,6 +268,7 @@ go(index){
 }
 
 .el-aside {
+<<<<<<< HEAD
 background-color: #20283F;
   font-size: 18px;
   width: 200px;
@@ -222,10 +277,19 @@ background-color: #20283F;
  div{
   text-align: center;
   margin-top: 18px;
+=======
+  background-image: linear-gradient(rgba(255, 249, 249, 0.678), #85e5fd);
+  font-size: 18px;
+  width: 200px;
+
+  div {
+    margin-top: 18px;
+>>>>>>> 9b990f1ef03eb0646d35f52befde03647580f3d8
     border-right: none;
     height: 50px;
     line-height: 50px;
     padding: 8px;
+<<<<<<< HEAD
     color: #eee;
     border-bottom: #000d4d;
 cursor: pointer;
@@ -238,8 +302,20 @@ cursor: pointer;
 //   color: orange;
   
 // }
+=======
 
+    border-bottom: #000d4d;
+    cursor: pointer;
+>>>>>>> 9b990f1ef03eb0646d35f52befde03647580f3d8
+
+    :hover {
+      color: orangered;
+    }
+    :active {
+      color: orange;
+    }
   }
+<<<<<<< HEAD
 //   :hover{
 //   color: rgb(71, 30, 148);
 //   background-color: rgb(169, 231, 228);
@@ -249,6 +325,11 @@ cursor: pointer;
 //   background-color: rgb(169, 231, 228);
 //   }
   
+=======
+  .class {
+    color: orange;
+  }
+>>>>>>> 9b990f1ef03eb0646d35f52befde03647580f3d8
 }
 
 .el-main {
