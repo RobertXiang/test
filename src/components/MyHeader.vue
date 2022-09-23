@@ -118,7 +118,11 @@ export default {
       sessionStorage.removeItem("phone");
       sessionStorage.removeItem("uid");
       sessionStorage.removeItem("avater");
-      this.$router.push("/");
+      if (this.$route.path == "/") {
+        return;
+      } else {
+        this.$router.push("/");
+      }
     }
   }
 };

@@ -51,11 +51,24 @@ export default {
     return {
       socket: io("http://localhost:3030/"),
       val: "",
-      close: this.show
+      close: this.show,
+      phone: window.sessionStorage.phone
     };
+  },
+  computed: {
+    loginout() {
+      return this.$store.state.phone;
+    }
   },
   methods: {
     send() {
+      if (window.sessionStorage.phone == undefined) {
+        alert("抱歉，请您先登录");
+        this.socket.close();
+        this.val = "";
+        this.$router.push("/login");
+        return;
+      }
       let inp = document.querySelector("#message");
       let val = this.val.trim();
       if (val == "") {
@@ -75,9 +88,18 @@ export default {
       this.close = !close;
     }
   },
+
+  watch: {
+    loginout() {
+      console.log("loginout:", this.loginout);
+      if (this.loginout == "") {
+        this.talk();
+      }
+    }
+  },
   mounted() {
     // this.close=this.show
-    console.log(this.socket);
+    // console.log(this.socket);
     this.socket.on("textmsg", function(data) {
       console.log(data);
       let chatlist = document.querySelector("#chart-list");

@@ -6,6 +6,9 @@
     <!-- 内容 -->
     <router-view />
 
+    <!-- 回到顶部 -->
+    <v-back-top style="bottom: 150px"></v-back-top>
+
     <!-- 尾部 -->
     <my-footer></my-footer>
   </div>
@@ -15,7 +18,12 @@
 import MyHeader from "./components/MyHeader.vue";
 import MyFooter from "./components/MyFooter.vue";
 export default {
-  components: { MyHeader, MyFooter }
+  components: { MyHeader, MyFooter },
+  watch: {
+    $route() {
+      window.scrollTo(0, 0);
+    }
+  }
 };
 </script>
 
