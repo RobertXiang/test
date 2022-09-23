@@ -179,7 +179,9 @@
         设计师
       </van-tabbar-item>
       <van-tabbar-item icon="orders-o" @click="goAnli">案列</van-tabbar-item>
-      <van-tabbar-item icon="contact" to="mine">我的</van-tabbar-item>
+      <van-tabbar-item icon="contact" to="mine" @click="goMine">
+        我的
+      </van-tabbar-item>
     </van-tabbar>
   </div>
 </template>
@@ -203,6 +205,11 @@ export default {
     })
   },
   methods: {
+    // 跳转我的自动刷新
+    goMine() {
+      this.$router.push('mine')
+      this.$router.go(0)
+    },
     //跳转首页自动刷新
     goIndex() {
       this.$router.push('/')
@@ -242,7 +249,7 @@ export default {
 .c2 img,
 .c3 img,
 .header img {
-  width: 30px;
+  width: 40px;
 }
 /*******头部 *******/
 /* 标题样式 */
