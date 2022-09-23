@@ -6,11 +6,12 @@ import Login from '../views/Login.vue'
 import Home from '../views/Home.vue'
 Vue.use(VueRouter)
 
-const routes = [{ path: '/', redirect: '/login' },
+const routes = [{ path: '/',props: true,  redirect: '/login' },
     { path: '/login', component: Login },
     {
         path: '/home',
         component: Home,
+        props: true, 
         redirect: '/welcome',
         children: [
             { path: '/welcome', component: Welcome },
@@ -18,14 +19,14 @@ const routes = [{ path: '/', redirect: '/login' },
             {
                 path: '/good',
                 component: () =>
-                    import ('../views/Good/Good'),
-                    children:[
-                        {
-                            path: '/add',
-                            component: () =>
-                                import ('../views/Good/Add.vue')
-                        },
-                    ]
+                    import ('../views/Good/Good')
+                    // children:[
+                        // {
+                        //     path: '/add',
+                        //     component: () =>
+                        //         import ('../views/Good/Add.vue')
+                        // },
+                    // ]
             },
             {
                 path: '/order',

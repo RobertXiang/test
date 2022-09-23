@@ -1,0 +1,83 @@
+
+#chart-container .chart-main-area{
+    padding-top: 10px;
+    /* float:left; */
+    width:100%;
+    background-color: rgb(248,248,248);
+}
+
+
+
+#chart-container .chart-list .chart-item{
+    display: flex;
+    margin-bottom: 10px;
+}
+#chart-container .chart-list .chart-item .user-face{
+    float:left;
+    margin:0 15px;
+}
+#chart-container .chart-list .chart-item .user-face img{
+    width:40px;
+    height: 40px;
+    border-radius: 5px;
+}
+#chart-container .chart-list .chart-item .user-message{
+    position: relative;
+    float:left;
+    padding:10px;
+    min-width: 100px;
+    max-width: 350px;
+    background: #fff;
+    font-size: 15px;
+    border-radius: 4px;
+    text-align: start;
+}
+#chart-container .chart-list .chart-item .user-message::before{
+    content: ' ';
+    position: absolute;
+    width:10px;
+    height:10px;
+    background: #fff;
+    top:10px;
+    left:-5px;
+    z-index: 222;
+    transform: rotate(45deg);
+    
+}
+
+#chart-container .chart-item-me {
+    display: flex;
+    padding: 10px 15px;
+    justify-content: end;
+  }
+  #chart-container chart-item-me .user-face-me  img {
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+  }
+  #chart-container .user-face-me {
+    margin-left: 10px;
+  }
+  #chart-container .user-message-me {
+    font-size: 15px;
+    background-color: rgb(33, 233, 33);
+    text-align: end;
+    padding: 10px;
+    position: relative;
+    color: #333;
+    min-width: 100px;
+    max-width: 400px;
+    text-align: left;
+    border-radius: 4px;
+  }
+  #chart-container .user-message-me::before {
+    content: " ";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: rgb(33, 233, 33);
+    top: 10px;
+    right: -5px;
+    z-index: 222;
+    transform: rotate(45deg);
+  }

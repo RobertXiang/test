@@ -73,8 +73,12 @@
         <span slot="title">订单管理</span>
       </el-menu-item>
       <el-menu-item index="5" @click="goOffer" style="font-size:22px;margin-top:10px;text-align: center;">
-        <i class="iconfont icon-danju"></i>
+        <i class="el-icon-coin"></i>
         <span slot="title">报价管理</span>
+      </el-menu-item>
+      <el-menu-item index="6" @click="show" style="font-size:22px;margin-top:10px;text-align: center;">
+        <i class="el-icon-service"></i>
+        <span slot="title">客服咨询</span>
       </el-menu-item>
     </el-menu>
 
@@ -210,6 +214,13 @@ export default {
     goOffer() {
       this.$router.push("/offer");
     },
+    show(){
+      console.log(this.$store.close);
+      if(this.$store.close==true){
+        return
+      }
+      this.$store.commit('updateClose')
+    }
   },
 };
 </script>
