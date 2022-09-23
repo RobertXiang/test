@@ -15,7 +15,7 @@
           </el-input>
         </el-col>
       </el-row>
-      <el-table border :data="data" style="width: 100%">
+      <el-table border :data="data" style="width: 100%;"  stripe  >
         <el-table-column prop="mid" width="50" label="ID">
         </el-table-column>
         <el-table-column prop="HouseStatu" label="房屋状态" width="120">
@@ -33,7 +33,7 @@
         </el-table-column>
         <el-table-column prop="other" label="其他需求"> </el-table-column>
         <el-table-column prop="yhphone" label="手机号"> </el-table-column>
-        <el-table-column fixed="right" label="操作" width="150">
+        <el-table-column label="操作" >
           <template slot-scope="scope">
             <el-button @click="handleClick(scope.row)" type="text" size="big"
               >联系</el-button
