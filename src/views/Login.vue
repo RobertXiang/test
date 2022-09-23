@@ -43,7 +43,7 @@
             :rules="[{ pattern: /^.{3,20}$/, message: '请输入正确用户名' }]"
             style="
               border: 1px solid #ddd;
-              border-radius: 5%;
+              border-radius: 5px;
               background-color: rgb(240 240 240);
               display: inner-block;
             "
@@ -57,7 +57,7 @@
             :rules="[{ validator, message: '请输入正确密码' }]"
             style="
               border: 1px solid #ddd;
-              border-radius: 5%;
+              border-radius: 5px;
               background-color: rgb(240 240 240);
               display: inner-block;
             "
@@ -101,7 +101,7 @@
             :rules="[{ pattern: /^1[3-9]\d{9}$/, message: '请输入正确手机号' }]"
             style="
               border: 1px solid #ddd;
-              border-radius: 5%;
+              border-radius: 5px;
               background-color: rgb(240 240 240);
               display: inner-block;
             "
@@ -262,7 +262,7 @@ export default {
 
 <style scoped>
 .log {
-  background-color: white;
+  background: url('../../public/img/src=http___hbimg.huabanimg.com_6a8b5cf52dab7c7c3538f49acc3a457fcfffcfa5392f5-eu5bX1_fw658&refer=http___hbimg.huabanimg.webp') no-repeat;
   background-size: cover;
   height: 100vh;
 }
@@ -286,5 +286,9 @@ export default {
   width: 90%;
   margin-left: 20px;
   margin-top: 20px;
+}
+::v-deep .van-tabs--line .van-tabs__wrap{
+  width: 90vw;
+  margin-left: 20px;
 }
 </style>

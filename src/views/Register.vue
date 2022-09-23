@@ -193,9 +193,11 @@ export default {
 }
 </script>
 
-<style>
+<style >
 .reg {
-  background-image: url('/public/loginbanner.jpeg');
+  /* background-image: url('/public/loginbanner.jpeg'); */
+  background: url('../../public/img/src=http___hbimg.huabanimg.com_6a8b5cf52dab7c7c3538f49acc3a457fcfffcfa5392f5-eu5bX1_fw658&refer=http___hbimg.huabanimg.webp') no-repeat;
+
   background-size: cover;
   height: 100vh;
 }
@@ -207,7 +209,7 @@ export default {
 }
 .reg .van-nav-bar {
   color: black !important;
-  background-color: rgb(61, 68, 103);
+  background-color:rgb(126 189 219);
   height: 50px;
   border-radius: 5px;
   color: black;
