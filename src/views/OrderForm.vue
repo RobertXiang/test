@@ -2,12 +2,7 @@
   <!-- 我的订单 -->
   <div class="order-form">
     <!-- 头部 -->
-    <van-nav-bar
-      title="我的订单"
-      left-text
-      left-arrow
-      @click-left="goIndex()"
-    />
+    <van-nav-bar title="我的订单" left-text left-arrow @click-left="goIndex()" />
 
     <!-- 导航栏 -->
     <van-tabs v-model="active">
@@ -25,9 +20,7 @@
           />
           <div class="ordlist_body_font fl">
             <ul>
-              <li class="olb_font_font fl over2">
-                开关插座面板家用套餐86型墙壁房屋装修暗装五孔防水盒5孔五孔
-              </li>
+              <li class="olb_font_font fl over2">开关插座面板家用套餐86型墙壁房屋装修暗装五孔防水盒5孔五孔</li>
               <li style="margin-top: 3vh" class="olb_money_money fl">
                 <label>实付：￥175</label>
               </li>
@@ -37,19 +30,20 @@
       </div>
 
       <div v-else-if="active == 0" id="dfk" class="ordlist_body">
-        <div
-          v-for="its in data.data"
-          :key="its.orderid"
-          class="ordlist_body_img fl card"
-        >
+        <div v-for="its in data.data" :key="its.orderid" class="ordlist_body_img fl card">
           <img :src="its.propic" />
           <div class="text">
             <ul>
               <li class="title">{{ its.protitle }}</li>
-              <li class="money">单价￥{{ its.price }}</li>
-              <li><van-button icon="delete" size="small" type="danger" @click="Del(its.orderid)"></van-button></li>
+              <li class="money">单价{{ its.price }}</li>
+              <li>
+                <van-button icon="delete" size="small" type="danger" @click="Del(its.orderid)"></van-button>
+              </li>
               <li class="he">
-                <span><van-icon name="add-o" />{{ its.num }}</span>
+                <span>
+                  <van-icon name="add-o" />
+                  {{ its.num }}
+                </span>
                 <span class="xiao">小计：￥{{ its.num * its.price }}</span>
               </li>
             </ul>
@@ -57,15 +51,11 @@
           <div>
             <!-- 提交订单 -->
             <van-cell @click="showPopup">
-              <van-submit-bar
-              :price="total"
-              button-text="提交订单"
-              @submit="onSubmit"
-            />
+              <van-submit-bar :price="total" button-text="提交订单" @submit="onSubmit" />
             </van-cell>
             <van-popup v-model="show" style="width:60vw;height:60vw;">
               <span>扫码支付</span>
-              <img src="/zhifu.jpg" alt="" style="width:50vw;height:50vw">
+              <img src="/zhifu.jpg" alt style="width:50vw;height:50vw" />
             </van-popup>
           </div>
         </div>
@@ -82,9 +72,9 @@ export default {
   data() {
     return {
       data: [], //商品订单列表
-      active: 0,  //高亮的id
-      num: 1,   //商品数量
-      show: false,
+      active: 0, //高亮的id
+      num: 1, //商品数量
+      show: false
     };
   },
   computed: {
@@ -98,14 +88,14 @@ export default {
         }
         return total;
       }
-    },
+    }
   },
   mounted() {
     this.getData();
   },
   methods: {
     // 弹出层
-      showPopup() {
+    showPopup() {
       this.show = true;
     },
     // 提交订单
@@ -120,7 +110,7 @@ export default {
     getData() {
       let orders = this.$route.query;
       let url = `http://127.0.0.1:3000/pro_order/allorder`;
-      this.axios.get(url).then((res) => {
+      this.axios.get(url).then(res => {
         console.log(res);
         this.data = res.data;
       });
@@ -128,20 +118,20 @@ export default {
     // 删除按钮功能
     Del(orderid) {
       let url = `http://127.0.0.1:3000/pro_order/delete/${orderid}`;
-      this.axios.get(url).then((res) => {
+      this.axios.get(url).then(res => {
         this.getData();
         if (res.data.code == 200) {
           this.getData();
         }
       });
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
 body {
-  background-color: rgba(249, 249, 249);
+  // background-color: rgba(249, 249, 249);
   color: gray;
 }
 /*******头部 *******/
@@ -277,17 +267,21 @@ ul li:last-child {
   font-size: 2.8vw;
   color: white;
   text-align: center;
-} 
+}
+.box {
+  height: 100vh;
+  background-color: rgba(249, 249, 249);
+}
 /* 订单样式设计 */
-.ordlist_body .card{
+.ordlist_body .card {
   display: flex;
   justify-content: space-between;
   // background: #ff452c;
-  .text{
+  .text {
     width: 65%;
-    >ul{
+    > ul {
       position: relative;
-      .title{
+      .title {
         font-size: 16px;
 
         display: -webkit-box;
@@ -295,25 +289,25 @@ ul li:last-child {
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 2;
       }
-      >li>button{
+      > li > button {
         position: absolute;
         right: -20px;
         bottom: 20px;
         border-radius: 5px;
       }
-     >.he{
-      display: flex;
-      justify-content: space-evenly;
-      .xiao{
-        font-size: 18px;
-        color: #ff452c;
+      > .he {
+        display: flex;
+        justify-content: space-evenly;
+        .xiao {
+          font-size: 18px;
+          color: #ff452c;
+        }
       }
-     }
     }
   }
 }
 /* 遮罩层内容样式 */
-.van-popup{
+.van-popup {
   display: flex;
   flex-flow: column;
   justify-content: center;
