@@ -4,7 +4,7 @@
     <!-- 头部 -->
     <van-nav-bar
       title="我的订单"
-      left-text=""
+      left-text
       left-arrow
       @click-left="goIndex()"
     />
@@ -12,55 +12,67 @@
     <!-- 导航栏 -->
     <van-tabs v-model="active">
       <van-tab title="待付款"></van-tab>
-      <van-tab title="已签约"></van-tab>
+      <van-tab title="待收货"></van-tab>
       <van-tab title="售后/退款"></van-tab>
     </van-tabs>
-
     <!-- 内容 -->
     <router-view />
-    <div class="mr">
+    <div class="mr" v-if="data">
       <div v-if="active == 1" id="yqy" class="ordlist_body">
         <div class="ordlist_body_img fl">
-          <img src="../assets/icon/bx.png" />
-        </div>
-        <div class="ordlist_body_font fl">
-          <ul>
-            <li class="olb_font_font fl over2">
-              仓鼠笼子送礼包47基础笼亚克力金丝熊小别墅小仓鼠大双层齐全窝包邮
-            </li>
-            <li class="olb_money_money fl">
-              实付：
-              <label>￥9.9</label>
-            </li>
-          </ul>
-          <div class="clear"></div>
-        </div>
-        <div class="ordlist_body_money fl">
-          <div class="olb_font_money fr">￥9.9</div>
-          <div style="color: gray" class="olb_font_money fr">x1</div>
+          <img
+            src="https://a.vpimg4.com/upload/merchandise/pdcpos/1100001789/2022/0510/92/9f308229-3b41-4e11-bb83-080b18904dd9.jpg"
+          />
+          <div class="ordlist_body_font fl">
+            <ul>
+              <li class="olb_font_font fl over2">
+                开关插座面板家用套餐86型墙壁房屋装修暗装五孔防水盒5孔五孔
+              </li>
+              <li style="margin-top: 3vh" class="olb_money_money fl">
+                <label>实付：￥175</label>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
+
       <div v-else-if="active == 0" id="dfk" class="ordlist_body">
-        <div class="ordlist_body_img fl">
-          <img src="../assets/icon/bx.png" />
-        </div>
-        <div class="ordlist_body_font fl">
-          <ul>
-            <li class="olb_font_font fl over2">
-              仓鼠笼子送礼包47基础笼亚克力金丝熊小别墅小仓鼠大双层齐全窝包邮
-            </li>
-            <li>
-              <button @click="n--">-</button>
-              <span>1</span>
-              <button @click="n++">+</button>
-            </li>
-          </ul>
-        </div>
-        <div class="ordlist_body_money fl">
-          <div class="olb_font_money fr">￥9.9</div>
+        <div
+          v-for="its in data.data"
+          :key="its.orderid"
+          class="ordlist_body_img fl card"
+        >
+          <img :src="its.propic" />
+          <div class="text">
+            <ul>
+              <li class="title">{{ its.protitle }}</li>
+              <li class="money">单价￥{{ its.price }}</li>
+              <li><van-button icon="delete" size="small" type="danger" @click="Del(its.orderid)"></van-button></li>
+              <li class="he">
+                <span><van-icon name="add-o" />{{ its.num }}</span>
+                <span class="xiao">小计：￥{{ its.num * its.price }}</span>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <!-- 提交订单 -->
+            <van-cell @click="showPopup">
+              <van-submit-bar
+              :price="total"
+              button-text="提交订单"
+              @submit="onSubmit"
+            />
+            </van-cell>
+            <van-popup v-model="show" style="width:60vw;height:60vw;">
+              <span>扫码支付</span>
+              <img src="/zhifu.jpg" alt="" style="width:50vw;height:50vw">
+            </van-popup>
+          </div>
         </div>
       </div>
-      <img v-else id="m1" src="@/assets/icon/mr.png" alt="" />
+      <div v-else class="box">
+        <img id="m1" src="@/assets/icon/mr.png" alt />
+      </div>
     </div>
   </div>
 </template>
@@ -69,18 +81,65 @@
 export default {
   data() {
     return {
-      active: 0,
-    }
+      data: [], //商品订单列表
+      active: 0,  //高亮的id
+      num: 1,   //商品数量
+      show: false,
+    };
   },
-  methods: {
-    goIndex() {
-      this.$router.push('/')
+  computed: {
+    //计算总价
+    total() {
+      console.log(this.data);
+      if (this.data.data) {
+        var total = 0;
+        for (var i of this.data.data) {
+          total += i.price * i.num * 100;
+        }
+        return total;
+      }
     },
   },
-}
+  mounted() {
+    this.getData();
+  },
+  methods: {
+    // 弹出层
+      showPopup() {
+      this.show = true;
+    },
+    // 提交订单
+    onSubmit() {
+      this.show = true;
+    },
+    // 点击跳转到空间商城
+    goIndex() {
+      this.$router.push("/spacemall");
+    },
+    // 订单数据显示
+    getData() {
+      let orders = this.$route.query;
+      let url = `http://127.0.0.1:3000/pro_order/allorder`;
+      this.axios.get(url).then((res) => {
+        console.log(res);
+        this.data = res.data;
+      });
+    },
+    // 删除按钮功能
+    Del(orderid) {
+      let url = `http://127.0.0.1:3000/pro_order/delete/${orderid}`;
+      this.axios.get(url).then((res) => {
+        this.getData();
+        if (res.data.code == 200) {
+          this.getData();
+        }
+      });
+    },
+  },
+};
 </script>
 
-<style>
+<style lang="scss" scoped>
 body {
   background-color: rgba(249, 249, 249);
   color: gray;
@@ -126,30 +185,43 @@ body {
 }
 
 .ordlist_body {
-  display: flex;
   width: 94vw;
   padding: 3vw;
-  background-color: white;
+  background-color: rgba(249, 249, 249);
   margin-top: 1vw;
+}
+
+.mr .ordlist_body_img {
+  background-color: white;
+  border-radius: 5px;
+  display: flex;
+  position: relative;
+  flex-wrap: wrap;
+  height: 10vh;
+  margin: 5vw 2vw;
+  padding: 5vw 2vw;
 }
 .mr .ordlist_body_img img {
   width: 18vw;
   height: 18vw;
   overflow: hidden;
+  border-radius: 5px;
 }
+
 .ordlist_body_font {
-  width: 74vw;
-  height: 10vw;
   margin-left: 2vw;
+  width: 50vw;
+  height: 10vw;
 }
 .olb_font_font {
-  width: 60vw;
+  width: 50vw;
   height: 10vw;
   line-height: 5vw;
   font-size: 3.6vw;
   color: black;
 }
-.ordlist_body_font li:last-child {
+ul li:last-child {
+  margin: 10px 0;
 }
 .ordlist_body_font li button {
   background-color: orange;
@@ -162,11 +234,14 @@ body {
   margin-left: 0;
 }
 .olb_font_money {
-  width: 12vw;
+  position: absolute;
+  left: 50%;
+  bottom: 20%;
+  width: 6vw;
   height: 5vw;
   line-height: 5vw;
   text-align: right;
-  font-size: 3.6vw;
+  font-size: 4vw;
   font-weight: 600;
   color: black;
 }
@@ -202,5 +277,46 @@ body {
   font-size: 2.8vw;
   color: white;
   text-align: center;
+} 
+/* 订单样式设计 */
+.ordlist_body .card{
+  display: flex;
+  justify-content: space-between;
+  // background: #ff452c;
+  .text{
+    width: 65%;
+    >ul{
+      position: relative;
+      .title{
+        font-size: 16px;
+
+        display: -webkit-box;
+        overflow: hidden;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+      }
+      >li>button{
+        position: absolute;
+        right: -20px;
+        bottom: 20px;
+        border-radius: 5px;
+      }
+     >.he{
+      display: flex;
+      justify-content: space-evenly;
+      .xiao{
+        font-size: 18px;
+        color: #ff452c;
+      }
+     }
+    }
+  }
+}
+/* 遮罩层内容样式 */
+.van-popup{
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
 }
 </style>
