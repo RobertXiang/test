@@ -114,7 +114,7 @@
       <van-tabbar-item icon="home-o" to="/" @click="goIndex">首页</van-tabbar-item>
       <van-tabbar-item icon="friends-o" to="designer">设计师</van-tabbar-item>
       <van-tabbar-item icon="orders-o" to="anli">案列</van-tabbar-item>
-      <van-tabbar-item icon="contact" to="mine">我的</van-tabbar-item>
+      <van-tabbar-item icon="contact"  @click="goMine">我的</van-tabbar-item>
     </van-tabbar>
     <!-- 完 -->
   </div>
@@ -149,6 +149,11 @@ export default {
 
     /*轮播和一楼跳转 */
     // 编程式跳转
+    // 跳转我的
+    goMine(){
+      this.$router.push('mine')
+      
+    },
     // 调至报价
     goQuote () {
       this.$router.push('price')
